@@ -6,7 +6,7 @@ Lecture notes for the undergraduate course Introduction to Category Theory and H
 
 - Latest compiled PDF (see [Releases](https://github.com/kras1lnikoff/hse-category-theory-notes-2025/releases/latest)).
 
-- Problems for the course (see [Releases](https://github.com/kras1lnikoff/hse-category-theory-notes-2025/releases/tag/latest)).
+- Problems for the course (see [Releases](https://github.com/kras1lnikoff/hse-category-theory-notes-2025/releases/latest)).
 
 ## Build
 
