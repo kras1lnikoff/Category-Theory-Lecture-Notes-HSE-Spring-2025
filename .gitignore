@@ -352,5 +352,7 @@ TSWLatexianTemp*
 # latexrun
 out/
 
-## Resource directories
+## Other rules
 resources/
+problems/
+*.pdf
