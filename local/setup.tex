@@ -8,7 +8,7 @@
 		bindingoffset=0.35in
 	]{geometry}
 
-\input{local/preset/helvet}
+\usepackage{local/preset/fhelvet}
 
 \setlength{\headheight}{15pt}
 
@@ -31,17 +31,17 @@
 
 \makepsmarks{lecture}
 	{%
-		\createmark{chapter}{both}{shownumber}{Chapter\ }{. \ }
-		\createmark{section}{right}{shownumber}{}{ \ }
+		\createmark{chapter}{both}{shownumber}{Chapter\ }{. \ }%
+		\createmark{section}{right}{shownumber}{}{ \ }%
 	}
 
 \newcommand*{\Lecture}[1]
 	{%
-		\renewcommand*{\proofname}{Proof}
-		\renewcommand*{\lecturedate}{#1}
-		\stepcounter{lecture}
-		\chapter*{\textsc{Lecture \arabic{lecture}.\, #1}}
-		\addcontentsline{lec}{chapter}{Lecture \arabic{lecture}.\, #1}
+		\renewcommand*{\proofname}{Proof}%
+		\renewcommand*{\lecturedate}{#1}%
+		\stepcounter{lecture}%
+		\chapter*{\textsc{Lecture \arabic{lecture}.\, #1}}%
+		\addcontentsline{lec}{chapter}{Lecture \arabic{lecture}.\, #1}%
 	}
 
 \newcommand*{\Heading}[1]{\subsection*{\textsc{#1}}}

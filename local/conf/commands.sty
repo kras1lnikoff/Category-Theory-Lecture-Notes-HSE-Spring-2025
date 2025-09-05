@@ -71,7 +71,7 @@
 
 % ---------------- CATEGORY-NAME FACTORIES ----------------
 
-\newcommand*{\ct}[1]{#1}
+\newcommand*{\ct}[1]{\underline{#1}}
 \newcommand*{\ctrm}[1]{\ct{\mrm{#1}}}
 
 \newcommand*{\hyp}[2]{#1\text{-}#2}
@@ -139,20 +139,17 @@
 
 % ------------------------- OTHER -------------------------
 
-\renewcommand*{\ct}[1]{\underline{#1}}
-
-\newcommand*{\A}{\ct{\ca{A}}}
-\newcommand*{\B}{\ct{\ca{B}}}
-\newcommand*{\C}{\ct{C}}
+\newcommand*{\A}{\ct{\ca A}}
+\newcommand*{\B}{\ct{\ca B}}
+\newcommand*{\C}{\ct C}
+\newcommand*{\K}{\ctrm K}
 
 \newcommand*{\Ch}{\ctrm{Ch}}
 \newcommand*{\CoCh}{\ctrm{CoCh}}
-\newcommand*{\uHom}{\ctrm{\Hom}}
-\newcommand*{\K}{\ctrm{K}}
+\newcommand*{\uHom}{\ctrm \Hom}
 
-\newcommand{\pdim}{\operatorname{pd}}
-\newcommand{\idim}{\operatorname{id}}
-\newcommand{\lgldim}{\operatorname{lgl}}
-
-\newcommand{\fdim}{\operatorname{fd}}
-\newcommand{\wgldim}{\operatorname{wgl}}
+\newcommand{\pdim}{\opn{pd}}
+\newcommand{\idim}{\opn{id}}
+\newcommand{\lgldim}{\opn{lgl}}
+\newcommand{\fdim}{\opn{fd}}
+\newcommand{\wgldim}{\opn{wgl}}
