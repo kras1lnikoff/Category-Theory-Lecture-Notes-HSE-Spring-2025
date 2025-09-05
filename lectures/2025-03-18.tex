@@ -1,0 +1,205 @@
+\Lecture{March 18, 2025}
+
+\textsc{In the last episode...}
+
+\vspace*{2mm}
+
+Let \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \) be a pair of adjoint functors (\( F \adj G \)).
+
+\begin{definition*}
+	A functor is called \emdef{continuous} (resp. \emdef{cocontinuous}) if it preserves all limits (resp. colimits).
+\end{definition*}
+
+We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
+
+\begin{examples*}
+	\item Let \( R, S \) be rings, and \( _R B_S \) an \( R \)-\( S \)-bimodule. Then
+		\[
+			B_S \otimes_S (-) \,\adj\, \Hom_R(_R B, -),
+		\]
+		hence in particular
+		\[
+			B_S \otimes_S \colim N_i \cong \colim B_S \otimes_S N_i
+		\]
+		and
+		\[
+			\Hom_R(_R B, \lim M_i) \cong \lim \Hom_R (_R B, M_i).
+		\]
+	\item Since \( \colim_I \adj \Delta \adj \lim_I \), we get (completely for free)
+		\[
+			\lim_I \lim_J(-) \cong \lim_J \lim_I (-).
+		\]
+\end{examples*}
+
+\chapter{Adjoint Functor Theorems}
+
+\section{Generators and Cogenerators of Categories}
+
+\begin{definitions*}
+	\item A set of objects \( \{G_i\}_{i \in I} \) in a category \( \C \) is a set of \emdef{generators} (\emdef{separators}) of \( \C \) if for all \( f \neq g \in \C(X, Y) \) there exist \( i \in I \) and \( h: G_i \to X \) such that \( fh \neq gh \).
+	\item Object \( G \) is called a generator if \( \{G\} \) is a generating set.
+	\item A \emdef{cogenerator} is a generator in the opposite category.
+\end{definitions*}
+
+\begin{remarks*}
+	\item \( G \) is a generator if and only if \( h_G = \C(G, -) \) is faithful.
+	\item \( \{G_i\}_{i \in I} \) is a generating set if and only if \( \prod_{i \in I} h_{G_i} \) is faithful.
+\end{remarks*}
+
+\begin{examples*}
+	\item In \( \ctrm{Sets} \), any non-empty set is a generator. Moreover, any \( S \) with \( |S| \ge 2 \) is a cogenerator.
+	\item In \( \ctrm{Top} \) we can endow the corresponding sets with discrete (resp. indiscrete) topology.
+	\item In \( \ctrm{Ab} \), a group \( \bb{Z} \oplus A \) is a generator and \( \bb{Q}/\bb{Z} \) is a cogenerator.
+	\item In \( \cthyprm{R}{Mod} \), \( R \) is a generator and \( \Hom_\bb{Z}(_\bb{Z} R, \bb{Q}/\bb{Z}) \) is a cogenerator.
+	\item In \( \ctrm{Grps} \), \( \bb{Z} \) is a generator.
+		\begin{statement*}
+			There are no cogenerators in \( \ctrm{Grps} \).
+		\end{statement*}
+		\begin{proof}
+			Suppose \( Q \) is cogenerating. Given a non-trivial simple group \( G \),
+			\[
+				\id_G \neq 1: G \to G
+			\]
+			hence there is \( \alpha: G \to Q \) such that \( \alpha \neq 1 \). Since \( \ker \alpha \) is a proper normal subgroup of a simple group, \( \alpha \) is injective. But there are simple groups of arbitrary large cardinalities (for example, \( \mrm{PSL}_2(K), K = \bb{C}(x_i)_{i \in I} \)), a contradiction.
+		\end{proof}
+	\item In \( \ctrm{Rings} \), \( \bb{Z}[x] \) is a generator. There are no cogenerators by the similar agrument: there are fields of arbitrary large cardinalities, and all non-trivial homomorphisms from them are injective.
+	\item In \( \ctrm{CHaus} \), \( \{\ast\} \) is a generator, and \( [0, 1] \) is a cogenerator.
+\end{examples*}
+
+\begin{definitions*}
+	\item Let \( R \incx{f} C \) and \( S \incx{g} C \) be monomorphisms in \( \C \). We say that \( (R, f) \sim (S, g) \) if there is an isomorphism \( \tau: R \to S \) such that \( g \tau = f \). Equivalence classes under this relation are called \emdef{subobjects} of \( C \). We denote by \( \mrm{Sub}(C) \) the class of all subobjects of \( C \).
+	\item We say that \( \C \) is \emdef{well-powered} if \( \mrm{Sub}(C) \) is a set for all \( C \in \Ob(\C) \).
+\end{definitions*}
+
+\begin{examples*}
+	\item All \enquote{everyday} categories are well-powered.
+	\item An example of a not well-powered category would be any partially ordered class with a maximal element (which every element would be a distinct suboject of). In particular, \( \ctrm{Ord}^\op \).
+\end{examples*}
+
+\begin{theorem*}[Electrification]
+	Let \( \C \) be a balanced category with finite intersections and a set of generators \( \{G_i\} \). Then \( \C \) is well-powered.
+\end{theorem*}
+\begin{proof}
+	Let \( B \not\cong B' \). If both \( j \) and \( j' \) are epic, then \( B \cong B \cap B' \cong B' \), a contradiction.
+	\[
+		\begin{tikzcd}{G_i} && {B \cap B'} && {B'} \\
+			\\
+			&& B && C
+			\arrow["{\nexists \tilde{h}}", from=1-1, to=1-3]
+			\arrow["b"', from=1-1, to=3-3]
+			\arrow["j", hook, from=1-3, to=1-5]
+			\arrow["{j'}"', hook, from=1-3, to=3-3]
+			\arrow["{i'}", hook, from=1-5, to=3-5]
+			\arrow["i"', hook, from=3-3, to=3-5]
+		\end{tikzcd}
+	\]
+
+	Suppose (WLOG) \( j \) is not epic, i.e. there are \( f \neq g: B \to D \) such that \( fj = gj \).
+
+	\vspace*{2mm}
+
+	There is \( h: G_i \to B \) such that \( fh \neq gh \). It is clear that \( h \) cannot be factored through \( B \cap B' \). Hence, there is no \( h': G_i \to B' \) such that \( i' h' = ih \). It implies that
+	\[
+		\Phi: \opn{Sub}(\C) \to 2^{\C(G_i, C)}, \quad B \mapsto \C(G_i, B)
+	\]
+	is injective.
+\end{proof}
+
+\begin{lemma*}
+	Let \( \C \) and \( \ct{D} \) be complete categories and \( F: \C \to \ct{D} \), \( G: \ct{D} \to \ct{E} \) continuous functors. Then \( F \comma G \) is complete, and the forgetful functors \( P_{\C}: F \comma G \to \C \) and \( P_{\ct{D}}: F \comma G \to \ct{D} \) are continuous.
+\end{lemma*}
+\begin{proof}
+	We provide a sketch of the proof:
+	\[
+		\lim_I\bigl(F(C_i) \tox{f} G(C_i)\bigr) = \lim_I F(C_i) \tox{\lim f_i} G(C_i).
+	\]
+\end{proof}
+
+\begin{theorem*}[Primeval AFT]
+	Suppose \( \ct{D} \) has all (not necessary small) limits. A functor \( G: \ct{D} \to \C \) has a left adjoint if and only if \( G \) is continuous.
+\end{theorem*}
+
+\begin{remark*}
+	For such \( \ct{D} \) we have \( |\ct{D}(X, Y)| \le 1 \) (i.e. \( \ct{D} \) is \emdef{thin}).
+\end{remark*}
+\begin{proof}
+	One direction follows from RAPL. Now, by the previous lemma, \( \C \comma G \) has all limits, hence \( \lim \Id_{\C \comma G} \) is the initial object.
+\end{proof}
+
+\begin{lemma*}
+	If \( \ct{D} \) is complete, well-powered with a cogenerator \( Q \), then \( \ct{D} \) has an initial object.
+\end{lemma*}
+\begin{proof}
+	Let \( i = \bigcap\limits_{X \inc Q} X \) and \( D \in \Ob(\ct{D}) \). For \( f, g \in \ct{D}(i, D) \), their equalizer is a suboject of \( i \), hence \( f = g \). Set \( S := \ct{D}(D, Q) \). The map \( D \to Q^S \) is monic, therefore
+	\[
+		\begin{tikzcd}
+			T && Q \\
+			\\
+			D && {Q^S}
+			\arrow[hook, from=1-1, to=1-3]
+			\arrow[from=1-1, to=3-1]
+			\arrow["\Delta", from=1-3, to=3-3]
+			\arrow[hook, from=3-1, to=3-3]
+		\end{tikzcd}
+	\]
+	is a pullback square. Now \( i \to T \to D \) is a required map.
+\end{proof}
+
+\begin{proposition*}
+	Let \( \C \) be a category with (small) coproducts and \( \{G_I\}_{i \in I} \) be a set of objects. Then the following are equivalent:
+	\begin{enumerate}
+		\item \( \{G_i\}_{i \in I} \) is a generating set.
+		\item \( G = \coprod G_i \) is a generator.
+		\item For each \( X \in \Ob(\C) \) there is a set \( S \) and an epimorphism \( G^{(S)} \to X \).
+	\end{enumerate}
+\end{proposition*}
+
+\begin{theorem*}[SAFT]
+	Let \( \ct{D} \) be a complete well-powered category with a cogenerator \( Q \). A functor \( G: \ct{D} \to \C \) has a left adjoint if and only if \( G \) is continuous.
+\end{theorem*}
+\begin{proof}
+	Only one direction requires proof. We want to show that \( C \comma G \) has an initial object for each \( C \in \Ob(\C) \). To do that we apply the previous lemma:
+	\begin{enumerate}
+		\item \( C \comma G \) is complete (DONE).
+		\item \( C \comma G \) is well-powered:
+
+			Since \( C \comma G \tox{P_{\ct{D}}} \ct{D} \) is continuous, it preserves monomorphisms (since \( f \) is mono iff the corresponding square is a pullback).
+
+			\vspace*{2mm}
+
+			We show that \( P_{\ct{D}} \) reflects monomorphisms. Indeed,
+			\[
+				\begin{tikzcd}
+					&&& {G(D'')} \\
+					\\
+					C &&& {G(D)} \\
+					\\
+					&&& {G(D')}
+					\arrow["{G(k)}"', shift right=2, from=1-4, to=3-4]
+					\arrow["{G(k')}", shift left=2, from=1-4, to=3-4]
+					\arrow["{f''}", from=3-1, to=1-4]
+					\arrow["f", from=3-1, to=3-4]
+					\arrow["{f'}"', from=3-1, to=5-4]
+					\arrow["{G(h)}", from=3-4, to=5-4]
+				\end{tikzcd}
+			\]
+			If \( h \) is mono, \( G(h) G(k) = G(h) G(k') \), we get \( G(k) = G(k') \) since \( G(h) \) is monic.
+		\item \( C \comma G \) has a cogenerator:
+
+			\vspace*{2mm}
+
+			We show that \( S = \C(C, G(D)) \) is a generating set. Let \( C \tox{f} G(D) \in \Ob(C \comma G) \). We have \( D \inc Q^T \), so the diagram
+			\[
+				\begin{tikzcd}
+					&&& {G(D)} \\
+					C \\
+					&&& {G(Q)^T}
+					\arrow["{G(j)}", from=1-4, to=3-4]
+					\arrow["f", from=2-1, to=1-4]
+					\arrow["{G(j) f}"', from=2-1, to=3-4]
+				\end{tikzcd}
+			\]
+			finishes the proof.
+	\end{enumerate}
+
+\end{proof}

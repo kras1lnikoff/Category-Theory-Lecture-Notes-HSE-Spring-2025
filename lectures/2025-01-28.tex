@@ -1,0 +1,236 @@
+\Lecture{January 28, 2025}
+
+\Heading{Textbooks}
+\begin{enumerate}
+	\item Leinster T., \textit{Basic Category Theory};
+	\item Riehl E., \textit{Category Theory in Context};
+	\item Herrlich H., Strecker G., \textit{Category Theory (3rd Edition)};
+	\item Ad\'amek J. et al., \textit{Abstract and Concrete Categories. The Joy of Cats};
+	\item Mac Lane S., \textit{Categories for a Working Mathematician};
+	\item Kashiwara M., Schapira P., \textit{Categories and Sheaves}.
+\end{enumerate}
+
+\section{Functors}
+
+\begin{definition*}
+	Let \( \C \) and \( \C' \) be categories. A (covariant) \emdef{functor} \( F: \C \to \C' \) consists of
+	\begin{enumerate}[(i)]
+		\item a (class) function \( F: \Ob(\C) \to \Ob(\C') \);
+		\item for all \( X, Y \in \Ob(\C) \), a function \( F: \Hom_{\C}(X, Y) \to \Hom_{\C'}(F(X), F(Y)) \),
+	\end{enumerate}
+	such that
+	\begin{enumerate}
+		\item \( F(1_X) = 1_{F(X)} \) for all \( X \in \Ob(\C) \);
+		\item \( F(g \circ f) = F(g) \circ F(f) \) for all \( f \in \Hom_{\C}(X, Y) \) and \( g \in \Hom_{\C}(Y, Z) \).
+	\end{enumerate}
+\end{definition*}
+
+\begin{examples*}
+	\item The \emdef{identity functor} \( \Id_{\C}: \C \to \C \), defined by \( F(X) := X \) and \( F(f) := f \).
+	\item For \( Y \in \Ob(\C') \), the \emdef{constant functor} \( \Delta_Y: \C \to \C' \), defined by \( \Delta_Y(X) = Y \) and \( \Delta_Y(f) = 1_Y \).
+
+	\item For \( \C \) locally small and \( A \in \Ob(\C) \), the \emdef{representable functor} \( h_A: \C \to \ctrm{Sets} \), also written as
+		\[
+			\quad h_A(-) := \Hom_{\C}(A, -),
+		\]
+		which maps \( X \) to \( \Hom_{\C}(A, X) \) and \( f: B \to B' \) to \( h_A(f): \Hom_{\C}(A, B) \to \Hom_{\C}(A, B') \), defined on \( g: A \to B \) as \( h_A(f)(g) := g f \). There is also the contravariant version
+		\[
+			h^A: \C^\op \to \ctrm{Sets}, \qquad h^A(-) := \Hom_{\C}(-, A).
+		\]
+
+	\item For \( n \in \bb{Z}_{> 0} \), the general linear group defines a functor
+		\[
+			GL_n: \ctrm{CRings} \to \ctrm{Grps}, \quad R \mapsto GL_n(R).
+		\]
+
+	\item The abelianization functor
+		\[
+			(-)_{ab}: \ctrm{Grps} \to \ctrm{Ab}, \quad G \mapsto G/[G, G].
+		\]
+
+	\item Algebra of continuous functions to \( \bb{R} \) is a functor
+		\[
+			C: \ctrm{Top}^\op \to \ctrm{Alg}(\bb{R}), \qquad X \mapsto C(X) := \ctrm{Cont}(X, \bb{R}).
+		\]
+
+	\item For \( k \) a field, the dual vector space functor
+		\[
+			D: \ctrm{Vect}(k)^\op \to \ctrm{Vect}(k), \qquad V \mapsto V^{\vee} := \Hom_k(V, k).
+		\]
+\end{examples*}
+
+\begin{definition*}
+	A \emdef{contravariant} functor \( F: \C \to \C' \) is simply a covariant functor \( F: \C^\op \to \C' \).
+\end{definition*}
+
+\begin{definition*}
+	A functor \( F: \C \to \C' \) is called
+	\begin{enumerate}
+		\item \emdef{faithful} if \( F: \Hom_{\C}(X, Y) \to \Hom_{\C'}(F(X), F(Y)) \) is injective for all \( X, Y \in \Ob(\C) \);
+		\item \emdef{full} if \( F: \Hom_{\C}(X, Y) \to \Hom_{\C'}(F(X), F(Y)) \) is surjective for all \( X, Y \in \Ob(\C) \);
+		\item \emdef{fully faithful} (f.f.) if \( F \) is full and faithful;
+		\item \emdef{essentially surjective} (e.s.) if every \( Y \in \Ob(\C') \) is isomorphic to \( F(X) \) for some \( X \in \Ob(\C) \).
+	\end{enumerate}
+\end{definition*}
+
+\begin{definition*}
+	Given a family of categories \( \{\C_i\}_{i \in I} \), we define the \emdef{product} \( \prod\limits_{i \in I} \C_i \) by saying that
+	\begin{enumerate}[(i)]
+		\item \( \Ob(\prod\limits_{i \in I} \C_i) \,:=\, \prod\limits_{i \in I} \Ob(\C_i) \);
+		\item \( \prod\limits_{i \in I} \C_i(\{X_i\}, \{Y_i\}) \,:=\, \prod\limits_{i \in I} \Hom_{\C_i}(X_i, Y_i) \).
+	\end{enumerate}
+\end{definition*}
+
+\begin{definition*}
+	A functor \( F: \C_1 \times \C_2 \to \ct{D} \) is also called a \emdef{bifunctor}.
+\end{definition*}
+
+\begin{examples*}
+	\item Hom-set is a bifunctor
+		\[
+			\Hom_{\C}(-, -): \C^\op \times \C \to \ctrm{Sets}.
+		\]
+	\item For a ring \( R \), tensor product is a bifunctor
+		\[
+			- \otimes_R -: \ctrmhyp{Mod}{R} \times \cthyprm{R}{Mod} \to \ctrm{Ab}.
+		\]
+\end{examples*}
+
+\begin{definition*}
+	Categories \( \C \) and \( \C' \) are called \emdef{isomorphic} (written \( \C \cong \C' \)) if there exist functors \( F: \C \to \C' \) and \( G: \C' \to \C \) such that \( F \circ G = \id_{\C'} \) and \( G \circ F = \id_{\C} \).
+\end{definition*}
+
+\begin{examples*}
+	\item \( \cthyprm{\bb{Z}}{Mod} \cong \ctrm{Ab} \).
+	\item For a finite group \( G \),
+		\[
+			\ctrm{Rep}_k(G) \cong \cthyprm{k[G]}{Mod}.
+		\]
+\end{examples*}
+
+\section{Natural Transformations}
+
+\begin{definition*}
+
+	Let \( F, G: \C \to \ct{D} \) be functors. A \emdef{natural transformation}
+	\begin{equation*}
+		\theta: F \To G
+	\end{equation*}
+	is a morphism \( \theta_X: F(X) \to G(X) \) (a \emdef{component} of the transformation \( \theta \)) for each \( X \in \Ob(\C) \) such that (\emdef{naturality condition}) given any \( f: X \to Y \), the diagram
+	\[
+		\begin{tikzcd}{F(X)} &&& {F(Y)} \\
+			\\
+			{G(X)} &&& {G(Y)}
+			\arrow["{F(f)}", from=1-1, to=1-4]
+			\arrow["{\theta_X}"', from=1-1, to=3-1]
+			\arrow["{\theta_Y}", from=1-4, to=3-4]
+			\arrow["{G(f)}"', from=3-1, to=3-4]
+		\end{tikzcd}
+	\]
+	is commutative.
+
+\end{definition*}
+
+\begin{remarks*}
+	\item If \( F \) is a functor, there is the \emdef{identity transformation} \( 1_F: F \To F \).
+	\item For \( \theta: F \To G \) and \( \lambda: G \To H \), the \emdef{composition} \( \lambda \circ \theta: F \To H \)
+		\[
+			\begin{tikzcd}
+				\C &&& {\ct{D}}
+				\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-4]
+				\arrow[""{name=1, anchor=center, inner sep=0}, "H"', curve={height=30pt}, from=1-1, to=1-4]
+				\arrow[""{name=2, anchor=center, inner sep=0}, "G"{pos=0.7}, from=1-1, to=1-4]
+				\arrow["\theta"', shorten <=4pt, shorten >=4pt, Rightarrow, from=0, to=2]
+				\arrow["\lambda"', shorten <=4pt, shorten >=4pt, Rightarrow, from=2, to=1]
+			\end{tikzcd}
+		\]
+		is defined by \( (\lambda \circ \theta)_X = \lambda_X \circ \theta_X \).
+	\item \( \theta: F \To G \) is a \emdef{natural isomorphism} if \( \theta_X \) is an isomorphism for each \( X \in \Ob(\C) \).
+\end{remarks*}
+
+If we fix \( \C \) and \( \ct{D} \), there is the \emdef{category of functors}
+\begin{equation*}
+	\ctrm{Func}(\C, \ct{D}) = [\C, \ct{D}] = \ct{D}^{\C}.
+\end{equation*}
+And for functors \( F, G: \C \to \ct{D} \), there is a \emdef{category of natural transformations}
+\begin{equation*}
+	\ctrm{Nat}(F, G) := [\C, \ct{D}](F, G).
+\end{equation*}
+
+\begin{examples*}
+	\item A transformation from \( \Id \) to \( (-)_{ab} \):
+		\[
+			\begin{tikzcd}{\ctrm{Grps}} &&& {\ctrm{Grps}} && G && {G_{ab}}
+				\arrow[""{name=0, anchor=center, inner sep=0}, "\Id", curve={height=-24pt}, from=1-1, to=1-4]
+				\arrow[""{name=1, anchor=center, inner sep=0}, "{(-)_{ab}}"', curve={height=24pt}, from=1-1, to=1-4]
+				\arrow["{\theta_G}"', from=1-6, to=1-8]
+				\arrow["\theta", shorten <=6pt, shorten >=6pt, Rightarrow, from=0, to=1]
+			\end{tikzcd}
+		\]
+	\item A transformation from \( \Id \) to \( D^2 \):
+		\[
+			\begin{tikzcd}{\ctrm{Vect}(k)} &&& {\ctrm{Vect}{k}} && V && {{{V}^\vee}^\vee}
+				\arrow[""{name=0, anchor=center, inner sep=0}, "\Id", curve={height=-24pt}, from=1-1, to=1-4]
+				\arrow[""{name=1, anchor=center, inner sep=0}, "{D^2}"', curve={height=24pt}, from=1-1, to=1-4]
+				\arrow["{\theta_V}"', from=1-6, to=1-8]
+				\arrow["\theta", shorten <=6pt, shorten >=6pt, Rightarrow, from=0, to=1]
+			\end{tikzcd}
+		\]
+	\item Determinant of a matrix as a natural transformation:
+		\[
+			\begin{tikzcd}{\ctrm{CRings}} &&& {\ctrm{Grps}}
+				\arrow[""{name=0, anchor=center, inner sep=0}, "{\ctrm{GL}_n}", curve={height=-24pt}, from=1-1, to=1-4]
+				\arrow[""{name=1, anchor=center, inner sep=0}, "{\ctrm{GL}_1 = \ctrm{G}_m}"', curve={height=24pt}, from=1-1, to=1-4]
+				\arrow["\det", shorten <=6pt, shorten >=6pt, Rightarrow, from=0, to=1]
+			\end{tikzcd}
+		\]
+	\item For \( I \) a set (considered as a discrete category):
+		\begin{equation*}[I, \C] = \prod_{i \in I} \C.
+		\end{equation*}
+	\item Given \( I = (\bullet \rightrightarrows \bullet) \):
+		\begin{equation*}[I, \ctrm{Sets}] = \ctrm{Graphs}.
+		\end{equation*}
+	\item \( [\ctrm{G}, \ctrm{Sets}] = \cthyprm{G}{Sets} \) and \( [\ctrm{G}, \ctrm{Vect}(k)] = \ctrm{Rep_k}(G) \).
+\end{examples*}
+
+\section{Equivalence of Categories}
+
+\begin{definition*}
+	Categories \( \C \) and \( \ct{D} \) are called \emdef{equivalent} if there are functors \( F: \C \to \ct{D} \), \( G: \ct{D} \to \C \) and natural isomorphisms \( \alpha: G \circ F \To \Id_{\C},~ \beta: F \circ G \To \Id_{\ct{D}} \). Notation: \( \C \simeq \ct{D} \).
+\end{definition*}
+
+\begin{lemma*}
+	Let \( F: \C \to \ct{D} \) and \( i: \ct{D_0} \inc \ct{D} \) such that \( \ct{D_0} \) is full and for all \( X \in \Ob(\C) \) there is \( Y \in \Ob(\ct{D_0}) \) such that \( F(X) = Y \). Then there exists a functor \( F_0: \C \to \ct{D_0} \) and a natural isomorphism \( \theta_0: F \tox{\sim} i F_0 \).
+\end{lemma*}
+\begin{proof}
+	Using the axiom of choice, we choose for each \( X \in \Ob(\C) \) an object \( Y \in \ct{D}_0 \) and an isomorphism \( \varphi_X: Y \to F(X) \). Now set \( F_0(X) := Y \). Given \( f: X \to X' \), let
+	\[
+		\begin{tikzcd}{F_0(X)} && {F(X)} && {F(X')} && {F_0(X')}
+			\arrow["{\varphi_X}"', from=1-1, to=1-3]
+			\arrow["{F(f)}"', from=1-3, to=1-5]
+			\arrow["{\varphi_{X'}^{-1}}"', from=1-5, to=1-7]
+		\end{tikzcd}
+	\]
+	be the value of \( F_0(f) \). This defines a functor since for any \( f: X \to X' \) and \( g: X' \to X'' \)
+	\[
+		\begin{tikzcd}{F(X)} && {F(X')} && {F(X'')} \\
+			\\
+			{Y=F_0(X)} && {Y'=F_0(X')} && {Y''=F_0(X'')}
+			\arrow["{F(f)}"', from=1-1, to=1-3]
+			\arrow["{F(g)}"', from=1-3, to=1-5]
+			\arrow["{\varphi_X}", from=3-1, to=1-1]
+			\arrow["{F_0(f)}"', from=3-1, to=3-3]
+			\arrow["{\varphi_{X'}}", from=3-3, to=1-3]
+			\arrow["{F_0(g)}"', from=3-3, to=3-5]
+			\arrow["{\varphi_{X''}}", from=3-5, to=1-5]
+		\end{tikzcd}
+	\]
+	It is clear that \( \varphi: F \To i F_0 \) is the required natural transformation.
+\end{proof}
+
+\begin{corollary*}
+	For any category \( \C \) there is a subcategory \( \opn{sk}(\C) \), the \emdef{skeleton} of \( \C \), such that \( i: \opn{sk}(\C) \inc \C \) is an equivalence of categories, and in \( \opn{sk}(\C) \) any two issomorphic objects are equal.
+\end{corollary*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}

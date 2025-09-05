@@ -1,0 +1,237 @@
+\Lecture{April 8, 2025}
+
+\textsc{In the previous episode...}
+
+\begin{theorem*}
+	Let \( P \in \cthyprm{R}{Mod} \). The following are equivalent:
+	\begin{enumerate}
+		\item \( P \) is projective.
+		\item For any epimorphism \( \beta: M \to N \) and any \( f: P \to N \) there exists \( \sigma: P \to M \) such that \( \beta \sigma = f \).
+			  \[
+				  \begin{tikzcd}
+					  M && N && 0 \\
+					  \\
+					  && P
+					  \arrow["\beta", from=1-1, to=1-3]
+					  \arrow[from=1-3, to=1-5]
+					  \arrow["\sigma", dashed, from=3-3, to=1-1]
+					  \arrow["f"', from=3-3, to=1-3]
+				  \end{tikzcd}
+			  \]
+		\item Any short exact sequence \( 0 \to K \to M \to P \to 0 \) splits.
+		\item There exists \( K \in \cthyprm{R}{Mod} \) such that \( P \oplus K \cong R^{(I)} \) for some set \( I \).
+	\end{enumerate}
+\end{theorem*}
+\begin{proof}
+	\( (1) \To (2) \) is obvious, since \( \Hom(P, \beta) \) is surjective. \( (2) \To (3) \) follows from the general criterion on splitting of exact sequences. We obtain \( (3) \To (4) \) by considering
+	\[0 \to K \to R^{(I)} \to P \to 0,\]
+	where \( I \) is the set of generators of \( P \). It splits, hence the result.
+
+	\vspace*{2mm}
+
+	Finally, we verify \( (4) \To (1) \). Let \( 0 \to M' \to M \to M'' \to 0 \) and consider
+	\[0 \to \prod_{i \in I} M' \to \prod_{i \in I} M \to \prod_{i \in I} M'' \to 0.\]
+	Rewrite it as the sequence
+	\[0 \to \Hom(R^{(I)}, M') \to \Hom(R^{(I)}, M) \to \Hom(R^{(I)}, M'') \to 0,\]
+	where \( I \) is the set in (4). But since \( R^{(I)} = P \oplus K \) we get
+	\[0 \to \Hom(K, M') \to \Hom(K, M) \to \Hom(K, M'') \to 0.\]
+\end{proof}
+
+\begin{proposition*}
+	\( \bigoplus\limits_{i \in I} P_i \) is projective if and only if each \( P_i \) is projective.
+\end{proposition*}
+\begin{proof}
+	Note that \( \Hom(\oplus P_i, -) = \prod \Hom(P_i, -) \).
+\end{proof}
+
+\newpage
+
+\begin{theorem*}
+	Let \( E \in \cthyprm{R}{Mod} \). The following are equivalent:
+	\begin{enumerate}
+		\item \( E \) is injective (\( h^E \) is exact).
+		\item For any monomorphism \( \beta: M \to N \) and any \( f: M \to P \) there exists \( g: N \to P \) such that \( g \beta = f \).
+			  \[
+				  \begin{tikzcd}
+					  M && N && 0 \\
+					  \\
+					  && P
+					  \arrow["\beta", from=1-1, to=1-3]
+					  \arrow[from=1-3, to=1-5]
+					  \arrow["\sigma", dashed, from=3-3, to=1-1]
+					  \arrow["f"', from=3-3, to=1-3]
+				  \end{tikzcd}
+			  \]
+		\item Any short exact sequence \( 0 \to E \to M \to N \to 0 \) splits.
+	\end{enumerate}
+\end{theorem*}
+\begin{proof}
+	The proof is similar.
+\end{proof}
+
+\begin{proposition*}
+	\( \prod\limits_{i \in I} E_i \) is injective if and only if each \( E_i \) is injective.
+\end{proposition*}
+
+\begin{theorem*}[Baer's criterion]
+	An \( R \)-module \( E \) is injective if and only if for any left ideal \( I \subset R \) has the property
+	\[
+		\begin{tikzcd}
+			I && R \\
+			\\
+			E
+			\arrow[hook, from=1-1, to=1-3]
+			\arrow["\varphi"', from=1-1, to=3-1]
+			\arrow["{\exists\,\tilde{\varphi}}", dashed, from=1-3, to=3-1]
+		\end{tikzcd}
+	\]
+\end{theorem*}
+\begin{proof}
+	This condition is clearly necessary. Now let \( A \subset B \) and \( f: A \to E \). Consider a set \( X \) of all ordered pairs \( (A', g') \), where \( A \subset A' \subset B \) and \( g': A' \to E \) such that \( g' \big|_A = f \).
+
+	\vspace*{1mm}
+
+	There is a natural order on \( X \), and by Zorn's lemma there is a maximal element \( (A_0, g_0) \). We want to show that \( A_0 = B \). Assume the contrary, i.e. there is \( b \in B \minus A_0 \). Let
+	\[I = \{r \in R ~|~ rb \in A_0\} \subset R.\]
+	It is clear that \( I \) is a left ideal of \( R \). Define \( \varphi: I \to E \) by
+	\[\varphi(r) := g_0(rb).\]
+	Let \( A_1 = A_0 + R b \) and \( g_1: A_1 \to E \), where
+	\[g_1(a_1 + rb) = g_1(a_0) + r \tilde{\varphi}(1).\]
+	It is routine to check that \( g_1 \) is well-defined. Hence \( (A_0, g_0) \) is not maximal, a contradiction.
+\end{proof}
+
+\begin{definition*}
+	Let \( R \) be a (commutative) domain. An \( R \)-module is a \emdef{division module} if for every \( m \in M \minus \{0\} \) and \( r \in R \minus \{0\} \) there is a \enquote{quotient} \( m' \in M \) such that \( m = rm' \).
+\end{definition*}
+
+\begin{proposition*}
+	If \( D \) is a division module, then \( D/C \) is a division module for each submodule \( C \subset D \).
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}
+
+\newpage
+
+\begin{proposition*}[Relations between injective and division modules]
+	\hfill
+	\begin{enumerate}
+		\item If \( R \) is a domain, then injective modules are division modules, i.e.\( \mrm{Inj}(R) \subset \mrm{Div}(R) \).
+		\item If \( R \) is a PID, then every division module is injective, i.e. \( \mrm{Inj}(R) = \mrm{Div}(R) \).
+		\item If \( R \) is a domain, then \( Q(R) \), i.e. the field of fractions of \( R \), is injective.
+	\end{enumerate}
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}
+
+Note that when \( R = \bb{Z} \), abelian group \( \bb{Q} \) is divisible, hence \( \bb{Q}/\bb{Z} \) is injective.
+
+\begin{proposition*}
+	\( \bb{Q}/\bb{Z} \) is an injective cogenerator of \( \ctrm{Ab} \).
+\end{proposition*}
+\begin{proof}
+	Let \( f: A \to B \) such that \( f \neq 0 \), i.e. there is \( b \in B \) such that \( b \in \Im f \) and \( b \neq 0 \). Define \( \tilde{h}: \bb{Z}b \to \bb{Q}/\bb{Z} \) by
+	\[\tilde{h}(b) =
+		\begin{cases}
+			\frac{1}{n}, & n = \opn{ord} b    \\
+			\frac{1}{2}, & \opn{ord} = \infty
+		\end{cases}
+		.\]
+	By injectivity, there is \( h: B \to \bb{Q}/\bb{Z} \) such that \( h(b) = \tilde{h}(b) \neq 0 \). Hence \( hf \neq 0 \).
+\end{proof}
+
+\begin{proposition*}
+	If \( Q \) is an injective cogenerator in an abelian category \( \A \), then any object of \( \A \) is a subobject of an injective object.
+\end{proposition*}
+\begin{proof}
+	There is a monomorphism \( X \inc Q^S \) for each \( X \in \Ob(\A) \) and some set \( S \).
+\end{proof}
+
+\begin{definition*}
+	An abelian category \( \A \) \emdef{has enough injectives} if every object can be embedded into an injective object.
+\end{definition*}
+
+\begin{proposition*}
+	Let \( R \) be a ring. Then \( \Hom_\bb{Z}(R_\bb{Z}, \bb{Q}/\bb{Z}) \) is an injective cogenerator in \( \cthyprm{R}{Mod} \).
+\end{proposition*}
+\begin{proof}
+	It follows from the following chain of isomorphisms:
+	\[\Hom_R(-, \Hom_\bb{Z}(R_\bb{Z}, \bb{Q}/\bb{Z})) \cong \Hom_\bb{Z}(R \otimes_R (-), \bb{Q}/\bb{Z}) \cong \Hom_\bb{Z}(-, \bb{Q}/\bb{Z}).\]
+\end{proof}
+
+\begin{corollary*}
+	In \( \cthyprm{R}{Mod} \) there are enough injectives.
+\end{corollary*}
+
+\begin{definition*}
+	An abelian category \( \A \) \emdef{has enough projectives} if for any \( X \in \Ob(\A) \) there is a projective object \( P \) and an epimorphism \( P \to X \).
+\end{definition*}
+
+\begin{proposition*}
+	In \( \cthyprm{R}{Mod} \) there are enough projectives.
+\end{proposition*}
+\begin{proof}
+	Note that \( R^{(S)} \to M \to 0 \) and free module \( R^{(S)} \) is clearly projective.
+\end{proof}
+
+\begin{proposition*}
+	If \( R \) is left Noetherian and \( \{E_i\}_{i \in I} \) is a set of injective \( R \)-modules, then \( \bigoplus E_i \) is injective.
+\end{proposition*}
+\begin{proof}
+	We check the Baer's criterion:
+	\[
+		\begin{tikzcd}
+			I && R \\
+			\\
+			{\bigoplus\limits_{i \in I} E_i} && {\bigoplus\limits_{i \in I_0} E_i}
+			\arrow[hook, from=1-1, to=1-3]
+			\arrow["f"', from=1-1, to=3-1]
+			\arrow[from=1-1, to=3-3]
+			\arrow["g", dashed, from=1-3, to=3-3]
+			\arrow[hook', from=3-3, to=3-1]
+		\end{tikzcd}
+	\]
+	Since \( I \) is finitely generated, \( \Im f \) is contained in some \( \bigoplus\limits_{i \in I_0} E_i \) where \( I_0 \) is finite, and the result follows from injectivity of \( \bigoplus\limits_{i \in I_0} E_i \).
+\end{proof}
+
+\begin{theorem*}[Bass-Papp]
+	Let \( R \) be a ring. If countable direct sums of injective objects in \( \cthyprm{R}{Mod} \)  are injective, then \( R \) is Noetherian.
+\end{theorem*}
+\begin{proof}
+	Assume the contrary. Let \( I_1 \subsetneq I_2 \subsetneq \dotsc \) and \( I = \bigcup\limits_{n \ge 1} I_n \) be ideals of \( R \). Consider injective module \( E_n \) such that \( I/I_n \inc E_n \), and let \( \pi_n: I \to I/I_n \).
+
+	\vspace*{2mm}
+
+	Let \( \pi: I \to \prod\limits_{n \geq 1} I/I_n \). Note that the image of \( \pi \) is in \( \bigoplus\limits_{n \geq 1} I/I_n \), so we can compose it with the map \( \bigoplus\limits_{n \geq 1} I/I_n \to \bigoplus\limits_{n \geq 1} E_n \) and get \( f: I \to \bigoplus\limits_{n \geq 1} E_n \). By assumtion \( \bigoplus\limits_{n \geq 1} E_n \) is injective, hence there is \( g: R \to \bigoplus\limits_{n \geq 1} E_n \) extending \( f \). Let \( g(1) = (e_n) \), \( e_n \in E_n \). For each \( m \geq 1 \) there is some \( a_m \in I \minus I_m \), and it follows that \( g(a_m) = f(a_m) = \pi(a_m) \neq 0 \). But \( g(a_m) = (a_m e_n) \), so \( e_m \neq 0 \) for any \( m \ge 0 \). This is a contradiction, since \( g(1) = (e_m) \in \bigoplus\limits_{n \ge 1} E_n \).
+\end{proof}
+
+\begin{definition*}
+	A monomorphism \( A \inc B \) is called \emdef{essential} if for all \( S \in B \) we have \( A \cap S \neq 0 \).
+\end{definition*}
+
+\begin{example*}
+	In \( \bb{Z} \)-modules, \( \bb{Z} \inc \bb{Q} \) is essential.
+\end{example*}
+
+\begin{definition*}
+	An \emdef{injective hull} (or \emdef{envelope}) of a module \( M \) is an injective module \( E \) such that \( M \inc E \) is essential. We denote \( E \) by \( E(M) \), which is unique up to isomorphism.
+\end{definition*}
+
+Let \( M \) and \( E \) be \( R \)-modules such that \( E \) is injective. Then (without proof)
+\[
+	\begin{tikzcd}
+		&& {E(M)} \\
+		M \\
+		&& E
+		\arrow[dashed, hook, from=1-3, to=3-3]
+		\arrow[hook, from=2-1, to=1-3]
+		\arrow[hook, from=2-1, to=3-3]
+	\end{tikzcd}
+\]
+and the following exact sequence splits:
+\[0 \to E(M) \to E \to E/E(M) \to 0.\]
+
+\begin{theorem*}[w/o proof]
+    For any \( R \)-module there is an injective hull.    
+\end{theorem*}

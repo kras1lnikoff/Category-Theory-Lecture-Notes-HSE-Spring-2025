@@ -1,0 +1,226 @@
+\Lecture{January 21, 2025}
+
+\Heading{Course Outline}
+\begin{enumerate}
+	\item Categories, functors, natural transformations
+	\item Adjoint functors
+	\item Limits and colimits
+	\item Abelian categories
+	\item Resolutions and derived functors
+\end{enumerate}
+
+\Heading{Course Grading}
+\begin{enumerate}
+	\item 3 quizzes: 10\% each, 30\% total
+	\item Midterm exam: 30\%
+	\item Final exam: 30\%
+	\item Seminars: 10\%
+	\item Homework: \( {\sim}10\% \)
+\end{enumerate}
+
+\chapter{Categories and Functors}
+
+\section{Definition and Examples of Categories}
+
+\begin{definition*}
+	A \emdef{category} \( \C \) consists of the following data:
+	\begin{enumerate}[(i)]
+		\item a class of \emdef{objects} \( \Ob(\C) \);
+		\item for every \( X, Y \in \Ob(\C) \) a set (or a class) of \emdef{morphisms} \( \Hom_{\C}(X, Y) \);
+		\item for every \( X \in \Ob(\C) \) an \emdef{identity morphism} \( \id_X \equiv 1_X \in \Hom_{\C}(X, X) \);
+		\item for every \( X, Y, Z \in \Ob(\C) \) a \emdef{composition rule}
+			\[
+				\circ: \Hom_{\C}(X, Y) \times \Hom_{\C}(Y, Z) \to \Hom_{\C}(X, Z)
+			\]
+			satisfying the usual associativity and unitality relations.
+	\end{enumerate}
+	A category \( \C \) is called \emdef{locally small} if each hom-set \( \Hom_{\C}(X, Y) \) is a set.
+\end{definition*}
+
+\begin{remark*}
+	There are plenty of ways to denote the set of morphisms. For example,
+	\[
+		\Hom_{\C}(X, Y) \equiv \C(X, Y) \equiv \opn{Maps}_{\C}(X, Y) \equiv \opn{Arr}_{\C}(X, Y).
+	\]
+\end{remark*}
+
+\begin{definition*}
+	Given a category \( \C \), there is an \emdef{opposite category} \( \C^\op \), whose
+	\begin{enumerate}[(i)]
+		\item objects are the same as in \( \C \), i.e. \( \Ob(\C^\op) := \Ob(\C) \);
+		\item morphisms are \enquote{reversed}, i.e. for all \( X, Y \in \Ob(\C^\op) \)
+			\[
+				\Hom_{\C^\op}(X, Y) := \Hom_{\C}(Y, X)
+			\]
+			with the natural composition rule \( f \circ_\op g := g \circ f \).
+	\end{enumerate}
+\end{definition*}
+
+\begin{examples*}
+	\item \( \ctrm{Sets} \) is the category of sets and functions;
+	\item \( \ctrm{Mon} \) is the category of monoids and monoid homomorphisms;
+	\item \( \ctrm{Grps} \) is the category of group and group homomorphisms;
+	\item \( \ctrm{Rings} \) is the category of (all) rings and ring homomorphisms;
+	\item \( \ctrm{CRings} \) is the category of commutative rings;
+	\item \( \ctrm{Fields} \) is the category of fields and field homomorphisms;
+	\item For a monoid \( M \), there is a category \( \cthyprm{M}{Sets} \), where
+		\begin{enumerate}[(i)]
+			\item objects are sets \( X \) with an \( M \)-\emdef{action} \( M \times X \to X \);
+			\item morphisms are \emdef{equivariant maps}, i.e. functions \( \varphi: X \to Y \) such that
+				\[
+					\varphi(mx) = m \varphi(x)
+				\]
+				for every \( m \in M \) and \( x \in X \). This can be expressed as a \emdef{commutative diagram}
+				\[
+					\begin{tikzcd}{M \times X} &&& {M \times Y} \\
+						\\
+						X &&& Y
+						\arrow["{1_M \times \varphi}", from=1-1, to=1-4]
+						\arrow[from=1-1, to=3-1]
+						\arrow[from=1-4, to=3-4]
+						\arrow["\varphi"', from=3-1, to=3-4]
+					\end{tikzcd}
+				\]
+				meaning that tracing elements through all possible paths yields the same result:
+				\[
+					\begin{tikzcd}{(m, x)} &&& {(m, \varphi(x))} \\
+						\\
+						mx &&& {\varphi(mx) = m \varphi(x)}
+						\arrow[maps to, from=1-1, to=1-4]
+						\arrow[maps to, from=1-1, to=3-1]
+						\arrow[maps to, from=1-4, to=3-4]
+						\arrow[from=3-1, to=3-4]
+					\end{tikzcd}
+				\]
+		\end{enumerate}
+
+	\item \( \cthyprm{R}{Mod} \) and \( \ctrmhyp{Mod}{R} \) are the categories of left and right modules over a ring \( R \).
+
+		If \( R \) is commutative, these notions coincide and we write
+		\[
+			\cthyprm{R}{Mod} \equiv \ctrmhyp{Mod}{R} \equiv \ctrm{Mod}(R).
+		\]
+		Moreover, if \( R \) is a field, this is the category of vector spaces
+		\[
+			\ctrm{Mod}(R) \equiv \ctrm{Vect}(R).
+		\]
+
+	\item \( \ctrm{Top} \) is the category of topological spaces and continuous maps.
+	\item The category of metric spaces \( \ctrm{Met} \):
+		\begin{enumerate}[(i)]
+			\item Objects are pairs \( (X, d) \), where \( X \) is a set and \( d: X \times X \to \bb{R} \) a metric.
+			\item Morphisms \( (X, d_1) \to (Y, d_2) \) are functions \( f: X \to Y \) which are
+				\begin{enumerate}[a)]
+					\item isometries (the rigid version of \( \ctrm{Met} \)), i.e.
+						\[
+							d(f(x), f(y)) = d(x, y) \quad \text{ for all } x, y \in X;
+						\]
+					\item Lipschitz maps (categorically richer version of \( \ctrm{Met} \)), i.e.
+						\[
+							\exists K > 0: \quad d(f(x), f(y)) \le K d(x, y) \quad \text{ for all } x, y \in X.
+						\]
+				\end{enumerate}
+		\end{enumerate}
+
+	\item \( C^{\infty} \)-manifolds, analytic manifolds, schemes, \dots
+	\item \( \ctrm{hTop} \) is the homotopy category of topological spaces, which
+		\begin{enumerate}[(i)]
+			\item objects are the same as in \( \ctrm{{Top}} \);
+			\item morphisms are homotopy classes of continuous maps.
+		\end{enumerate}
+
+		\begin{definition*}[intuitive]
+			A category is called \emdef{concrete} if objects are sets with additional structure and hom-sets are maps of sets respecting the additional structure.
+		\end{definition*}
+
+		\begin{theorem*}[w/o proof]
+			\( \ctrm{hTop} \) is not a concrete category.
+		\end{theorem*}
+
+	\item The category of \emdef{binary relations} \( \ctrm{Rel} \):
+		\begin{enumerate}[(i)]
+			\item Objects of \( \Ob(\ctrm{Rel}) \) are sets.
+			\item Morphisms \( X \to Y \) are binary relations \( R \subset X \times Y \) with the usual notion of composition.
+		\end{enumerate}
+
+	\item Every monoid \( M \) can be considered a category \( \ct{M} \), where
+		\begin{enumerate}[(i)]
+			\item there is a single object \( \ast \);
+			\item morphisms \( \ast \to \ast \) are labeled by elements of \( M \), where composition is plain multiplication.
+		\end{enumerate}
+
+		\begin{definition*}
+			A \emdef{groupoid} \( \C \) is a category where every arrow is inverible, which formally means that for every \( f \in \C(X, Y) \) there is \( g \in \C(Y, X) \) such that \( fg = 1_Y \) and \( gf = 1_X \).
+		\end{definition*}
+
+		\begin{example*}
+			If \( G \) is a group, then \( \ct{G} \) is a groupoid.
+		\end{example*}
+
+	\item If \( X \) is a topological space, then \( \Pi_1(X) \), the \emdef{fundamental groupoid} of \( X \):
+		\begin{enumerate}[(i)]
+			\item Objects of \( \Pi_1(X) \) are points of \( X \).
+			\item Morphisms \( x \to y \) are homotopy classes of all paths from \( x \) to \( y \).
+		\end{enumerate}
+		This is a generalization of the fundamental group of \( X \), since
+		\[
+			\Hom_{\Pi_1(X)}(x, x) = \pi_1(X, x).
+		\]
+\end{examples*}
+
+\section{Special Morphisms}
+
+Let \( f \in \C(X, Y) \) be a morphism in \( \C \). We say that
+
+\begin{definitions*}
+	\item \( f \) is an \emdef{isomorphism} (iso) if it has an inverse \( f^{-1} \in \C(Y, X) \).
+	\item \( f \) is a \emdef{monomorphism} (mono) if \( fg_1 = fg_2 \) implies \( g_1 = g_2 \) for any \( g_1, g_2 \in \C(Z, X) \).
+	\item \( f \in \C(X, Y) \) is an \emdef{epimorphism} (epi) if \( f \in \C^\op(Y, X) \) is a monomorphism.
+	\item Suppose \( Y \tox{g}  X \tox{f} Y \) with \( f \circ g = 1_Y \). Then \( g \) is called a \emdef{section} (or a \emdef{coretraction}) of \( f \) and \( g \) is called a \emdef{retraction} (or a \emdef{cosection}) of \( g \).
+\end{definitions*}
+
+\begin{lemma*}[Basic properties of monomorphisms and epimorphisms]
+	\hfill
+	\begin{enumerate}
+		\item Composition of monomorphisms (resp. epimorphisms) is monic (resp. epic);
+		\item If \( fg \) is monic, then \( g \) is monic;
+		\item If \( fg \) is epic, then \( f \) is epic;
+		\item Any section is a monomorphism;
+		\item Any retraction is an epimorphism.
+	\end{enumerate}
+\end{lemma*}
+\begin{proof}
+	\textsc{Exercise.}
+\end{proof}
+
+\vspace*{2mm}
+
+Note that there are non-invertible maps that are both monomorphisms and epimorphisms.
+
+\vspace*{2mm}
+
+\begin{lemma*}
+	For \( f: X \to Y \), the following are equivalent:
+	\begin{enumerate}
+		\item \( f \) is an isomorphism;
+		\item \( f \) is a retraction and a monomorphism;
+		\item \( f \) is a section and an epimorphism.
+	\end{enumerate}
+\end{lemma*}
+\begin{proof}
+	\textsc{Exercise.}
+\end{proof}
+
+\begin{remarks*}
+	\item Sections are also called \emdef{split monomorphisms}.
+	\item Similarly, retractions are called \emdef{split epimorphisms}.
+\end{remarks*}
+
+\begin{definition*}
+	A category \( \C' \) is a \emdef{subcategory} of a category \( \C \) if
+	\begin{enumerate}[(i)]
+		\item its objects form a subclass of objects of \( \C \), i.e. \( \Ob(\C') \subset \Ob(\C) \);
+		\item its morphisms are \( \ct{C'}(X, Y) \subset \C(X, Y) \) for all \( X, Y \in \Ob(\ct{C'}) \).
+	\end{enumerate}
+	A subcategory is called \emdef{full} if \( \ct{C'}(X, Y) = \C(X, Y) \) for each \( X, Y \in \Ob(\ct{C'}) \).
+\end{definition*}

@@ -1,0 +1,241 @@
+\Lecture{February 4, 2025}
+
+\begin{theorem*}
+	A functor \( F: \C \to \ct{D} \) is an equivalence of categories if and only if \( F \) is fully faithful and essentially surjective.
+\end{theorem*}
+\begin{proof}
+	We introduce the following notation:
+	\[
+		\begin{tikzcd}{\opn{sk} \C} &&& {\opn{sk} \ct{D}} \\
+			\\
+			\C &&& {\ct{D}}
+			\arrow["{j_D F i_C}", from=1-1, to=1-4]
+			\arrow["{i_C}", shift left=2, hook, from=1-1, to=3-1]
+			\arrow["{i_D}", shift left=2, hook, from=1-4, to=3-4]
+			\arrow["{j_C}", shift left=2, from=3-1, to=1-1]
+			\arrow["F", from=3-1, to=3-4]
+			\arrow["{j_D}", shift left=2, from=3-4, to=1-4]
+		\end{tikzcd}
+	\]
+	Note that \( j_D F i_C \) is surjective on objects. We will show that it is also injective. Indeed,
+	\[
+		\varphi: \C(A, B) \tox{\sim} \ct{D}(F(A), F(B))
+	\]
+	is a bijection for any \( A, B \in \Ob(\C) \). Suppose \( h: F(A) \tox{\sim} F(B) \) is an isomorphism. Then \( \varphi^{-1}(h) \) is also an isomorphism, hence \( A = B \) in \( \opn{sk}(\C) \). This shows that \( j_D F i_C \) is an isomorphism of categories, so there is an inverse functor \( K: \opn{sk} \ct{D} \to \opn{sk} \C \). It follows that \( F \) is an equivalence of categories and \( i_D K j_C \) is a quasi-inverse for \( F \).
+\end{proof}
+
+\section{Yoneda's Lemma}
+
+Let \( \C^\vee = [\C, \ctrm{Sets}] \). Recall that \( h_A = \C(A, -): \C \to \ctrm{Sets} \) is an object of \( \Ob(\C^\vee) \).
+
+\begin{lemma*}[Yoneda]
+	For any \( F \in \Ob(\C^\vee) \) and \( A \in \Ob(\C) \),
+	\[
+		\C^\vee(h_A, F) \overset{\varphi}{\cong} F(A).
+	\]
+	Moreover, \( \varphi \) is natural in \( A \) and \( F \).
+\end{lemma*}
+\begin{proof}
+	Let \( \theta \in \C^\vee(h_A, F) \) and \( f: A \to B \). Then
+	\[
+		\begin{tikzcd}{1_A \in h_A(A)} &&& {F(A)} \\
+			\\
+			{h_A(B)} &&& {F(B)}
+			\arrow["{\theta_A}", from=1-1, to=1-4]
+			\arrow["{h_A(f)}"', from=1-1, to=3-1]
+			\arrow["{F(f)}", from=1-4, to=3-4]
+			\arrow["{\theta_B}"', from=3-1, to=3-4]
+		\end{tikzcd}
+	\]
+	and hence
+	\[
+		F(f) \circ \theta_A = \theta_B \circ h_A(f),
+	\]
+	which implies
+	\[
+		F(f) \circ \theta_A(1_A) = \theta_B\bigl(h_A(f)(1_A)\bigr) = \theta_B(f).
+	\]
+
+	\newpage
+
+	\textsc{Naturality in \( A \)}:
+
+	\[
+		\begin{tikzcd}{\C^\vee(h_A, F)} &&& {\C^\vee(h_B, F)} \\
+			\\
+			{F(A)} &&& {F(B)}
+			\arrow["{\theta \mapsto \theta \circ h_f}", from=1-1, to=1-4]
+			\arrow["{\theta \mapsto \theta_A(1_A)}"', from=1-1, to=3-1]
+			\arrow["{\theta' \mapsto \theta'_B(1_B)}", from=1-4, to=3-4]
+			\arrow["{F(f)}"', from=3-1, to=3-4]
+		\end{tikzcd}
+	\]
+	We note that
+	\[
+		(\theta \circ h_f)(1_B) = \theta \circ (h_f)_B (1_B) = \theta_B(f \circ 1_B) = \theta_B(f) = F(f) \theta_A(1_A).
+	\]
+
+	\textsc{Naturality in \( F \)}:
+
+	\vspace*{3mm}
+
+	Let \( \alpha: F \To F' \). It follows that \( (\alpha \circ \theta)(1_A) = \alpha_A \circ \theta_A(1_A) \).
+
+	\[
+		\begin{tikzcd}{\theta \in \C^\vee(h_A, F)} &&& {\C^\vee(h_A, F')} \\
+			\\
+			{F(A)} &&& {F(B)}
+			\arrow["{\alpha \circ (-)}", from=1-1, to=1-4]
+			\arrow["\cong"', from=1-1, to=3-1]
+			\arrow["\cong", from=1-4, to=3-4]
+			\arrow["{\alpha_A}"', from=3-1, to=3-4]
+		\end{tikzcd}
+	\]
+\end{proof}
+
+\begin{corollary*}
+	Functor \( h_{(-)}: \C^\op \to \C^\vee \) (defined by \( A \mapsto h_A \)) is fully faithful.
+\end{corollary*}
+\begin{proof}
+	By Yoneda's lemma, \( \C^\vee(h_A, h_B) = h_B(A) = \C(B, A) \).
+\end{proof}
+
+\vspace*{2mm}
+
+Let \( \hat{\C} = [\C^\op, \ctrm{Sets}] \). The dual statement of Yoneda's lemma:
+\[
+	\hat{\C}(h^A, F) = F(A),
+\]
+where \( F \) and \( h^A = \C(-, A) \in \Ob(\hat{\C}) \). It follows that \( h^{(-)}: \C \to \hat{\C} \) is fully faithful.
+
+\begin{definition*}
+	A functor \( F: \C \to \ctrm{Sets} \) is called \emdef{representable} if there is a natural isomorphism \( \theta: F \tox{\sim} h_A \) for some object \( A \in \Ob(\C) \).
+\end{definition*}
+
+\section{The Godement's Product (a.k.a. the Horizontal Composition)}
+
+Recall that for natural transformations \( \alpha: F \To G \) and \( \beta: G \To H \) its \emdef{vertical composition}
+\[
+	\begin{tikzcd}
+		\C &&&& {\ct{D}}
+		\arrow[""{name=0, anchor=center, inner sep=0}, "G"{pos=0.8}, from=1-1, to=1-5]
+		\arrow[""{name=1, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
+		\arrow[""{name=2, anchor=center, inner sep=0}, "H"', curve={height=30pt}, from=1-1, to=1-5]
+		\arrow["\alpha"', shorten <=4pt, shorten >=4pt, Rightarrow, from=1, to=0]
+		\arrow["\beta"', shorten <=4pt, shorten >=4pt, Rightarrow, from=0, to=2]
+	\end{tikzcd}
+\]
+is defined by \( (\beta \circ \alpha)_X = \beta_X \circ \alpha_X \) for all \( X \in \Ob(\C) \).
+
+\vspace*{3mm}
+
+Now consider the following diagram:
+\[
+	\begin{tikzcd}{\ct{A}} &&& {\ct{B}} &&& {\ct{C}}
+		\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-1, to=1-4]
+		\arrow[""{name=1, anchor=center, inner sep=0}, "G"', curve={height=18pt}, from=1-1, to=1-4]
+		\arrow[""{name=2, anchor=center, inner sep=0}, "H", curve={height=-18pt}, from=1-4, to=1-7]
+		\arrow[""{name=3, anchor=center, inner sep=0}, "K"', curve={height=18pt}, from=1-4, to=1-7]
+		\arrow["\alpha"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+		\arrow["\beta"', shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
+	\end{tikzcd}
+\]
+We will define the \emdef{horizontal composition} \( \beta \ast \alpha \),
+\[
+	\begin{tikzcd}{\ct{A}} &&&& {\ct{C}}
+		\arrow[""{name=0, anchor=center, inner sep=0}, "HF", curve={height=-18pt}, from=1-1, to=1-5]
+		\arrow[""{name=1, anchor=center, inner sep=0}, "KG"', curve={height=18pt}, from=1-1, to=1-5]
+		\arrow["{\beta \ast\alpha}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+	\end{tikzcd}
+\]
+by saying that given \( X \in \Ob(\C) \), one has
+\[
+	(\beta \ast \alpha)_X \,:=\, \beta_{G(X)} \circ H(\alpha_X) = K(\alpha_X) \circ \beta_{F(X)},
+\]
+taking advantage of the fact that the following diagram commutes:
+\[
+	\begin{tikzcd}{HF(X)} &&& {KF(X)} \\
+		\\
+		{HG(X)} &&& {KG(X)}
+		\arrow["{\beta_{F(X)}}", from=1-1, to=1-4]
+		\arrow["{H(\alpha_X)}"', from=1-1, to=3-1]
+		\arrow["{(\beta \ast \alpha)_X}"{description}, dashed, from=1-1, to=3-4]
+		\arrow["{K(\alpha_X)}", from=1-4, to=3-4]
+		\arrow["{\beta_{G(X)}}"', from=3-1, to=3-4]
+	\end{tikzcd}
+\]
+
+\begin{examples*}
+	\item If \( F = G \) and \( \alpha = 1_F \),
+		\[
+			\beta_F := \beta \ast 1_F: HF \to KF, \qquad (\beta F)_X = \beta_{F(X)}.
+		\]
+	\item If \( H = K \) and \( \beta = 1_H \),
+		\[
+			H \alpha := 1_H \ast \alpha: HF \to HG, \qquad (H \alpha)_X = H(\alpha_X).
+		\]
+\end{examples*}
+
+Redrawing the diargam using new notation,
+\[
+	\begin{tikzcd}
+		HF &&& KF \\
+		\\
+		HG &&& KG
+		\arrow["{\beta_F}", from=1-1, to=1-4]
+		\arrow["{H \alpha}"', from=1-1, to=3-1]
+		\arrow["{\beta \ast \alpha}"{description}, dashed, from=1-1, to=3-4]
+		\arrow["{K \alpha}", from=1-4, to=3-4]
+		\arrow["{\beta_G}"', from=3-1, to=3-4]
+	\end{tikzcd}
+\]
+we note that
+\[
+	(1_K \ast \alpha) \circ (\beta \ast 1_F) = (\beta \ast 1_G) \circ (1_H \ast \alpha) = \beta \ast \alpha.
+\]
+
+\newpage
+
+\begin{proposition*}
+	Properties of Godement's product:
+	\begin{enumerate}
+		\item \( (\alpha \ast \beta) \ast \gamma = \alpha \ast (\beta \ast \gamma) \).
+		\item \emdef{2-associativity} or \emdef{interchange law}:
+			\[
+				\begin{tikzcd}{\ct{A}} &&& {\ct{B}} &&& {\ct{C}}
+					\arrow[""{name=0, anchor=center, inner sep=0}, "G"{pos=0.7}, from=1-1, to=1-4]
+					\arrow[""{name=1, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-4]
+					\arrow[""{name=2, anchor=center, inner sep=0}, "H"', curve={height=30pt}, from=1-1, to=1-4]
+					\arrow[""{name=3, anchor=center, inner sep=0}, "{G'}"{pos=0.7}, from=1-4, to=1-7]
+					\arrow[""{name=4, anchor=center, inner sep=0}, "{F'}", curve={height=-30pt}, from=1-4, to=1-7]
+					\arrow[""{name=5, anchor=center, inner sep=0}, "{H'}"', curve={height=30pt}, from=1-4, to=1-7]
+					\arrow["\alpha"', shorten <=4pt, shorten >=4pt, Rightarrow, from=1, to=0]
+					\arrow["\beta"', shorten <=4pt, shorten >=4pt, Rightarrow, from=0, to=2]
+					\arrow["{\alpha'}"', shorten <=4pt, shorten >=4pt, Rightarrow, from=4, to=3]
+					\arrow["{\beta'}"', shorten <=4pt, shorten >=4pt, Rightarrow, from=3, to=5]
+				\end{tikzcd}
+			\]
+			\[
+				(\beta' \circ \alpha') \ast (\beta \circ \alpha) = (\beta' \ast \beta) \circ (\alpha' \ast \alpha).
+			\]
+	\end{enumerate}
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}
+
+\begin{remark*}
+	Let \( \ct{A} \) and \( \ct{B} \) be categories. Define a functor
+	\[
+		\mrm{Comp}: [A, B] \times [B, C] \to [A, C]
+	\]
+	on objects and morphisms by letting
+	\begin{enumerate}
+		\item \( \mrm{Comp}(F, H) = H \circ F \);
+		\item \( \mrm{Comp}(\alpha, \beta) = \beta \ast \alpha \).
+	\end{enumerate}
+\end{remark*}
+
+\begin{remark*}
+	Godement's product is useful when defining 2-categories.
+\end{remark*}

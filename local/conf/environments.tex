@@ -1,0 +1,83 @@
+% --------------------- TRANSLATIONS ----------------------
+
+\DeclareTranslation{russian}{Theorem}{Теорема}
+\DeclareTranslation{russian}{Lemma}{Лемма}
+\DeclareTranslation{russian}{Corollary}{Следствие}
+\DeclareTranslation{russian}{Statement}{Утверждение}
+\DeclareTranslation{russian}{Observation}{Наблюдение}
+\DeclareTranslation{russian}{Proposition}{Предложение}
+\DeclareTranslation{russian}{Definition}{Определение}
+\DeclareTranslation{russian}{Remark}{Замечание}
+\DeclareTranslation{russian}{Question}{Вопрос}
+\DeclareTranslation{russian}{Problem}{Задача}
+\DeclareTranslation{russian}{Example}{Пример}
+
+\DeclareTranslation{russian}{Definitions}{Определения}
+\DeclareTranslation{russian}{Remarks}{Замечания}
+\DeclareTranslation{russian}{Examples}{Примеры}
+
+% ------------------ PLAIN ENVIRONMENTS -------------------
+
+\theoremstyle{plain}
+
+\newtheorem{theorem}{\GetTranslation{Theorem}}
+\newtheorem{lemma}{\GetTranslation{Lemma}}
+\newtheorem{corollary}{\GetTranslation{Corollary}}
+\newtheorem{statement}{\GetTranslation{Statement}}
+\newtheorem{observation}{\GetTranslation{Observation}}
+\newtheorem{proposition}{\GetTranslation{Proposition}}
+
+\newtheorem*{theorem*}{\GetTranslation{Theorem}}
+\newtheorem*{lemma*}{\GetTranslation{Lemma}}
+\newtheorem*{corollary*}{\GetTranslation{Corollary}}
+\newtheorem*{statement*}{\GetTranslation{Statement}}
+\newtheorem*{observation*}{\GetTranslation{Observation}}
+\newtheorem*{proposition*}{\GetTranslation{Proposition}}
+
+% ---------------- DEFINITION ENVIRONMENTS ----------------
+
+\theoremstyle{definition}
+
+\newtheorem{definition}{\GetTranslation{Definition}}
+\newtheorem{remark}{\GetTranslation{Remark}}
+\newtheorem{question}{\GetTranslation{Question}}
+\newtheorem{problem}{\GetTranslation{Problem}}
+\newtheorem{example}{\GetTranslation{Example}}
+
+\newtheorem*{definition*}{\GetTranslation{Definition}}
+\newtheorem*{remark*}{\GetTranslation{Remark}}
+\newtheorem*{question*}{\GetTranslation{Question}}
+\newtheorem*{problem*}{\GetTranslation{Problem}}
+\newtheorem*{example*}{\GetTranslation{Example}}
+
+% ----------------- PLURAL ENVIRONMENTS ------------------
+
+\newtheoremstyle{definitions_break}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {}          % BODYFONT
+  {0pt}       % INDENT
+  {\bfseries} % HEADFONT
+  {:}         % HEADPUNCT
+  {\newline}  % HEADSPACE
+  {}          % CUSTOM-HEAD-SPEC
+
+\theoremstyle{definitions_break}
+
+\newtheorem*{definitions_break}{\GetTranslation{Definitions}}
+\newtheorem*{remarks_break}{\GetTranslation{Remarks}}
+\newtheorem*{examples_break}{\GetTranslation{Examples}}
+
+% -------------- PLURAL ENVIRONMENTS WRAPPED --------------
+
+\newenvironment{definitions*} {
+  \begin{definitions_break} \leavevmode\vspace{-\baselineskip} \begin{enumerate}
+}{\end{enumerate} \end{definitions_break}}
+
+\newenvironment{remarks*} {
+  \begin{remarks_break} \leavevmode\vspace{-\baselineskip} \begin{enumerate}
+}{\end{enumerate} \end{remarks_break}}
+
+\newenvironment{examples*} {
+  \begin{examples_break} \leavevmode\vspace{-\baselineskip} \begin{enumerate}
+}{\end{enumerate} \end{examples_break}}

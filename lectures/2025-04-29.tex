@@ -1,0 +1,252 @@
+\Lecture{April 29, 2025}
+
+\begin{proposition*}[Dimension shifting]
+	Let \( F \) be right exact. Let
+	\[
+		0 \too K_{m+1} \too P_m \too \dotsm \too P_0 \too A \too 0
+	\]
+	be an exact sequence with \( P_i \) projective for \( i=0,\dots,m \). Denote syzygies \( K_0:=A \) and, for \( i\ge 0 \), \( K_{i+1}:=\ker(d_i: P_i\to K_i) \). Then:
+	\begin{enumerate}
+		\item For \( i\ge m+2 \), there are natural isomorphisms
+			\[
+				L_i F(A)\;\simeq\; L_{i-1}F(K_1)\;\simeq\; \dotsm\; \simeq\; L_{i-m-1}F(K_{m+1}).
+			\]
+		\item There is a short exact sequence
+			\[
+				0 \too L_{m+1}F(A) \too F(K_{m+1}) \too F(P_m) \too F(K_m) \too 0.
+			\]
+	\end{enumerate}
+\end{proposition*}
+
+\begin{proof}
+	For the short exact sequence \( 0\to K_{i+1}\to P_i\to K_i\to 0 \) with \( P_i \) projective, the long exact sequence of left derived functors gives \( L_jF(P_i)=0 \) for \( j\ge 1 \) and isomorphisms \( L_jF(K_i)\simeq L_{j-1}F(K_{i+1}) \) for \( j\ge 2 \). Iterating, starting from \( 0\to K_1\to P_0\to A\to 0 \) yields the chain in (1). For (2), apply the long exact sequence to \( 0\to K_{m+1}\to P_m\to K_m\to 0 \) to obtain
+	\[
+		0 \to L_1F(K_m) \to F(K_{m+1}) \to F(P_m) \to F(K_m) \to 0,
+	\]
+	then identify \( L_1F(K_m) \simeq L_{m+1}F(A) \) by (1). Consider the short exact sequences
+	\[
+		0 \to K_{m+2} \to P_{m+1} \tox{d_{m+1}} K_{m+1} \to 0
+	\]
+	and
+	\[
+		0 \to K_{m+1}\tox{i} P_m\tox{d_m} K_m \to 0.
+	\]
+	Applying \( F \) and using \( L_jF(P)=0 \) for projective \( P \), get the commutative diagram with exact rows
+	\[
+		\begin{tikzcd}
+			F(P_{m+2}) \arrow[r] \arrow[d, equals] & \ker F(d_{m+1}) \arrow[r] \arrow[d] & \ker F(i) \arrow[r] \arrow[d] & 0 \\
+			F(P_{m+2}) \arrow[r] \arrow[d] & F(P_{m + 1}) \arrow[d,"F(d_{m + 1})"] \arrow[r] & F(K_{m + 1}) \arrow[r] \arrow[d, "F(i)"] & 0 \\
+			0 \arrow[r] & F(P_m) \arrow[r,"\sim"] \arrow[d] & F(P_m) \arrow[r] \arrow[d] & 0 \\
+			& F(K_m) \arrow[r,"\sim"] & \coker F(i)
+		\end{tikzcd}
+	\]
+	Snake Lemma yields an isomorphism \( \ker F(i)\cong L_1F(K_m) \), and by iterating the isomorphisms \( L_jF(K_r)\cong L_{j-1}F(K_{r+1}) \) one gets \( \ker F(i)\cong L_{m+1}F(A) \), which finishes the proof.\qedhere
+\end{proof}
+
+\begin{definition*}
+	An object \( Q \) is called \( F \)-\emdef{acyclic} if \( L_iF(Q)=0 \) for all \( i\ge 1 \).
+\end{definition*}
+
+\begin{definition*}
+	An \( F \)-\emdef{acyclic resolution} of an object \( A \) is a left resolution
+	\[
+		\dotsm \too Q_2 \too Q_1 \too Q_0 \too A \too 0,
+	\]
+	with each \( Q_i \) \( F \)-acyclic.
+\end{definition*}
+
+\begin{example*}
+	Let \( F(-):= M\otimes_R(-) \). A left \( R \)-module \( N \) is \( F \)-acyclic iff \( \Tor_i^R(M,N)=0 \) for all \( i\ge 1 \). The following are equivalent:
+	\begin{enumerate}
+		\item \( N \) is flat.
+		\item \( \Tor_1^R(M,N)=0 \) for all \( M\in \ctrmhyp{Mod}{R} \).
+		\item \( \Tor_i^R(M,N)=0 \) for all \( M\in \ctrmhyp{Mod}{R} \) and all \( i\ge 1 \).
+	\end{enumerate}
+\end{example*}
+
+\begin{proposition*}
+	If \( Q_\bullet \to A \) is an \( F \)-acyclic resolution, then for every \( n\ge 0 \)
+	\[
+		L_n F(A)\;\simeq\; H_n\bigl(F(Q_\bullet)\bigr).
+	\]
+\end{proposition*}
+
+\begin{proof}
+	Set \( K_i := \ker(d_i: Q_i\to Q_{i-1}) \) for \( i\ge 1 \) and \( K_0:=A \). For each short exact sequence
+	\[
+		0\to K_{i+1}\to Q_i\to K_i\to 0
+	\]
+	with \( Q_i \) being \( F \)-acyclic, the long exact sequence of left derived functors yields isomorphisms
+	\[
+		L_nF(K_i)\cong L_{n-1}F(K_{i+1})
+	\]
+	for all \( n\ge 2 \) and an exact segment
+	\[
+		0\too L_1F(K_i)\too F(K_{i+1}) \too F(Q_i)\too F(K_i)\too 0.
+	\]
+	Iterating gives \( L_nF(A)\cong L_1F(K_{n-1}) \). For \( i=0 \) the segment reads
+	\[
+		0\too L_1F(A)\too F(K_1)\tox{F(j)} F(Q_0)\too F(A)\too 0,
+	\]
+	which identifies
+	\[
+		L_1F(A) \cong \ker F(j) \cong H_1(F(Q_\bullet)),
+	\]
+	and the result follows after shifting the indices
+	\[
+		L_n F(A) \cong L_1 F(K_{n - 1}) \cong H_1\biggl(F\bigl(\,\dotsc \to Q_{n - 1} \to K_{n - 1} \to 0\bigr)\biggr) \cong H_n (F(Q_\bullet)).
+	\]
+\end{proof}
+
+\section{Ext and Tor}
+
+Let \( R \) be a ring and \( A,B \) left \( R \)-modules. If \( P_\bullet \to A \) is a projective resolution, define
+\[
+	\Tor_i^R(A,B)\;:=\; H_i\bigl(P_\bullet \otimes_R B\bigr)\qquad (i\ge 0).
+\]
+Also if \( Q_\bullet \to B \) is a projective resolution, let
+\[
+	\tor_i^R(A,B)\;\cong\; H_i\bigl(A \otimes_R Q_\bullet\bigr)\qquad (i\ge 0).
+\]
+
+\begin{theorem*}[Balancing Tor]
+	For all left \( R \)-modules \( A,B \) and all \( n\ge 0 \) there is a natural isomorphism
+	\[
+		\Tor_n^R(A,B)\;\cong\; \tor_n^R(A,B).
+	\]
+\end{theorem*}
+
+\begin{proof}
+	Let \( P_\bullet\to A \) and \( Q_\bullet\to B \) be projective resolutions and set \( K_i:=\ker(P_i\to P_{i-1}) \) with \( K_0=A \), and \( V_j:=\ker(Q_j\to Q_{j-1}) \) with \( V_0=B \). By dimension shifting,
+	\[
+		\Tor_n^R(A,B)\;\cong\; \Tor_1^R(K_i,B)\quad\text{and}\quad \tor_n^R(A,B)\;\cong\; \tor_1^R(A,V_j)\qquad(i+j=n,\ i,j\ge1).
+	\]
+	Consider the short exact sequences \( 0\to K_i\to P_{i-1}\to K_{i-1}\to 0 \) and \( 0\to V_j\to Q_{j-1}\to V_{j-1}\to 0 \). Tensoring element-wise gives a commutative \( 3\times3 \) diagram with exact rows and columns
+	\[
+		\begin{tikzcd}
+			K_i\otimes V_j \arrow[r] \arrow[d] & P_{i-1}\otimes V_j \arrow[r] \arrow[d] & K_{i-1}\otimes V_j \arrow[r] \arrow[d] & 0 \\
+			K_i\otimes Q_{j-1} \arrow[r] \arrow[d] & P_{i-1}\otimes Q_{j-1} \arrow[r] \arrow[d] & K_{i-1}\otimes Q_{j-1} \arrow[r] \arrow[d] & 0 \\
+			K_i\otimes V_{j-1} \arrow[r] & P_{i-1}\otimes V_{j-1} \arrow[r] & K_{i-1}\otimes V_{j-1} \arrow[r] & 0
+		\end{tikzcd}
+	\]
+	The Snake Lemma identifies \( \Tor_1^R(K_{i-1},V_j) \) with the kernel of the top horizontal map and also identifies \( \tor_1^R(K_i,V_{j-1}) \) with the kernel of the left vertical map; exactness in the middle square shows these kernels coincide, hence
+	\[
+		\Tor_1^R(K_i,V_{j-1})\;\cong\; \tor_1^R(K_i,V_{j-1}).
+	\]
+	Applying dimension shifting back yields \( \Tor_n^R(A,B)\cong\tor_n^R(A,B) \) for all \( n\ge0 \).
+\end{proof}
+
+\begin{theorem*}[Ext via resolutions]
+	For left \( R \)-modules \( A,B \) and \( n\ge 0 \), if \( B\to E^\bullet \) is an injective resolution and \( P_\bullet\to A \) is a projective resolution, then
+	\[
+		\Ext_R^n(A,B) \,=\, H^n\!\bigl(\Hom(A,E^\bullet)\bigr) \;\cong\; H^n\!\bigl(\Hom(P_\bullet,B)\bigr).
+	\]
+\end{theorem*}
+
+\section{Dimensions}
+
+\begin{definition*}
+	For \( M\in \cthyprm{R}{Mod} \), the \emdef{projective dimension} \( \pdim_R(M) \) is the minimal integer \( n \) such that there exists a projective resolution
+	\[
+		0 \too P_n \too \dotsm \too P_0 \too M \too 0.
+	\]
+	The \emdef{injective dimension} \( \idim_R(M) \) is defined dually via an injective resolution
+	\[
+		0 \to M \to I^0 \to \dotsm \to I^n\to 0.
+	\]
+\end{definition*}
+
+\begin{example*}
+	Over \( R=\bb{Z} \) and for \( M= \bb{Z}/n \), one has \( \pdim_R(M) = 1 \), since there is a projective resolution
+	\[
+		0 \too \bb{Z} \tox{n} \bb{Z} \too M \too 0.
+	\]
+\end{example*}
+
+\begin{proposition*}
+	If \( R \) is a PID, then \( \pdim_R(M)\le 1 \) for all \( R \)-modules \( M \), and dually \( \idim_R(M)\le 1 \) for all \( M \).
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise.}
+\end{proof}
+
+\begin{theorem*}
+	Let \( M \) be a left \( R \)-module and \( d\ge 0 \). The following are equivalent:
+	\begin{enumerate}
+		\item \( \pdim_R(M)\le d \).
+		\item \( \Ext_R^n(M,N)=0 \) for all \( n>d \) and all \( N \).
+		\item \( \Ext_R^{d+1}(M,N)=0 \) for all \( N \).
+		\item If \( 0\to K_d\to P_{d-1}\to\dotsm\to P_0\to M\to 0 \) is exact with each \( P_i \) projective, then \( K_d \) is projective.
+	\end{enumerate}
+\end{theorem*}
+\begin{proof}
+	Implications \( 4 \To 1 \To 2 \To 3 \) are clear. We show \( 3 \To 4 \). By dimension shifting,
+	\[
+		\Ext_R^{d+1}(M,N)\cong \Ext_R^1(K_d,N)
+	\]
+	for all \( N \). Hence \( \Ext_R^1(K_d,-)=0 \), and the lemma below shows that \( K_d \) is projective.\qedhere
+\end{proof}
+
+\begin{lemma*}
+	A left  \( R \)-module \( P \) is projective if and only if \( \Ext_R^1(P,N)=0 \) for all \( N \).
+\end{lemma*}
+\begin{proof}
+	The forward implication is clear. Now, given a short exact sequence
+	\[
+		0 \to N' \to N \tox{g} N'' \to 0,
+	\]
+	apply \( \Hom_R(P,-) \) to get an exact row
+	\[
+		0\to\Hom(P,N')\to\Hom(P,N)\to\Hom(P,N'')\to \Ext_R^1(P,N')=0.
+	\]
+	Thus \( \Hom(P,N)\to\Hom(P,N'') \) is an epimorphism, so \( P \) is projective.
+\end{proof}
+
+A dual statement of the theorem also holds for injective dimensions.
+
+\begin{theorem*}
+	For a left module \( N \) and integer \( d\ge 0 \), the following are equivalent:
+	\begin{enumerate}
+		\item \( \idim_R(N)\le d \).
+		\item \( \Ext_R^{n}(M,N)=0 \) for all \( n>d \) and all \( M \).
+		\item \( \Ext_R^{d+1}(M,N)=0 \) for all \( M \).
+		\item  If \( 0\to N\to E^0\to\dotsm\to E^{d - 1} \to K^d\to 0 \) is exact with each \( E_i \) injective, then \( K_d \) is injective.
+	\end{enumerate}
+\end{theorem*}
+
+\begin{lemma*}
+	A left \( R \)-module \( N \) is injective if and only if \( \Ext^1_R(R/I, N) = 0 \) for all left ideals \( I \).
+\end{lemma*}
+\begin{proof}
+	Follows from the long exact sequence for \( I \to R \to R/I \) and \( F = \Hom(-, N) \):
+	\[
+		\Hom(R, N) \to \Hom(I, N) \to \Ext_R^1(R/I, N) \to 0.
+	\]
+\end{proof}
+
+\begin{theorem*}
+	The following numbers are equal:
+	\begin{enumerate}
+		\item \( \displaystyle \sup\{\idim_R N \mid N \in \cthyprm{R}{Mod}\} \).
+		\item \( \displaystyle \sup\{\pdim_R M \mid M \in \cthyprm{R}{Mod}\} \).
+		\item \( \displaystyle \sup\{\pdim_R M \mid M \text{ is finitely generated}\} \).
+		\item \( \displaystyle \sup\{\pdim_R I \mid I \le R\ \text{a left ideal}\} \).
+		\item \( \displaystyle \sup\{ d \mid \exists M,N\in \cthyprm{R}{Mod}\ \text{with}\ \Ext_R^{d}(M,N)\ne 0\} \).
+	\end{enumerate}
+\end{theorem*}
+\begin{proof}
+	From the theorems on projective and injective dimensions it follows that
+	\( (1) = (5) = (2) \). Moreover, \( (2) \ge (3) \ge (4) \) is immediate. If \( d:=(4)<\infty \) and \( N\in \cthyprm{R}{Mod} \), take
+	\[
+		0 \to N \to E^0 \to \dotsm \to E^d \to K \to 0.
+	\]
+	to be an injective resolution of \( N \). For every left ideal \( I\le R \), dimension shifting gives
+	\[
+		\Ext_R^{d+1}(R/I,N)\cong \Ext_R^{1}(R/I,K).
+	\]
+	Since \( \pdim_R(R/I)\le d \), the left side vanishes, hence \( \Ext_R^{1}(R/I,K)=0 \) for all \( I \). As we showed, this forces \( K \) injective, so \( \idim_R N\le d \). Thus \( (1) \le (4) \), and all five numbers are equal.
+\end{proof}
+
+\begin{definition*}
+	This common value is called the \emdef{left global dimension} of \( R \), and is denoted \( \lgldim R \).
+\end{definition*}

@@ -1,0 +1,158 @@
+% --------------- UNARY UPPERCASE OPERATORS ---------------
+
+\let\Im\relax\DeclareMathOperator{\Im}{Im}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+
+\DeclareMathOperator{\Gal}{Gal}
+
+\DeclareMathOperator{\Prj}{Proj}
+\DeclareMathOperator{\Inj}{Inj}
+
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ext}{Ext}
+
+% --------------- UNARY LOWERCASE OPERATORS ---------------
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\ob}{ob}
+\DeclareMathOperator{\mor}{mor}
+\DeclareMathOperator{\eq}{eq}
+
+\DeclareMathOperator{\coeq}{coeq}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\coker}{coker}
+
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator*{\colimx}{colim}
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\trace}{trace}
+
+\DeclareMathOperator{\tor}{tor}
+
+% ---------------- OPERATOR-NAME FACTORIES ----------------
+
+\newcommand*{\opn}[1]{\operatorname{#1}}
+\newcommand*{\opnx}[1]{\operatorname*{#1}}
+
+% ----------------- POST-OPERATOR SPACING -----------------
+
+\newcommand*{\liminj}{\varinjlim\,}
+\newcommand*{\limproj}{\varprojlim\,}
+
+% ------------------- BINARY OPERATORS --------------------
+
+\newcommand*{\fac}{\mathbin{/}}
+\newcommand*{\Fac}{\mathbin{\bigg/}}
+\newcommand*{\minus}{\mathbin{\setminus}}
+
+\newcommand*{\comma}{\mathbin{\downarrow}}
+\newcommand*{\slice}{\mathbin{/}}
+\newcommand*{\adj}{\mathrel{\vdash}}
+
+% ----------------------- BRACKETS ------------------------
+
+\newcommand*{\cl}[1]{\langle #1 \rangle}
+\newcommand*{\Cl}[1]{\bigl\langle #1 \bigr\rangle}
+
+\newcommand*{\brr}[1]{\llbracket #1 \rrbracket}
+
+% --------------------- COMMON WORDS ----------------------
+
+\newcommand*{\op}{\mrm{op}}
+\newcommand*{\id}{\mrm{id}}
+\newcommand*{\Id}{\mrm{Id}}
+
+% ---------------- CATEGORY-NAME FACTORIES ----------------
+
+\newcommand*{\ct}[1]{#1}
+\newcommand*{\ctrm}[1]{\ct{\mrm{#1}}}
+
+\newcommand*{\hyp}[2]{#1\text{-}#2}
+\newcommand*{\cthyprm}[2]{\ct{\hyp{#1}{\mrm{#2}}}}
+\newcommand*{\ctrmhyp}[2]{\ct{\hyp{\mrm{#1}}{#2}}}
+
+% ----------------- MATH TEXT FORMATTING ------------------
+
+\newcommand*{\bd}{\mathbf}
+\newcommand*{\bb}{\mathbb}
+\newcommand*{\ca}{\mathcal}
+\newcommand*{\fr}{\mathfrak}
+\newcommand*{\scr}{\mathscr}
+\newcommand*{\mrm}{\mathrm}
+
+% --------------------- RIGHT ARROWS ----------------------
+
+\newcommand*{\To}{\Rightarrow}
+\newcommand*{\too}{\longrightarrow}
+\newcommand*{\Too}{\Longrightarrow}
+
+\newcommand*{\inc}{\hookrightarrow}
+\newcommand*{\mono}{\rightarrowtail}
+\newcommand*{\epi}{\twoheadrightarrow}
+\newcommand*{\mapstoo}{\longmapsto}
+
+% ----------------- RIGHT ARROWS EXTENDED ------------------
+
+\newcommand*{\tox}{\xrightarrow}
+\newcommand*{\Tox}{\xRightarrow}
+\newcommand*{\toox}{\xlongrightarrow}
+\newcommand*{\Toox}{\xLongrightarrow}
+
+\newcommand*{\incx}{\xhookrightarrow}
+\newcommand*{\monox}{\xrightarrowtail}
+\newcommand*{\epix}{\xtwoheadrightarrow}
+\newcommand*{\mapstox}{\xmapsto}
+
+% ---------------------- LEFT ARROWS ----------------------
+
+\newcommand*{\ot}{\leftarrow}
+\newcommand*{\mapsot}{\mapsfrom}
+
+\newcommand*{\oT}{\Leftarrow}
+\newcommand*{\oot}{\longleftarrow}
+\newcommand*{\ooT}{\Longleftarrow}
+
+\newcommand*{\cni}{\hookleftarrow}
+\newcommand*{\onom}{\leftarrowtail}
+\newcommand*{\ipe}{\twoheadleftarrow}
+\newcommand*{\mapsoot}{\longmapsfrom}
+
+% ------------------ LEFT ARROWS EXTENDED ------------------
+
+\newcommand*{\otx}{\xleftarrow}
+\newcommand*{\mapsotx}{\xmapsfrom}
+
+\newcommand*{\oTx}{\xLeftarrow}
+\newcommand*{\ootx}{\xlongleftarrow}
+\newcommand*{\ooTx}{\xLongleftarrow}
+
+\newcommand*{\cnix}{\xhookleftarrow}
+\newcommand*{\onomx}{\xleftarrowtail}
+\newcommand*{\ipex}{\xtwoheadleftarrow}
+
+% ------------------------- OTHER -------------------------
+
+\renewcommand*{\ct}[1]{\underline{#1}}
+
+\newcommand*{\A}{\ct{\ca{A}}}
+\newcommand*{\B}{\ct{\ca{B}}}
+\newcommand*{\C}{\ct{C}}
+
+\newcommand*{\Ch}{\ctrm{Ch}}
+\newcommand*{\CoCh}{\ctrm{CoCh}}
+\newcommand*{\uHom}{\ctrm{\Hom}}
+\newcommand*{\K}{\ctrm{K}}
+
+\newcommand{\pdim}{\operatorname{pd}}
+\newcommand{\idim}{\operatorname{id}}
+\newcommand{\lgldim}{\operatorname{lgl}}
+
+\newcommand{\fdim}{\operatorname{fd}}
+\newcommand{\wgldim}{\operatorname{wgl}}

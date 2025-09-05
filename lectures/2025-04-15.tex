@@ -1,0 +1,175 @@
+\Lecture{April 15, 2025}
+
+\chapter{Resolutions and Derived Functors}
+
+\Heading{References}
+\begin{itemize}
+	\item J. Rotman, \textit{An Introduction to Homological Algebra}.
+	\item C. Weibel, \textit{An Introduction to Homological Algebra}.
+\end{itemize}
+
+\section{Complexes}
+
+\begin{definitions*}
+	\item If \( \A \) is an abelian category, the category \( \Ch(\A) \) of chain complexes has as objects diagrams
+		\[
+			C = \bigl( \dotsm \tox{d_{i+1}} C_i \tox{d_i} C_{i-1} \tox{d_{i-1}} \dotsm \bigr),
+		\]
+		with differentials \( d_i: C_i \to C_{i-1} \) such that \( d_i\, d_{i+1} = 0 \) for all \( i \in \bb{Z} \) (equivalently, \( d^2 = 0 \)).
+	\item The category \( \CoCh(\A) \) of cochain complexes has as objects diagrams
+		\[
+			C = \bigl( \dotsm \tox{d^{i-1}} C^{i} \tox{d^{i}} C^{i+1} \tox{d^{i+1}} \dotsm \bigr),
+		\]
+		with differentials \( d^{i}: C^{i} \to C^{i+1} \) such that \( d^{i+1}\, d^{i} = 0 \) for all \( i \in \bb{Z} \).
+	\item For a chain complex \( C \), define the \emdef{cycles}, \emdef{boundaries}, and \emdef{homology} by
+		\[
+			Z_i(C) := \ker(d_i), \qquad B_i(C) := \im(d_{i+1}), \qquad H_i(C) := Z_i(C) \Fac B_i(C) .
+		\]
+	\item Given chain complexes \( C, C' \), put for each \( d \in \bb{Z} \)
+		\[
+			\uHom^{d}(C, C') := \prod_{i \in \bb{Z}} \Hom(C_i, C'_{i+d}).
+		\]
+		Elements of \( \uHom^{d}(C, C') \) are \emdef{homogeneous maps of degree} \( d \): these are families \( u = (u_i) \) with \( u_i: C_i \to C'_{i+d} \). Define a differential \( D: \uHom^{d}(C, C') \to \uHom^{d-1}(C, C') \) by
+		\[
+			D(u) := d' \circ u - (-1)^{d} u \circ d .
+		\]
+		Then \( D^2 = 0 \), so \( \uHom(C, C') := (\uHom^{\bullet}(C, C'), D) \) is a complex. A \emdef{chain map} is a degree \( 0 \) cycle in \( \uHom(C, C') \), i.e. a family \( f = (f_i) \) with \( f_i: C_i \to C'_i \) and \( d' f = f d \).
+	\item Two chain maps \( f, g: C \to C' \) are \emdef{homotopic} if \( f - g = D(h) \) for some \( h \in \uHom^{1}(C, C') \), equivalently,
+		\[
+			f_i - g_i = d'_{i+1} h_i + h_{i-1} d_i \quad \text{for all } i \in \bb{Z} .
+		\]
+		The \emdef{homotopy category} \( \K(\A) \) has the same objects as \( \Ch(\A) \) and morphisms
+		\[
+			\Hom_{\K(\A)}(C, C') := H_0\bigl(\uHom(C, C')\bigr) ,
+		\]
+		i.e. chain-homotopy classes of chain maps \( C \to C' \).
+\end{definitions*}
+
+\begin{definitions*}
+	\item Chain complexes \( C \) and \( D \) are \emdef{homotopy equivalent} if there are chain maps \( f: C \to D \) and \( g: D \to C \) with \( fg \sim 1_D \) and \( gf \sim 1_C \).
+	\item If \( u: C \to C' \) is a chain map, then for all \( i \in \bb{Z} \)
+		\[
+			u\bigl(Z_i(C)\bigr) \subseteq Z_i(C'), \qquad u\bigl(B_i(C)\bigr) \subseteq B_i(C'),
+		\]
+		so there are induced maps \( Z_i(u): Z_i(C) \to Z_i(C') \), \( B_i(u): B_i(C) \to B_i(C') \), and hence
+		\[
+			H_i(u): H_i(C) \to H_i(C').
+		\]
+		A chain map \( u \) is a \emdef{quasi-isomorphism} if \( H_i(u) \) is an isomorphism for all \( i \in \bb{Z} \).
+\end{definitions*}
+
+\section{Snake lemma}
+
+\begin{lemma*}[Snake Lemma]
+	\[
+		\begin{tikzcd}
+			0 \arrow[r] & A' \arrow[r] \arrow[d,"f'"] & A \arrow[r] \arrow[d,"f"] & A'' \arrow[r] \arrow[d,"f''"] & 0 \\
+			0 \arrow[r] & B' \arrow[r] & B \arrow[r] & B'' \arrow[r] & 0
+		\end{tikzcd}
+	\]
+	If the rows are exact, then there is a natural long exact sequence
+	\[
+		0 \to \ker(f') \to \ker(f) \to \ker(f'') \tox{\delta} \coker(f') \to \coker(f) \to \coker(f'') \to 0 .
+	\]
+\end{lemma*}
+
+\begin{proposition*}
+	Let \( 0 \to A_{\bullet} \to B_{\bullet} \to C_{\bullet} \to 0 \) be a short exact sequence of chain complexes. Then there are connecting morphisms \( \delta_n: H_n(C) \to H_{n-1}(A) \) forming a long exact sequence
+	\[
+		\dotsm \to H_n(A) \to H_n(B) \to H_n(C) \tox{\delta_n} H_{n-1}(A) \to H_{n-1}(B) \to H_{n-1}(C) \to \dotsm .
+	\]
+\end{proposition*}
+\begin{proof}
+	Apply the Snake Lemma to the diagram with exact rows
+	\[
+		\begin{tikzcd}
+			0 \arrow[r] & Z_n(A) \arrow[r] \arrow[d] & Z_n(B) \arrow[r] \arrow[d] & Z_n(C) \arrow[r] \arrow[d] & 0 \\
+			0 \arrow[r] & B_{n-1}(A) \arrow[r] & B_{n-1}(B) \arrow[r] & B_{n-1}(C) \arrow[r] & 0
+		\end{tikzcd}
+	\]
+	where the vertical arrows are induced by the differentials. The connecting morphism \( \delta_n \) lands in \( H_{n-1} \) after passing to the quotients by boundaries, giving the long exact sequence.
+\end{proof}
+
+\begin{proposition*}
+	Given a morphism of short exact sequences of chain complexes
+	\[
+		\begin{tikzcd}
+			0 \arrow[r] & A_{\bullet} \arrow[r] \arrow[d,"f_{\bullet}"] & B_{\bullet} \arrow[r] \arrow[d,"g_{\bullet}"] & C_{\bullet} \arrow[r] \arrow[d,"h_{\bullet}"] & 0 \\
+			0 \arrow[r] & A'_{\bullet} \arrow[r] & B'_{\bullet} \arrow[r] & C'_{\bullet} \arrow[r] & 0
+		\end{tikzcd}
+	\]
+	the induced long exact sequences in homology form a commutative diagram. Moreover, the connecting morphisms are natural, i.e.
+	\[
+		H_{n-1}(f) \circ \delta_n \,=\, \delta'_n \circ H_n(h) \quad \text{for all } n \in \bb{Z} .
+	\]
+\end{proposition*}
+
+\section{Resolutions}
+
+\begin{definitions*}
+	\item A \emdef{left resolution} of an object \( M \in \A \) is a chain complex
+		\[
+			\dotsm \too P_2 \tox{d_2} P_1 \tox{d_1} P_0 \tox{\varepsilon} M \to 0
+		\]
+		with augmentation \( \varepsilon: P_0 \to M \), such that \( P_i = 0 \) for \( i < 0 \) and the sequence is exact; equivalently,
+		\[
+			H_0(P) \cong M, \qquad H_i(P) = 0 \text{ for } i>0 .
+		\]
+		A left resolution is \emdef{projective} if \( P_i \in \Prj(\A) \) for all \( i \ge 0 \).
+	\item A \emdef{right resolution} of \( M \) is a cochain complex
+		\[
+			0 \to M \tox{\eta} I^0 \tox{d^0} I^1 \tox{d^1} I^2 \too \dotsm
+		\]
+		with \( I^j = 0 \) for \( j<0 \), which is exact except at degree \( 0 \); equivalently,
+		\[
+			\ H^0(I) \cong M, \qquad H^j(I) = 0 \text{ for } j>0 .
+		\]
+		It is \emdef{injective} if \( I^j \in \Inj(\A) \) for all \( j \ge 0 \).
+\end{definitions*}
+
+\begin{examples*}
+	\item If \( \A = \cthyprm{R}{Mod} \), then every module has a projective (indeed, free) resolution: choose an epimorphism \( R^{(I_1)} \epi M \) with kernel \( K_1 \), then an epimorphism \( R^{(I_2)} \epi K_1 \) with kernel \( K_2 \), etc., obtaining an exact sequence
+		\[
+			\dotsm \to R^{(I_2)} \to R^{(I_1)} \to M \to 0,
+		\]
+		whose left part \( \dotsm \to R^{(I_2)} \to R^{(I_1)} \to 0 \) is a projective resolution of \( M \).
+
+	\item The modules \( K_i \) appearing here are called \emdef{syzygies} of \( M \).
+	\item If \( \A = \cthyprm{R}{Mod} \), then every module has an injective resolution: embed \( M \) into an injective module \( E^0 \) (e.g. an injective hull), let \( C^1 := \coker(M \to E^0) \), embed \( C^1 \) into an injective \( E^1 \), and continue to obtain
+		\[
+			0 \to M \to E^0 \to E^1 \to E^2 \to \dotsm,
+		\]
+		which is an injective resolution of \( M \).
+\end{examples*}
+
+\begin{proposition*}[Comparison for projective resolutions]
+	Let \( f: M \to M' \) be a morphism in \( \A \). Let \( P_{\bullet} \tox{\varepsilon\,} M \) and \( Q_{\bullet} \tox{\,\varepsilon'} M' \) be left resolutions with \( P_i \) projective for all \( i \ge 0 \). Then there exists a chain map
+	\[
+		\tilde f: P_{\bullet} \to Q_{\bullet}
+	\]
+	lifting \( f \), i.e. \( \varepsilon' \circ \tilde f_0 = f \circ \varepsilon \); moreover, \( \tilde f \) is unique up to chain homotopy.
+\end{proposition*}
+\begin{proof}
+	Construct \( \tilde f_0: P_0 \to Q_0 \) by lifting \( f\varepsilon \) along the epimorphism \( \varepsilon' \) using the projectivity of \( P_0 \). Inductively, having \( \tilde f_{i-1} \) with \( \varepsilon' d'_1 \dotsm d'_i \tilde f_i = f \varepsilon d_1 \dotsm d_i \), use the exactness of \( Q_{\bullet} \) at \( Q_{i-1} \) and the projectivity of \( P_i \) to obtain \( \tilde f_i: P_i \to Q_i \) such that \( d'_i \tilde f_i = \tilde f_{i-1} d_i \).
+
+	\vspace*{2mm}
+
+	To show uniqueness, let \( \tilde f, \tilde g: P_{\bullet} \to Q_{\bullet} \) be two lifts of \( f \). Put \( h := \tilde f - \tilde g \) and define \( s_n := 0 \) for \( n<0 \). Since \( \varepsilon' h_0 = 0 \) and \( Q_{\bullet} \) is exact at \( Q_0 \), there exists \( s_0: P_0 \to Q_1 \) with \( d'_1 s_0 = h_0 \).
+	Assume \( s_0,\dots,s_{n-1} \) are chosen so that \( h_k = d'_{k+1} s_k + s_{k-1} d_k \) for all \( k<n \). Set
+	\[
+		\alpha_n := h_n - s_{n-1} d_n : P_n \to Q_n .
+	\]
+	Then \( d'_n \alpha_n = d'_n h_n - (h_{n-1} - s_{n-2} d_{n-1}) d_n = 0 \), so by exactness at \( Q_n \) there exists \( s_n: P_n \to Q_{n+1} \) with \( d'_{n+1} s_n = \alpha_n \). Hence for all \( n \)
+	\[
+		h_n = d'_{n+1} s_n + s_{n-1} d_n ,
+	\]
+	which means \( h = D(s) \). Therefore \( \tilde f \) and \( \tilde g \) are chain-homotopic.\qedhere
+\end{proof}
+
+\begin{corollary*}
+	Let \( M \in \A \). Any two projective resolutions of \( M \) are chain-homotopy equivalent. Equivalently, if \( P_{\bullet} \tox{\varepsilon} M \) and \( P'_{\bullet} \tox{\varepsilon'} M \) are projective resolutions, then there exist chain maps
+	\[
+		f: P_{\bullet} \to P'_{\bullet}, \qquad g: P'_{\bullet} \to P_{\bullet}
+	\]
+	with \( g f \sim 1_{P_{\bullet}} \) and \( f g \sim 1_{P'_{\bullet}} \).
+\end{corollary*}

@@ -1,0 +1,290 @@
+\Lecture{February 25, 2025}
+
+\section{Pullbacks}
+
+\begin{definition*}
+	A \emdef{pullback} of the diagram \( X \tox{f} Z \otx{g} Y \) is a triple \( (X \times_Z Y, \pi_1, \pi_2) \),
+	\[
+		\begin{tikzcd}{X \times_Z Y} && Y &&& T && Y \\
+			\\
+			X && Z &&& X && Z
+			\arrow["{\pi_2}", from=1-1, to=1-3]
+			\arrow["{\pi_1}"', from=1-1, to=3-1]
+			\arrow["g", from=1-3, to=3-3]
+			\arrow["{t_2}", from=1-6, to=1-8]
+			\arrow["{t_1}"', from=1-6, to=3-6]
+			\arrow["g", from=1-8, to=3-8]
+			\arrow["f"', from=3-1, to=3-3]
+			\arrow["f"', from=3-6, to=3-8]
+		\end{tikzcd}
+	\]
+	with the property that given any other such triple \( (T, t_1, t_2) \), there is a unique map \( u: T \to X \times_Z Y \) such that \( t_1 = \pi_1 u \) and \( t_2 = \pi_2 u \).
+	\[
+		\begin{tikzcd}
+			T \\
+			\\
+			&& {X \times_Z Y} && Y \\
+			\\
+			&& X && Z
+			\arrow["{\exists! u}"{description}, dashed, from=1-1, to=3-3]
+			\arrow["{t_2}", from=1-1, to=3-5]
+			\arrow["{t_1}"', from=1-1, to=5-3]
+			\arrow["{\pi_2}", from=3-3, to=3-5]
+			\arrow["{\pi_1}"', from=3-3, to=5-3]
+			\arrow["g", from=3-5, to=5-5]
+			\arrow["f"', from=5-3, to=5-5]
+		\end{tikzcd}
+	\]
+	Pullbacks are also called \emdef{cartesian squares} or \emdef{fibered products}. Notation:
+	\[
+		X \times_Z Y = X {}_f\times_g Y = X \prod_Z Y.
+	\]
+\end{definition*}
+
+\begin{remarks*}
+	\item A pullback is the terminal object in the category of all triples \( (P, \pi_1, \pi_2) \) such that \( f\pi_1 = g\pi_2 \) (with morphisms as in the diagram above).
+	\item If \( t \in \Ob(\C) \) is terminal, then
+		\[
+			X \times_t Y \cong X \times Y.
+		\]
+	\item There is a cancellation property (\textsc{exercise}):
+		\[
+			X \times_Y (Y \times_Z W) \cong X \times_Z W.
+		\]
+	\item Pullbacks are binary products in \( \C/Z \).
+\end{remarks*}
+
+\begin{examples*}
+	\item In \( \ctrm{Sets} \), one has
+		\[
+			X \times_Z Y = \{(x, y) \in X \times Y \,\mid\, f(x) = g(y)\}.
+		\]
+	\item Further examples in \( \ctrm{Sets} \):
+		\[
+			\begin{tikzcd}[column sep = 9mm]
+				{f^{-1}(x)} && Y && {X \cap Y} && Y && {R_f} && X \\
+				\\
+				{\{x\}} && X && X && Z && X && Y
+				\arrow[hook, from=1-1, to=1-3]
+				\arrow[from=1-1, to=3-1]
+				\arrow["f", from=1-3, to=3-3]
+				\arrow[from=1-5, to=1-7]
+				\arrow[from=1-5, to=3-5]
+				\arrow[hook, from=1-7, to=3-7]
+				\arrow[from=1-9, to=1-11]
+				\arrow[from=1-9, to=3-9]
+				\arrow["f", from=1-11, to=3-11]
+				\arrow[hook, from=3-1, to=3-3]
+				\arrow[hook, from=3-5, to=3-7]
+				\arrow["f"', from=3-9, to=3-11]
+			\end{tikzcd}
+		\]
+	\item In \( \ctrm{Mon} \), \( R_f \) is the \emdef{congruence} on \( M \) induced by \( f \).
+\end{examples*}
+
+\section{Limits of Functors}
+
+\begin{definition*}
+	A \emdef{limit} of a functor \( D: I \to \C \) is the terminal object in \( (\Delta \comma D) \):
+	\[
+		\C \tox{\Delta} [I, \C] \otx{D_*} \ctrm{1}.
+	\]
+	Notation: \( \lim_I D \equiv \lim D \).
+\end{definition*}
+
+In more detail, elements of this category are morphisms
+\[
+	\Delta_C \tox{p} D \in \Ob(\Delta \comma D),
+\]
+meaning that for all \( u: i \to j \) in \( I \) the diagram
+\[
+	\begin{tikzcd}
+		&& {D(i)} \\
+		C \\
+		&& {D(j)}
+		\arrow["{D(u)}", from=1-3, to=3-3]
+		\arrow["{p_i}", from=2-1, to=1-3]
+		\arrow["{p_j}"', from=2-1, to=3-3]
+	\end{tikzcd}
+\]
+is commutative. Such object is called a \emdef{cone} (over \( F \)), and \( p_i \) are called \emdef{projections}.
+
+\begin{definition*}[Alternative]
+	A \emdef{limit} of \( F \) is the terminal object in the category of cones over \( F \).
+\end{definition*}
+
+Note that terminal objects, products, equalizers and pullback are all examples of limits.
+
+\vspace*{3mm}
+
+Let \( \alpha: D \to E \) be a natural transformation of \( D, E: I \to \C \).
+\[
+	\begin{tikzcd}{\Delta_{\lim D}} &&& D \\
+		\\
+		{\Delta_{\lim E}} &&& E
+		\arrow["p", from=1-1, to=1-4]
+		\arrow["{\exists! \lim\alpha}"', dashed, from=1-1, to=3-1]
+		\arrow["\alpha", from=1-4, to=3-4]
+		\arrow["{\tilde{p}}", from=3-1, to=3-4]
+	\end{tikzcd}
+\]
+Since limit is a terminal object, there is a unique arrow \( \lim \alpha: \lim D \to \lim E \).
+
+\vspace*{4mm}
+
+It follows that \( \lim \) is a functor \( \lim_I: [I, \C] \to \C \). Note that
+\[
+	[I, \C](\Delta_C, D) \cong \C(C, \lim_I D),
+\]
+hence \( \lim \) is a right adjoint for the constant functor \( \Delta \).
+
+\begin{theorem*}
+	If a category \( \C \) has binary equalizers and all products indexed by \( \Ob(I) \) and \( \opn{Arr}(I) \), then for any \( D: I \to \C \) there is a limit \( \lim_I D \).
+\end{theorem*}
+\begin{proof}
+	We argue that the category of cones over \( F \) is isomorphic to the following category of cones:
+	\[
+		\begin{tikzcd}
+			T && {\prod\limits_{i \in \text{Ob}(I)} D(i)} &&& {\prod\limits_{u: i \to j} D(j)}
+			\arrow["t", from=1-1, to=1-3]
+			\arrow["\varphi", shift left=2, from=1-3, to=1-6]
+			\arrow["\psi"', shift right=2, from=1-3, to=1-6]
+		\end{tikzcd}
+	\]
+	Where \( \varphi \) and \( \psi \) are uniquely defined by the universal property of product and the relations
+	\[
+		\pi_u \varphi = \pi_j, \qquad \pi_u \psi = D(u) \pi_i.
+	\]
+\end{proof}
+
+\begin{corollary*}
+	There is a monomorphism \( \lim_I D \inc \prod\limits_{i \in \Ob(I)} D(i) \).
+\end{corollary*}
+
+\begin{example*}
+	In a concrete category \( \C \),
+	\[
+		\lim_I D \,=\, \bigl\{(x_i) \in \prod D(i) ~\big|~ D(u)(x_i)=x_j \quad \text{ for all } u: i \to j\bigr\}.
+	\]
+\end{example*}
+
+\section{Inverse (Projective) Limits}
+
+\begin{definition*}
+	An \emdef{inverse (projective) system} in \( \C \) is \( D: I^{op} \to \C \), where \( I \) is an ordered set. In this case the limit of \( D \) is called \emdef{inverse} (\emdef{projective}).
+\end{definition*}
+
+\begin{examples*}
+	\item Let \( R \) be a commutative ring, \( I \subset R \) an ideal, and \( M \) an \( R \) module. Consider the diagram
+		\[
+			\begin{tikzcd}
+				\dotsb && {M/I^3M} && {M/I^2M} && {M/IM}
+				\arrow[from=1-1, to=1-3]
+				\arrow[from=1-3, to=1-5]
+				\arrow[from=1-5, to=1-7]
+			\end{tikzcd}
+		\]
+		Its limit
+		\[
+			\lim_{\oot} M/I^nM =: \hat{M}^I
+		\]
+		is called the \emdef{completion} of \( M \) with respect to \( I \).
+	\item For a prime \( p \), the \emdef{p-adic integers}
+		\[
+			\lim_{\oot} \bb{Z}/p^n\bb{Z} \cong \bb{Z}_p.
+		\]
+\end{examples*}
+
+\begin{proposition*}
+	If \( \C \) has finile limits and direct limits, then \( \C \) has all limits.
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}
+
+\begin{definition*}
+	A category \( \C \) is called \emdef{complete} if any \( D: I \to \C \) has a limit (where \( I \) is small).
+\end{definition*}
+
+\begin{theorem*}
+	The following are equivalent:
+	\begin{enumerate}
+		\item \( \C \) is complete;
+		\item \( \C \) has small products and binary equalizers;
+		\item \( \C \) has small products and binary pullbacks;
+		\item \( \C \) has terminal object and small pullbacks;
+		\item \( \C \) has finite limits and inverse limits;
+	\end{enumerate}
+\end{theorem*}
+
+\chapter{Colimits}
+
+\begin{definition*}[Formal]
+	A \emdef{colimit} of a functor \( D: I \to \C \) is
+	\[
+		\colim_I D := \bigl(\opn{lim}_{I^{op}} D^{op}\bigr)^{op}.
+	\]
+	It is the dual notion to the limit. There are \emdef{cocones} and \emdef{coprojections}:
+	\[
+		\begin{tikzcd}
+			&&& {D(i)} \\
+			{\text{colim}_I D} \\
+			&&& {D(j)}
+			\arrow["{q_i}"', from=1-4, to=2-1]
+			\arrow["{D(u)}", from=1-4, to=3-4]
+			\arrow["{q_j}", from=3-4, to=2-1]
+		\end{tikzcd}
+	\]
+\end{definition*}
+
+\begin{remarks*}
+	\item \( \colim_I: [I, \C] \to \C \) is a functor.
+	\item \( \colim_I \) is the left adjoint to the constant functor \( \Delta: \C \to [I, \C] \).
+\end{remarks*}
+
+\section{Coproducts}
+
+\begin{definition*}
+	Let \( I \) be a set, \( D: I \to \C \) a family of objects \( D(i) = X_i \). A coproduct of \( X_i \) is
+	\[
+		\coprod_{i \in I} X_i := \colim_I D.
+	\]
+	Considering the binary case, there is the following universal property:
+	\[
+		\begin{tikzcd}
+			&& Z \\
+			\\
+			X && {X \coprod Y} && Y
+			\arrow["f", from=3-1, to=1-3]
+			\arrow["{i_1}"', from=3-1, to=3-3]
+			\arrow["{\exists! [f, g]}"{description}, dashed, from=3-3, to=1-3]
+			\arrow["g"', from=3-5, to=1-3]
+			\arrow["{i_2}", from=3-5, to=3-3]
+		\end{tikzcd}
+	\]
+\end{definition*}
+
+\begin{examples*}
+	\item In \( \ctrm{Sets} \), the coproduct is the disjoint union \( X \coprod Y \).
+	\item In \( \ctrm{Top} \), the same set can be endowed with topology.
+	\item In \( \cthyprm{R}{Mod} \), the coproduct is the disjoint union \( X \oplus Y \).
+
+		Note that for an infinite set \( I \),
+		\[
+			\bigoplus_{i \in I} M_i \neq \prod_{i \in I} M_i.
+		\]
+
+	\item In \( \ctrm{Grps} \), the coproduct is the \emdef{free product} \( X \ast Y \).
+
+		Note that if \( X = \cl{S_X ~|~ R_X} \) and \( Y = \cl{S_Y ~|~ R_Y} \), then
+		\[
+			X \ast Y = \cl{S_X \coprod S_Y ~|~ R_X \coprod R_Y}.
+		\]
+
+	\item In \( \ctrm{Rings} \), the coproduct is the similarly defined free product \( X \ast Y \).
+
+		It can also be defined in the following way:
+		\[
+			R \ast S = \opn{T}_\bb{Z}(R \times S) \:/\: \bigl(r \otimes r' - r r', s \otimes s' - s s', 1_R - 1_S\bigr).
+		\]
+\end{examples*}

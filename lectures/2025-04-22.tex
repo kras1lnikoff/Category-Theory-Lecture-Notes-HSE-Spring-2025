@@ -1,0 +1,190 @@
+\Lecture{April 22, 2025}
+
+\begin{definition*}
+	Let \( f: A \to B \) be a chain map. The \emdef{cone} of \( f \) is the complex \( C(f) \) defined degreewise by
+	\[
+		C(f)_n := B_n \oplus A_{n-1} = B_n \oplus A[1]_n,
+	\]
+	with differential given, in the decomposition \( B_n \oplus A_{n-1} \to B_{n-1} \oplus A_{n-2} \), by the block matrix
+	\[
+		d^{C(f)}_n =
+		\begin{pmatrix}
+			d^B_n & -\,f_{n-1}   \\
+			0     & -\,d^A_{n-1}
+		\end{pmatrix}
+		,
+		\quad\text{i.e.}\quad
+		d^{C(f)}(b,a) = \bigl(d^B_n b - f_{n-1}(a),\,-d^A_{n - 1} a\bigr).
+	\]
+	One checks that \( d^{C(f)} \circ d^{C(f)} = 0 \).
+\end{definition*}
+
+\begin{remark*}
+	The \emdef{shift functor} \( [1]: \Ch(\ct{A}) \to \Ch(\ct{A}) \) is defined by
+	\[
+		(A[1])_n := A_{n-1}, \qquad d^{A[1]}_n := -\,d^A_{n-1},
+	\]
+	and for a chain map \( f \) set \( \bigl(f[1]\bigr)_n := f_{n-1} \).
+\end{remark*}
+
+\begin{proposition*}[Properties of cones]
+	\mbox{}
+	\begin{enumerate}
+		\item There is a short exact sequence of chain complexes
+			\[
+				0 \too B \tox{i} C(f) \tox{p} A[1] \too 0,
+			\]
+			where \( i(b) := (b,0) \) and \( p(b,a) := -a \).
+		\item If the square
+			\[
+				\begin{tikzcd}
+					A \arrow[r,"f"] \arrow[d,"g"'] & B \arrow[d,"h"] \\
+					A' \arrow[r,"f'"'] & B'
+				\end{tikzcd}
+			\]
+			is a commutative square of chain complexes, then the map
+			\[
+				h \oplus g[1]: C(f) \too C(f'), \qquad (b,a) \longmapsto \bigl(h(b),\, g(a)\bigr),
+			\]
+			is a chain map.
+		\item In the situation of (2), there is a morphism of short exact sequences
+			\[
+				\begin{tikzcd}
+					0 \arrow[r] & B \arrow[r,"i"] \arrow[d,"h"'] & C(f) \arrow[r,"p"] \arrow[d,"h \oplus g\lbrack1\rbrack"] & A[1] \arrow[r] \arrow[d,"g\lbrack1\rbrack"] & 0 \\
+					0 \arrow[r] & B' \arrow[r,"i'"] & C(f') \arrow[r,"p'"] & A'[1] \arrow[r] & 0
+				\end{tikzcd}
+			\]
+			commuting with the indicated arrows.
+	\end{enumerate}
+\end{proposition*}
+
+Let \( 0 \to A \tox{i} B \tox{q} C \to 0 \) be a short exact sequence in an abelian category \( \ct{A} \). Take projective resolutions \( \varepsilon^A: Q_\bullet \epi A \) and \( \varepsilon^C: P_\bullet \epi C \). By projectivity choose a lift \( \psi_0: P_0 \to B \) with \( q\,\psi_0 = \varepsilon^C_0 \).
+
+Using the induced map on cycles, pick \( \varphi_0: P_1 \to Q_0 \) so that
+\[
+	i\, \varepsilon^A_0\, \varphi_0 \;=\; \psi_0\, d^{P}_1.
+\]
+Inductively, choose maps \( \varphi_n: P_{n+1} \to Q_n \) making \( i\, \varepsilon^A_n\, \varphi_n = \psi_n\, d^{P}_{n+1} \) with suitable lifts \( \psi_n: P_n \to B \) extending \( \psi_{n-1} \). This yields a chain map
+\[
+	\varphi_\bullet: P_\bullet \too Q_\bullet[1].
+\]
+
+\begin{lemma*}[Horseshoe Lemma]
+	\mbox{}
+	\begin{enumerate}
+		\item Put \( S_\bullet := C\bigl(\varphi_\bullet[-1]\bigr) \). Then there is a short exact sequence of complexes
+			\[
+				0 \too Q_\bullet \too S_\bullet \too P_\bullet \too 0,
+			\]
+			and \( S_\bullet \) is a projective resolution of \( B \) fitting into a commutative diagram with \( \varepsilon^A,\varepsilon^B,\varepsilon^C \).
+		\item The construction in (1) is natural with respect to morphisms of short exact sequences.
+	\end{enumerate}
+\end{lemma*}
+
+We omit the proof of this lemma but reformulate the statement (2):
+
+\begin{lemma*}
+	Given a morphism of short exact sequences
+	\[
+		\begin{tikzcd}
+			0 \arrow[r] & A \arrow[r,hook,"i"] \arrow[d,"a"'] & B \arrow[r,two heads,"q"] \arrow[d,"b"] & C \arrow[r] \arrow[d,"c"] & 0 \\
+			0 \arrow[r] & A' \arrow[r,hook,"i'"] & B' \arrow[r,two heads,"q'"] & C' \arrow[r] & 0
+		\end{tikzcd}
+	\]
+	choose projective resolutions \( P_\bullet(A), P_\bullet(C) \) and \( P_\bullet(A'), P_\bullet(C') \), together with chain maps lifting \( a \) and \( c \). Then the above construction yields a chain map
+	\[
+		P_\bullet(B) \too P_\bullet(B'),
+	\]
+	which makes the diagram of short exact sequences of complexes
+	\[
+		\begin{tikzcd}
+			0 \arrow[r] & P_\bullet(A) \arrow[r] \arrow[d] & P_\bullet(B) \arrow[r] \arrow[d] & P_\bullet(C) \arrow[r] \arrow[d] & 0 \\
+			0 \arrow[r] & P_\bullet(A') \arrow[r] & P_\bullet(B') \arrow[r] & P_\bullet(C') \arrow[r] & 0
+		\end{tikzcd}
+	\]
+	commute.
+\end{lemma*}
+
+\section{Derived Functors}
+
+\begin{definition*}
+	Let \( F: \ct{A} \to \ct{B} \) be a right exact additive functor between abelian categories and assume \( \ct{A} \) has enough projectives. For \( A \in \Ob(\ct{A}) \), choose a projective resolution \( P_\bullet \epi A \) and define
+	\[
+		(\mrm{L}_i F)(A) := H_i\bigl(F(P_\bullet)\bigr) \qquad (i \ge 0).
+	\]
+	Independent of the choice of \( P_\bullet \) up to canonical isomorphism, this yields \emdef{left derived functors}
+	\[
+		\mrm{L}_i F: \ct{A} \to \ct{B}.
+	\]
+\end{definition*}
+
+\begin{definition*}
+	Similarly, if \( F: \ct{A} \to \ct{B} \) is left exact additive and \( \ct{A} \) has enough injectives, then for \( A \in \Ob(\ct{A}) \) and an injective resolution \( A \inc E^\bullet \) one defines \emdef{right derived functors}
+	\[
+		(\mrm{R}^i F)(A) := H^i\bigl(F(E^\bullet)\bigr) \qquad (i \ge 0).
+	\]
+\end{definition*}
+
+\begin{proposition*}[Properties of derived functors]
+	\mbox{}
+	\begin{enumerate}
+		\item \( \mrm{L}_0 F \cong F \).
+		\item The functors \( \mrm{L}_i F \) are independent of the chosen projective resolution.
+		\item Each \( \mrm{L}_i F \) is additive.
+	\end{enumerate}
+\end{proposition*}
+\begin{proof}
+	\mbox{}
+	\begin{enumerate}
+		\item If \( 0 \to P_1 \to P_0 \epi A \to 0 \) is exact with \( P_j \) projective, then applying \( F \) gives an exact sequence \( F(P_1) \to F(P_0) \to F(A) \to 0 \), and hence \( H_0(F(P_\bullet)) \cong F(A) \).
+		\item Any two resolutions of \( A \) are connected by a chain homotopy equivalence, and applying \( F \) preserves homotopies, so the induced maps on homology are isomorphisms.
+		\item For a morphism \( f: A \to A' \) and chosen projective resolutions, any lift \( f_\bullet \)  of \( f \) induces a chain map whose effect on homology defines \( \mrm{L}_i F(f) \). In particular, \( f_\bullet + g_\bullet \) lifts \( f + g \).
+	\end{enumerate}
+\end{proof}
+
+\begin{remark*}
+	For any projective object \( P \) and any \( i\ge 1 \) one has \( L_iF(P)=0 \).
+\end{remark*}
+
+In the category of \( R \)-modules there are two canonical examples.
+
+\begin{examples*}
+	\item Given \( M \in \Ob(\cthyprm{R}{Mod}) \), the functor \( h_M := \Hom(M, -) \) is left exact. Then
+		\[
+			\Ext_R^i(M, N) := R^i \, h_M(N).
+		\]
+	\item Given \( M \in \Ob(\cthyprm{R}{Mod}) \), the functor \( t_M := M \otimes - \) is left exact. Then
+		\[
+			\Tor^R_i(M, N) := L^i \, t_M(N).
+		\]
+\end{examples*}
+
+\begin{theorem*}[Derived long exact sequence]
+	Let \( 0 \to A' \tox{i} A \tox{q} A'' \to 0 \) be a short exact sequence in an abelian category \( \ct{A} \), and let \( F: \ct{A} \to \ct{B} \) be a right exact additive functor. Assume \( \ct{A} \) has enough projectives. Then there is a natural long exact sequence
+	\[
+		\dotsm \too \mrm{L}_{n}F(A') \tox{u_n} \mrm{L}_{n}F(A) \tox{v_n} \mrm{L}_{n}F(A'') \tox{\partial_n} \mrm{L}_{n-1}F(A') \too
+	\]
+	\[
+		\dotsm \too \mrm{L}_{1}F(A'') \tox{\partial_1} \mrm{L}_{0}F(A') \too \mrm{L}_{0}F(A) \too \mrm{L}_{0}F(A'') \to 0.
+	\]
+	The maps \( u_n \) and \( v_n \) are induced by \( i \) and \( q \), and \( \partial_n \) is the connecting morphism. The construction is functorial in morphisms of short exact sequences.
+\end{theorem*}
+
+\begin{proof}
+	We outline a proof sketch. Choose projective resolutions \( P'_\bullet \epi A' \) and \( P''_\bullet \epi A'' \). By the Horseshoe Lemma there exists a short exact sequence of complexes
+	\[
+		0 \too P'_\bullet \too P_\bullet \too P''_\bullet \too 0,
+	\]
+	with degreewise splittings \( P_n \cong P'_n \oplus P''_n \). Applying \( F \) yields a short exact sequence of complexes
+	\[
+		0 \too F(P'_\bullet) \too F(P_\bullet) \too F(P''_\bullet) \too 0,
+	\]
+	so passing to homology gives the desired long exact sequence in which \( H_n(F(P_\bullet)) = \mrm{L}_nF(-) \). Naturality follows from the functoriality of the horseshoe and the connecting morphism in homology.
+\end{proof}
+
+\begin{example*}
+	Let \( 0 \to A' \tox{i} A \tox{q} A'' \to 0 \) be a short exact sequence of left \( R \)-modules and \( M \) a right \( R \)-module. Then there is a long exact sequence
+	\[
+		\dotsc \to \Tor_1^R(M, A') \to \Tor_1^R(M, A) \to \Tor_1^R(M, A'') \to M \otimes A' \to M \otimes A \to M \otimes M'' \to 0.
+	\]
+\end{example*}

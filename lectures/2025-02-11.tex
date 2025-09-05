@@ -1,0 +1,299 @@
+\Lecture{February 11, 2025}
+
+\section{Adjoint Functors}
+
+\begin{definition*}
+	Functors \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \) are called \emdef{adjoint} (\( F \) is \emdef{left adjoint} of \( G \) and \( G \) is \emdef{right adjoint} of \( F \); we write \( F \adj G \)) if there is a binatural bijection
+	\[
+		\ct{D}(F(X), Y) \cong \C(X, G(Y)).
+	\]
+\end{definition*}
+
+\Heading{Motivation}
+
+Let \( k \) be a field and \( S \) be a set. We write
+\[
+	k^{(S)} = k^{\oplus S} := \bigoplus_{s \in S} k.
+\]
+If \( U: \ctrm{Vect} \to \ctrm{Sets} \) is the forgetful functor, then
+\[
+	\Hom_{\ctrm{Vect}}(k^{(S)}, V) \cong \Hom_{\ctrm{Sets}}(S, U(V)).
+\]
+It turns out that the isomorphism is also binatural, implying that \( k^{(-)} \) is left adjoint to \( U \).
+
+\Heading{Binaturality}
+
+\begin{enumerate}
+	\item Naturality in the first argument
+		\[
+			\begin{tikzcd}{X'} && {\ct{D}(F(X), Y)} &&& {\C(X, G(Y))} \\
+				\\
+				X && {\ct{D}(F(X'), Y)} &&& {\C(X', G(Y))}
+				\arrow["h"', from=1-1, to=3-1]
+				\arrow["{\varphi^{-1}_{X, Y}}", from=1-3, to=1-6]
+				\arrow["{\ct{D}(F(h), Y)}"', from=1-3, to=3-3]
+				\arrow["{\C(h, G(Y))}", from=1-6, to=3-6]
+				\arrow["{\varphi^{-1}_{X', Y}}"', from=3-3, to=3-6]
+			\end{tikzcd}
+		\]
+	\item Naturality in the second argument
+		\[
+			\begin{tikzcd}
+				Y && {\ct{D}(F(X), Y)} &&& {\C(X, G(Y))} \\
+				\\
+				{Y'} && {\ct{D}(F(X), Y')} &&& {\C(X, G(Y'))}
+				\arrow["h"', from=1-1, to=3-1]
+				\arrow["{\varphi_{X, Y}}", from=1-3, to=1-6]
+				\arrow["{\ct{D}(F(X), h)}"', from=1-3, to=3-3]
+				\arrow["{\C(X, G(h))}", from=1-6, to=3-6]
+				\arrow["{\varphi_{X, Y'}}"', from=3-3, to=3-6]
+			\end{tikzcd}
+		\]
+\end{enumerate}
+
+Given the bijection
+\[
+	\varphi_{X,Y}: \ct{D}(F(X), Y) \cong \C(X, G(Y)),
+\]
+it is convenient to speak of transposes: for a morphism \( g: F(X) \to Y \), its \emdef{transpose} is
+\[
+	\bar{g} := \varphi_{X,Y}(g): X \to G(Y);
+\]
+conversely, for \( f: X \to G(Y) \), its \emdef{transpose} is
+\[
+	\bar{f} := \varphi^{-1}_{X,Y}(f): F(X) \to Y.
+\]
+These assignments are mutually inverse, so \( \bar{\bar{g}} = g \) and \( \bar{\bar{f}} = f \).
+
+\newpage
+
+Then the two naturalities can be phrased succinctly in this language:
+\begin{enumerate}
+	\item For every \( h: X' \to X \), transposition commutes with precomposition:
+		\[
+			\overline{f h} \;=\; \bar{f}\, F(h).
+		\]
+	\item For every \( h: Y \to Y' \), transposition commutes with postcomposition:
+		\[
+			\overline{h g} \;=\; G(h)\, \bar{g}.
+		\]
+\end{enumerate}
+
+Let now \( X \in \Ob(\C) \) and set \( Y = F(X) \). Define
+\[
+	\eta_X := \bar{1}_{F(X)} : X \to GF(X).
+\]
+This map is called the \emdef{unit} of the adjunction: it is the image, under the adjunction bijection, of the identity on \( F(X) \), and it is natural in \( X \) by binaturality of \( \varphi \). In particular, for any \( h : X' \to X \) one has the naturality relation
+\[
+	GF(h)\, \eta_{X'} \;=\; \eta_X\, h.
+\]
+
+Dually, define
+\[
+	\varepsilon_Y := \bar{1}_{G(Y)} : FG(Y) \to Y.
+\]
+This map is called the \emdef{counit} of the adjunction: it is the image, under \( \varphi^{-1} \), of the identity on \( G(Y) \), and it is natural in \( Y \) by binaturality of \( \varphi \). The unit and counit satisfy the \emdef{triangle identities}, which express that transposition and transposition back act as the identity on both sides of the adjunction:
+\[
+	\varepsilon_{F(X)} \circ F(\eta_X) \;=\; 1_{F(X)},
+	\qquad
+	G(\varepsilon_Y) \circ \eta_{G(Y)} \;=\; 1_{G(Y)}.
+\]
+
+Using \( \eta \) and \( \varepsilon \), the transposes admit explicit formulas. For \( g : F(X) \to Y \), one has
+\[
+	\bar{g} : X \tox{\eta_X} GF(X) \tox{G(g)} G(Y).
+\]
+Conversely, for \( f : X \to G(Y) \), its transpose is the composite
+\[
+	\bar{f} : F(X) \tox{F(f)} FG(Y) \tox{\varepsilon_Y} Y.
+\]
+By the \textbf{triangle identities}, these constructions are inverse to one another: \( \bar{\bar{g}} = g \) and \( \bar{\bar{f}} = f \).
+
+\begin{lemma*}[Triangular identities]
+	If \( F \adj G \), then the following diagrams are commutative:
+	\[
+		\begin{tikzcd}
+			F &&& FGF && G &&& GFG \\
+			\\
+			&&& F &&&&& G
+			\arrow["{F\eta}", from=1-1, to=1-4]
+			\arrow["{1_F}"', from=1-1, to=3-4]
+			\arrow["{\varepsilon F}", from=1-4, to=3-4]
+			\arrow["{\eta_G}", from=1-6, to=1-9]
+			\arrow["{1_G}"', from=1-6, to=3-9]
+			\arrow["{G\varepsilon}", from=1-9, to=3-9]
+		\end{tikzcd}
+	\]
+\end{lemma*}
+\begin{proof}
+	The following establishes the first identity and finishes the proof (by duality):
+	\[
+		1_{F(X)} = \overline{\eta_X} = \overline{1_{GF(X)} \eta_X} \overset{(2)}{=} \overline{1_{GF(X)}} F(\eta_X) = \varepsilon_{F(X)} F(\eta_X).
+	\]
+\end{proof}
+
+\begin{theorem*}
+	Let \( F: \C \to \ct{D} \), \( G: \ct{D} \to \C \). There is a one-to-one correspondence between
+	\begin{itemize}
+		\item[(a)] adjunctions between \( F \) and \( G \);
+		\item[(b)] natural transformations \( \eta: 1_{\C} \to GF,~ \varepsilon: FG \to 1_{\ct{D}} \) satisfying triangular identities.
+	\end{itemize}
+\end{theorem*}
+\begin{proof}
+	It is left to define a function from (b) to (a). Given \( g: F(X) \to Y \) and \( f: X \to G(Y) \), we set
+	\[
+		\bar{g} := (X \tox{\eta_X} GF(X) \tox{G(g)} G(Y)),
+		\qquad
+		\bar{f} := (F(X) \tox{F(f)} FG(Y) \tox{\varepsilon_Y} Y).
+	\]
+	We claim that maps \( g \to \bar{g} \) and \( f \to \bar{f} \) are inverse to each other. Indeed,
+	\[
+		\begin{tikzcd}{F(X)} &&& {FGF(X)} &&& {FG(Y)} \\
+			\\
+			&&& {F(X)} &&& Y
+			\arrow["{F(\eta_X)}", from=1-1, to=1-4]
+			\arrow["1"', from=1-1, to=3-4]
+			\arrow["{FG(g)}", from=1-4, to=1-7]
+			\arrow["{\varepsilon_{F(X)}}", from=1-4, to=3-4]
+			\arrow["{\varepsilon_Y}", from=1-7, to=3-7]
+			\arrow["g"', from=3-4, to=3-7]
+		\end{tikzcd}
+	\]
+
+	This follows from the following computation:
+	\[
+		g = \varepsilon_Y FG(g) F(\eta_X) = \varepsilon_Y F(G(g) \eta_X) = \eta_Y F(\bar{g}) = \bar{\bar{g}}.
+	\]
+
+	Finally, the chain of equalities
+	\[
+		\overline{hg} = G(hg) \eta_X = G(h) G(g) \eta_X = G(h) \bar{g}
+	\]
+	verifies the naturality conditions and finishes the proof.
+\end{proof}
+
+\begin{proposition*}
+	If a functor \( F: \C \to \ct{D} \) admits a right adjoint, then this adjoint is unique up to isomorphism. Moreover, \( F \) admits a right adjoint if and only if the functor
+	\[
+		\ct{D}(F(-), Y): \C^\op \to \ctrm{Sets}
+	\]
+	is representable for every \( Y \in \Ob(\ct{D}) \).
+\end{proposition*}
+
+\begin{proof}
+	Consider the functor
+	\[
+		F_*: \ct{D} \too [\C^\op, \ctrm{Sets}],
+		\quad 
+		F_*(Y) := \ct{D}(F(-), Y),
+	\]
+	and recall the Yoneda embedding \( h^{(-)}: \C \to [\C^\op, \ctrm{Sets}] \), where \( h^{X} = \C(-, X) \).
+
+	\Heading{Uniqueness}
+
+	If \( G, G': \ct{D} \to \C \) are both right adjoint to \( F \), then for each \( Y \) there are natural bijections
+	\[
+		\C(-, GY) \cong \ct{D}(F(-), Y) \cong \C(-, G'Y),
+	\]
+	natural in the \( \C \)-variable. By Yoneda, this yields natural isomorphisms \( GY \cong G'Y \), hence \( G \cong G' \).
+
+	\Heading{Existence}
+
+	The existence of a right adjoint to \( F \) is equivalent to a factorization of \( F_* \) through \( h^{(-)} \):
+	\[
+		\begin{tikzcd}
+			\ct{D} \arrow[rr, "F_*"] \arrow[dr, dashed, "G_0"'] && {[\C^\op, \ctrm{Sets}]} \\
+			& \C \arrow[ur, "h^{(-)}"'] &
+		\end{tikzcd}
+	\]
+	that is, to the existence of isomorphisms
+	\[
+		F_*(Y) \cong h^{G_0(Y)} \quad \text{or equivalently} \quad
+		\ct{D}(F(-), Y) \cong \C(-, G_0(Y)),
+	\]
+	natural in both variables. If \( F \adj G \), then for every \( Y \) the functor \( \ct{D}(F(-), Y) \) is represented by \( G(Y) \), so \( F_* \cong h^{(-)} \circ G \). Conversely, assume each \( F_*(Y) \) is representable. Choose for each \( Y \) an object \( G_0(Y) \in \Ob(\C) \) and a natural isomorphism
+	\[
+		\theta_Y: h^{G_0(Y)} \tox{ \cong} F_*(Y).
+	\]
+	For a morphism \( f: Y \to Y' \) in \( \ct{D} \), define \( G_0(f): G_0(Y) \to G_0(Y') \) to be the unique arrow corresponding under Yoneda to the natural transformation
+	\[
+		h^{G_0(Y)} \tox{\theta_Y} F_*(Y) \tox{F_*(f)} F_*(Y') \tox{\theta_{Y'}^{-1}} h^{G_0(Y')}.
+	\]
+	This makes \( G_0 \) a functor and the \( \theta_Y \) natural in \( Y \). Consequently, for all \( X \in \Ob(\C) \), \( Y \in \Ob(\ct{D}) \) there are natural bijections
+	\[
+		\C(X, G_0Y)
+		\cong [\C^\op, \ctrm{Sets}]\bigl(h^{X}, h^{G_0Y}\bigr)
+		\cong [\C^\op, \ctrm{Sets}]\bigl(h^{X}, F_*(Y)\bigr)
+		\cong \ct{D}(FX, Y),
+	\]
+	natural in both \( X \) and \( Y \). Thus \( G_0 \) is a right adjoint to \( F \).
+\end{proof}
+
+\section{Terminal and Initial Objects}
+
+\begin{definitions*}
+	\item An object \( T \in \Ob(\C) \) is \emdef{terminal} if for all \( X \in \Ob(\C) \) there exists a unique map \( f: X \to T \).
+
+	\item An object \( S \in \Ob(\C) \) is \emdef{initial} if for all \( X \in \Ob(\C) \) there exists a unique map \( f: S \to X \).
+
+	\item An object \( Z \in \Ob(\C) \) is \emdef{zero} if \( Z \) is both initial and terminal.
+	\item A map \( f: X \to Y \) is \emdef{zero} if \( f \) factors through the zero object.
+\end{definitions*}
+
+\begin{examples*}
+	\item In \( \ctrm{Sets} \), \( S = \varnothing \) is initial, and \( T = \{\bullet\} \) is terminal.
+	\item In \( \ctrm{R-Mod} \), \( Z = 0 \) is a zero object.
+	\item In \( \ctrm{Rings} \), \( S = \bb{Z} \) is initial, and \( T = 0 \) is terminal.
+\end{examples*}
+
+\section{Comma Category}
+
+\begin{definition*}
+	Given a diagram of categories and functors
+	\[
+		\C \tox{F} \ca{E} \otx{G} \ct{D},
+	\]
+	the \emdef{comma category} \( (F \comma G) \) is defined by the following data:
+	\begin{enumerate}[i)]
+		\item Its objects are triples \( (C, h, D) \), where \( C \in \Ob(\C), D \in \Ob(\ct{D}) \), and \( h \in \ca{E}(F(C), G(D)) \).
+		\item Its morphisms \( (C, h, D) \to (C', h', D') \) are pairs \( (f, g) \), where \( f \in \C(C, C'),~ g \in \ct{D}(D, D') \)
+			are such the following diagram is commutative:
+			\[
+				\begin{tikzcd}{F(C)} &&& {G(D)} \\
+					\\
+					{F(C')} &&& {G(D')}
+					\arrow["h", from=1-1, to=1-4]
+					\arrow["{F(f)}"', from=1-1, to=3-1]
+					\arrow["{G(g)}", from=1-4, to=3-4]
+					\arrow["{h'}"', from=3-1, to=3-4]
+				\end{tikzcd}
+			\]
+	\end{enumerate}
+\end{definition*}
+
+\begin{examples*}
+	\item Given an object \( c \in \Ob(\C) \), the \emdef{slice category} is the comma category for the diagram
+		\[
+			\C \tox{1_{\C}} \C \otx{c} 1,
+		\]
+		where \( 1 \tox{c} \C \) is the constant functor with value \( c \). It is commonly denoted by
+		\[
+			(1_{\C} \comma c) \equiv (c \comma \C) \equiv \C \slice c.
+		\]
+	\item Analogously, the \emdef{coslice category} is defined by the diagram
+		\[
+			1 \tox{c} \C \otx{1_{\C}} \C,
+		\]
+		and is usually denoted by
+		\[
+			(c \comma 1_{\C}) \equiv (\C \comma c) \equiv c \slice \C.
+		\]
+	\item The diagram
+		\[
+			\C \tox{1_{\C}} \C \otx{1_{\C}} \C
+		\]
+		defines the \emdef{arrow category} denoted as follows:
+		\[
+			(1_{\C} \comma 1_{\C}) \equiv \ctrm{Arr}(\C) \equiv (\C \comma \C).
+		\]
+\end{examples*}

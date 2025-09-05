@@ -1,0 +1,290 @@
+\Lecture{February 18, 2025}
+
+\textsc{In the last episode...}
+
+\begin{definition*}
+	A \emdef{universal arrow} is an initial object in \( (C \comma G) \), where \( C \in \Ob(\C) \) and \( G: \C \to \ct{D} \).
+\end{definition*}
+
+\begin{lemma*}
+	If functors \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \) are adjoint (\( F \adj G \)), then \( (F(C), \eta_C) \) is a universal arrow for any given object \( C \in \Ob(\C) \).
+\end{lemma*}
+\begin{proof}
+	Let \( (D, h) \in \Ob(C \comma G) \); in other words, let \( D \in \Ob(\ct{D}) \) and \( h \in \C(C, G(D)) \). By adjunction there is a unique map \( \bar{h} \in \ct{D}(F(C), D) \) closing the diagram below:
+	\[
+		\begin{tikzcd}
+			&& C \\
+			\\
+			{GF(C)} &&&& {G(D)}
+			\arrow["{\eta_C}"', from=1-3, to=3-1]
+			\arrow["h", from=1-3, to=3-5]
+			\arrow["{G(\bar{h})}"', from=3-1, to=3-5]
+		\end{tikzcd}
+	\]
+	This proves the claim.
+\end{proof}
+
+\begin{theorem*}
+	Let \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \). There is a one-to-one correspondence between
+	\begin{itemize}
+		\item[a)] adjunctions \( F \adj G \);
+		\item[b)] natural transformations \( \eta: 1_{\C} \to GF \) such that \( (F(C), \eta_C) \) is a universal arrow for any \( C \in \Ob(\C) \).
+	\end{itemize}
+\end{theorem*}
+\begin{proof}
+	Note that the previous lemma implies a) \( \To \) b). To show that b) \( \To \) a), let \( D \in \Ob(\ct{D}) \) and define \( \varepsilon_D: FG(D) \to D \) to be the unique map
+	\[
+		(FG(D), \eta_{G(D)}) \to (G(D), 1_{G(D)})
+	\]
+	in \( (G(D) \comma G) \). We get the following commutative diargram:
+
+	\[
+		\begin{tikzcd}
+			&& {G(D)} \\
+			\\
+			{GFG(D)} &&&& {G(D)}
+			\arrow["{\eta_{G(D)}}"', from=1-3, to=3-1]
+			\arrow["1_{G(D)}", from=1-3, to=3-5]
+			\arrow["{G(\varepsilon_D)}", from=3-1, to=3-5]
+		\end{tikzcd}
+	\]
+
+	Our goal is to show that \( \varepsilon_D \) defines a natural transformation, and that \( \eta \) and \( \varepsilon \) satisfy triangle identities. This would suffice to imply that \( F \adj G \) by one of the previous theorems.
+
+	\vspace*{2mm}
+
+	We argue that one of the \( \Delta \)-identities follows from the definition of \( \varepsilon_D \). For the rest, we provide brief proof sketches, which constist of commutative diagrams and encode the proof.
+	\vspace*{3mm}
+
+	\newpage
+	\textsc{Naturality of \( \varepsilon_D \)}:
+
+	\vspace*{3mm}
+
+	Given a morphism \( g: D \to D' \), one has
+
+	\[
+		\begin{tikzcd}{G(D)} &&& {GFG(D)} \\
+			\\
+			&&& {G(D)} \\
+			\\
+			&&& {G(D')}
+			\arrow["{\eta_{G(D)}}", from=1-1, to=1-4]
+			\arrow["1", from=1-1, to=3-4]
+			\arrow["{G(g)}"', from=1-1, to=5-4]
+			\arrow["{G(\varepsilon_D)}", from=1-4, to=3-4]
+			\arrow["{G(g)}", from=3-4, to=5-4]
+		\end{tikzcd}
+	\]
+
+	\[
+		\begin{tikzcd}{G(D)} &&& {GFG(D)} \\
+			\\
+			{G(D')} &&& {GFG(D')} \\
+			\\
+			&&& {G(D')}
+			\arrow["{\eta_{G(D)}}", from=1-1, to=1-4]
+			\arrow["{G(g)}"', from=1-1, to=3-1]
+			\arrow["{GFG(g)}", from=1-4, to=3-4]
+			\arrow["{\eta_{G(D')}}"', from=3-1, to=3-4]
+			\arrow["1"', from=3-1, to=5-4]
+			\arrow["{G(\varepsilon_D)}", from=3-4, to=5-4]
+		\end{tikzcd}
+	\]
+
+	\[
+		g \circ \varepsilon_D = \varepsilon_D \circ FG(g)
+	\]
+
+	\vspace*{3mm}
+
+	\textsc{Second \( \Delta \)-identity}:
+
+	\vspace*{3mm}
+
+	\[
+		\begin{tikzcd}
+			& C &&& C && {GF(C)} \\
+			\\
+			{GF(C)} && {GF(C)} && {GF(C)} && {GFGF(C)} \\
+			\\
+			&&&&&& {GF(C)}
+			\arrow["{\eta_C}"', from=1-2, to=3-1]
+			\arrow["{\eta_C}", from=1-2, to=3-3]
+			\arrow["{\eta_C}", from=1-5, to=1-7]
+			\arrow["{\eta_C}"', from=1-5, to=3-5]
+			\arrow["{GF(\eta_C)}", from=1-7, to=3-7]
+			\arrow["{G(1_{F(C)})}"', from=3-1, to=3-3]
+			\arrow["{\eta_{GF(C)}}"', from=3-5, to=3-7]
+			\arrow["1"', from=3-5, to=5-7]
+			\arrow["{G(\varepsilon_{F(C)})}", from=3-7, to=5-7]
+		\end{tikzcd}
+	\]
+
+	\[
+		1_{F(C)} = \varepsilon_{F(C)} \circ F(\eta_C)
+	\]
+\end{proof}
+
+\begin{corollary*}
+	\( G: \ct{D} \to \C \) has a left adjoint iff for all \( C \in \Ob(\C) \) the category \( (C \comma G) \) has an initial object.
+\end{corollary*}
+\begin{proof}
+	It suffices to show only the backward implication. Set \( (F(C), \eta_C) \) to be the initial oobject in \( (C \comma G) \). If \( f: C \to C' \) set \( F(f) \) to be the unique map such that
+
+	\[
+		\begin{tikzcd}
+			C &&& {GF(C)} \\
+			\\
+			{C'} &&& {GF(C')}
+			\arrow["{\eta_C}", from=1-1, to=1-4]
+			\arrow["f"', from=1-1, to=3-1]
+			\arrow["{GF(f)}", from=1-4, to=3-4]
+			\arrow["{\eta_{C'}}"', from=3-1, to=3-4]
+		\end{tikzcd}
+	\]
+	From the diagram it follows that \( \eta: 1 \to GF \) is a natural transformation, hence the result.
+\end{proof}
+
+\chapter{Limits}
+
+\section{Products}
+
+\begin{definition*}
+	Let \( X \) and \( Y \) be objects of \( \C \). A \emdef{product} of \( X \) and \( Y \) is a triple \( (X \times Y, \pi_1, \pi_2) \) with an object \( X \times Y \in \Ob(\C) \) and \emdef{projection morphisms}
+	\[
+		X \otx{\pi_1} X \times Y \tox{\pi_2} Y,
+	\]
+	having the property that for any other triple \( (T, f_1, f_2) \) there exists a unique map
+	\[
+		f = \cl{f_1, f_2}: T \to X \times Y
+	\]
+	such that the following diagram commutes:
+	\[
+		\begin{tikzcd}
+			&&& T \\
+			\\
+			X &&& {X \times Y} &&& Y
+			\arrow["{f_1}"', from=1-4, to=3-1]
+			\arrow["{f = \langle f_1, f_2\rangle}", from=1-4, to=3-4]
+			\arrow["{f_2}", from=1-4, to=3-7]
+			\arrow["{\pi_1}"', from=3-4, to=3-1]
+			\arrow["{\pi_2}", from=3-4, to=3-7]
+		\end{tikzcd}
+	\]
+\end{definition*}
+
+\begin{remarks*}
+	\item Product is the terminal object in the category of triples \( (T, f_1, f_2) \).
+	\item Product is unique, if it exists at all.
+	\item \( \C(T, X \times Y) \cong \C(T, X) \times \C(T, Y) \).
+	\item Let \( t \) be a terminal object in \( \C \). Then \( t \times X \cong X \) for all \( X \in \Ob(\C) \).
+\end{remarks*}
+
+\begin{examples*}
+	\item In \( \ctrm{Sets}, \cthyprm{G}{Sets}, \ctrm{Mon}, \ctrm{Rings} \) the product of \( X \) and \( Y \) the product is the \enquote{usual} \( X \times Y \).
+	\item In \( \ctrm{Fields} \) there are no products (if \( L, K \) are fields, \( L, L \times K, K \) would have the same characteristic).
+\end{examples*}
+
+\begin{definition*}
+	Given a family \( \{X_i\}_{i \in I} \subset \Ob(\C) \), its \emdef{product} is defined by the following data:
+	\begin{enumerate}[i)]
+		\item An object \( P = \prod_{i \in I} X_i \);
+		\item A family of \emdef{projections} \( \pi_i: P \to X_i \),
+	\end{enumerate}
+	with with the property that for any other such data \( (T, f_i: T \to X_i) \) there exists a unique map
+	\[
+		f = \cl{f_i}_{i \in I} : T \to \prod_{i \in I} X_i
+	\]
+	such that \( f_i = \pi_i f \) for all \( i \in I \).
+\end{definition*}
+
+\begin{examples*}
+	\item In the category of finitely generated \( R \)-modules there are only finite products.
+	\item \( \ctrm{Sets}, \ctrm{Mon}, \ctrm{Rings}, \ctrm{CRings} \) all have arbitrary large products.
+\end{examples*}
+
+\begin{definition*}
+	The \emdef{diagonal map} \( \Delta_X: X \to X \times X \) is the unique map \( \cl{\id_X, \id_X} \).
+\end{definition*}
+
+\begin{definition*}
+	The \emdef{product of maps} \( f: X \to X', g: Y \to Y' \):
+	\[
+		\begin{tikzcd}
+			X && {X \times Y} && Y \\
+			\\
+			{X'} && {X' \times Y'} && {Y'}
+			\arrow["f"', from=1-1, to=3-1]
+			\arrow["{\pi_X}"', from=1-3, to=1-1]
+			\arrow["{\pi_Y}", from=1-3, to=1-5]
+			\arrow["\exists!{f \times g}"', dashed, from=1-3, to=3-3]
+			\arrow["g", from=1-5, to=3-5]
+			\arrow["{\pi_{X'}}", from=3-3, to=3-1]
+			\arrow["{\pi_{Y'}}"', from=3-3, to=3-5]
+		\end{tikzcd}
+	\]
+\end{definition*}
+
+\begin{proposition*}
+	For \( f: X \to Y \), \( g: X \to Y' \), one has \( \cl{f, g} = (f \times g) \circ \Delta_X \).
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}
+
+\section{Equalizers}
+
+\begin{definition*}
+	An \emdef{equalizer} of two maps \( f, g: \C(X, Y) \) is a pair \( (E, e) \) with an object \( E \in \Ob(\C) \) and a map \( e: E \to X \) such that \( fe = ge \), with the property that for any other such pair \( (T, h) \) with \( fh = gh \), there exists a unique map \( \bar{h} \) satifying \( e \bar{h} = h \). In other words, we have the following diagram:
+	\[
+		\begin{tikzcd}
+			E && X && Y \\
+			\\
+			T
+			\arrow["e", from=1-1, to=1-3]
+			\arrow["f", shift left, from=1-3, to=1-5]
+			\arrow["g"', shift right, from=1-3, to=1-5]
+			\arrow["{\exists! \bar{h}}", dashed, from=3-1, to=1-1]
+			\arrow["h"', from=3-1, to=1-3]
+		\end{tikzcd}
+	\]
+\end{definition*}
+
+\begin{remarks*}
+	\item An equalizer is the terminal object in the category of such pairs.
+	\item If \( \C \) has a zero object and \( 0 \) denotes the zero map, the \emdef{kernel} of \( f \in \C(X, Y) \) is
+		\[
+			\ker f := \eq(f, 0).
+		\]
+	\item The definition of an equalizer can be generalized to families of maps.
+\end{remarks*}
+
+\begin{examples*}
+	\item In \( \ctrm{Sets} \), given \( f, g: X \to Y \) one has
+		\[
+			\eq(f, g) = \{x \in X ~|~ f(x) = g(x)\}.
+		\]
+	\item In \( \ctrm{Mon}, \ctrm{Grps} \), we can put algebraic structure on (1).
+	\item In \( \ctrm{Top} \), we can put topology on (1).
+\end{examples*}
+
+\begin{proposition*}
+	\( e \) is a monomorphism.
+\end{proposition*}
+\begin{proof}
+	\textsc{Exercise}.
+\end{proof}
+
+\begin{proposition*}
+	The following are equivalent:
+	\begin{enumerate}
+		\item \( f = g \);
+		\item \( e = 1_X \);
+		\item \( e \) is an isomorphism;
+		\item \( e \) is an epimorphism.
+	\end{enumerate}
+\end{proposition*}
+\begin{proof}
+	\textsc{Clear}.
+\end{proof}

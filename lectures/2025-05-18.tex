@@ -1,0 +1,385 @@
+\Lecture{May 18, 2025}
+
+\begin{definition*}
+	For a right \( R \)-module \( M \), the \emdef{flat dimension} \( \fdim_R(M) \) is the least \( d\in \bb{Z}_{\ge 0} \) such that there exists an exact sequence
+	\[
+		0\too F_d\too F_{d-1} \too \dotsm \too F_0\too M\too 0
+	\]
+	with each \( F_i \) flat; if no such \( d \) exists, set \( \fdim_R(M)=\infty \).
+\end{definition*}
+
+\begin{lemma*}
+	Fix \( d \ge 0 \). For a right \( R \)-module \( M \), the following are equivalent:
+	\begin{enumerate}
+		\item \( \fdim_R(M) \le d \).
+		\item \( \Tor^R_i(M,N)=0 \) for all \( i>d \) and all \( N\in \ctrmhyp{Mod}{R} \).
+		\item \( \Tor^R_{d+1}(M,N)=0 \) for all \( N\in \ctrmhyp{Mod}{R} \).
+		\item If \( 0\to K_d\to F_{d-1}\to \dotsm \to F_0\to M\to 0 \) is exact with each \( F_i \) flat, then \( K_d \) is flat.
+	\end{enumerate}
+\end{lemma*}
+
+\begin{theorem*}
+	The following numbers are equal:
+	\begin{enumerate}
+		\item \( \displaystyle \sup\{\fdim_R(M)\mid M\in \cthyprm{R}{Mod}\} \).
+		\item \( \displaystyle \sup\{\fdim_R(R/I)\mid I\le R \text{ a right ideal}\} \).
+		\item \( \displaystyle \sup\{\fdim_R(N)\mid N\in \ctrmhyp{Mod}{R}\} \).
+		\item \( \displaystyle \sup\{\fdim_R(R/I)\mid I\le R \text{ a left ideal}\} \).
+		\item \( \displaystyle \sup\{\,d \mid \exists\, M\in \cthyprm{R}{Mod},\,N\in \ctrmhyp{Mod}{R}\text{ with }\Tor^R_d(M,N)\neq 0\,\} \).
+	\end{enumerate}
+\end{theorem*}
+
+\begin{definition*}
+	The \emdef{weak global dimension} of \( R \) is the common value above, and is denoted \( \wgldim(R) \).
+\end{definition*}
+
+\chapter{Delta Functors}
+
+\section{Definition and Basic Properties}
+
+Fix abelian categories \( \A \) and \( \B \).
+
+\begin{definition*}[Delta Functor]
+	A \emdef{(cohomological) delta functor} \( F = \{F^n, \delta_{C}^n\}: \A \to \B \) is:
+	\begin{enumerate}
+		\item a collection of additive functors \( F^n: \A \to \B \) for \( n \ge 0 \);
+		\item for any short exact sequence \( 0 \to A \to B \to C \to 0 \), a collection \( \delta_C^n: F^n(C) \to F^{n+1}(A) \) for \( n \ge 0 \) of morphisms in \( \B \).
+	\end{enumerate}
+	Satisfying the following axioms:
+	\begin{enumerate}[(i)]
+		\item For any short exact sequence \( 0 \to A \to B \to C \to 0 \), the following is exact:
+			\[
+				0 \to F^0(A) \to F^0(B) \to F^0(C) \tox{\delta_C^0} F^1(A) \to F^1(B) \to F^1(C) \tox{\delta_C^1} \dotsm
+			\]
+		\item For any commutative diagram with exact rows:
+			\[
+				\begin{tikzcd}
+					0 \arrow[r] & A \arrow[r] \arrow[d] & B \arrow[r] \arrow[d] & C \arrow[r] \arrow[d] & 0 \\
+					0 \arrow[r] & A' \arrow[r] & B' \arrow[r] & C' \arrow[r] & 0
+				\end{tikzcd}
+			\]
+			the diagram
+			\[
+				\begin{tikzcd}
+					F^n(C) \arrow[r,"\delta_C^n"] \arrow[d] & F^{n+1}(A) \arrow[d] \\
+					F^n(C') \arrow[r,"\delta_{C'}^n"] & F^{n+1}(A')
+				\end{tikzcd}
+			\]
+			commutes, i.e. \( \delta^n \) is natural.
+	\end{enumerate}
+\end{definition*}
+
+\begin{remark*}
+	\( F^\bullet \in \opn{Lex}(\A, \B) \).
+\end{remark*}
+
+\begin{example*}
+	\( \{R^iF\} \) is a \( \delta \)-functor.
+\end{example*}
+
+\begin{definition*}[Morphism of Delta Functors]
+	A morphism \( t: (F^n, \delta_F^n) \to (G^n, \delta_G^n) \) of \( \delta \)-functors is a collection of natural transformations \( t^n: F^n \to G^n \) for \( n \ge 0 \) such that for any short exact sequence \( 0 \to A \to B \to C \to 0 \) in \( \A \), the diagram
+	\[
+		\begin{tikzcd}
+			F^n(C) \arrow[r,"\delta_F^n"] \arrow[d,"t^n"] & F^{n+1}(A) \arrow[d,"t^{n+1}"] \\
+			G^n(C) \arrow[r,"\delta_G^n"] & G^{n+1}(A)
+		\end{tikzcd}
+	\]
+	commutes.
+\end{definition*}
+
+\begin{definition*}[Homological Delta Functor]
+	A \emdef{homological \( \delta \)-functor} is a functor
+	\[
+		K^\bullet: \opn{Lex}(\A, \B) \to \delta\text{-}\opn{Func}(\A, \B).
+	\]
+\end{definition*}
+
+\begin{definition*}[Effaceability; Grothendieck]
+	Let \( F: \A \to \B \) be an additive fuctor.
+	\begin{enumerate}
+		\item \( F \) is \emdef{effaceable} if for every \( A \in \A \) there exists a monomorphism \( u: A \inc E \) such that \( F(u)=0 \).
+		\item \( F \) is \emdef{coeffaceable} if for every \( A \in \A \) there exists an epimorphism \( v: P \epi A \) such that \( F(v)=0 \).
+	\end{enumerate}
+\end{definition*}
+
+\begin{lemma*}
+	Assume that \( \A \) has enough injectives. Then \( F \) is effaceable if and only if \( F(I)=0 \) for all \( I \in \Inj(\A) \).
+\end{lemma*}
+
+\begin{proof}
+	(\( \To \)) Given injective \( I \), choose a monomorphism \( u: I \inc E \) with \( F(u)=0 \). Since \( I \) is injective, \( u \) splits, hence \( E \simeq I \oplus I' \). Applying \( F \), the map \( F(u) \) identifies with the inclusion \( F(I) \to F(I) \oplus F(I') \), so \( 0 = F(u) \) forces \( \id_{F(I)}=0 \) and thus \( F(I)=0 \).
+	(\( \oT \)) For any \( A \) pick a monomorphism \( i: A \inc I \) with \( I \) injective. Then \( F(I)=0 \) by assumption, hence \( F(i)=0 \), proving effaceability.
+\end{proof}
+
+\section{Universal \texorpdfstring{\( \delta \)}{delta}-functors}
+
+\begin{definition*}
+	A \( \delta \)-functor \( F=(F^n,\delta_F^n): \A \to \B \) is \emdef{universal} if for every \( \delta \)-functor \( G=(G^n,\delta_G^n) \) and natural transformation \( t: F^0 \to G^0 \) there exists a unique morphism of \( \delta \)-functors \( \{t^n\}_{n\ge 0}: F \to G \) with \( t^0 = t \).
+\end{definition*}
+
+\begin{lemma*}
+	If a universal \( \delta \)-functor exists, it is unique up to a unique isomorphism of \( \delta \)-functors.
+\end{lemma*}
+
+\begin{theorem*}
+	If a cohomological \( \delta \)-functor \( (F^n, \delta_F^n) \) is effaceable in all degrees \( n\ge 1 \), then \( F \) is universal.
+\end{theorem*}
+
+\begin{proof}
+	Given \( t^0: F^0 \to G^0 \), construct \( t^{n} \) by induction on \( n \). Suppose \( t^k \) are defined for \( k\le n \). For each \( A \) choose a short exact sequence \( 0\to A \tox{i} B \to C \to 0 \) with \( F^{n+1}(i)=0 \) (effaceability). Exactness gives a factorization
+	\[
+		F^n(C) \too \coker F^n(i) \tox{\bar\delta_F^{\,n}} F^{n+1}(A).
+	\]
+	By functoriality of cokernels, \( t^n_B \) and \( t^n_C \) induce \( z_A^{n}: \coker F^n(i) \to \coker G^n(i) \). Define \( t_A^{n+1} \) as the unique map making the following diagram commute:
+	\[
+		\begin{tikzcd}
+			F^n(B) \arrow[r] \arrow[d,"t_B^n"] & F^n(C) \arrow[r] \arrow[d,"t_C^n"] & \coker F^n(i) \arrow[r,"\bar\delta_F^{\,n}"] \arrow[d,"z_A^{n}"] & F^{n+1}(A) \arrow[d,"t_A^{n+1}"] \\
+			G^n(B) \arrow[r] & G^n(C) \arrow[r] & \coker G^n(i) \arrow[r,"\bar\delta_G^{\,n}"] & G^{n+1}(A)
+		\end{tikzcd}
+	\]
+	Naturality of connecting morphisms shows this \( t_A^{n+1} \) is well defined and natural in \( A \); uniqueness follows by exactness and the same diagram chase.
+\end{proof}
+
+\begin{corollary*}
+	If \( F: \A \to \B \) is left exact additive, then its right derived functors \( R^nF \) with the standard connecting morphisms form a universal \( \delta \)-functor.
+\end{corollary*}
+
+\section{Universal Coefficients Theorem}
+
+\begin{theorem*}[K\"unneth formula]
+	Let \( P=(\dotsm \to P_{n+1} \tox{d_{n+1}} P_n \tox{d_n} P_{n-1}\to\dotsm) \) be a chain complex of flat right \( R \)-modules such that the images \( d(P_n)\subseteq P_{n-1} \) are flat for all \( n\in\bb{Z} \). For every \( n\in\bb{Z} \) and every \( M\in \cthyprm{R}{Mod} \) there is a natural short exact sequence
+	\[
+		0 \too H_n(P)\otimes_R M \too H_n(P\otimes_R M) \too \Tor^{R}_1\!\bigl(H_{n-1}(P), M\bigr) \too 0. \tag{$\star$}
+	\]
+\end{theorem*}
+\begin{proof}
+	By the long exact sequence of \( \Tor \) for \( 0\to Z_n \to P_n \to d(P_n) \to 0 \) and the flatness of \( P_n \) and \( d(P_n) \), each \( Z_n:=\ker(d_n) \) is flat. Hence there is a short exact sequence of complexes
+	\[
+		0 \too Z_{\bullet} \too P_{\bullet} \too dP_{\bullet} \too 0,
+	\]
+	where the differentials on \( Z_{\bullet} \) and \( dP_{\bullet} \) are zero. Tensoring with \( M \) remains exact and yields a long exact sequence in homology
+	\[
+		H_{n+1}(dP_{\bullet}\otimes_R M) \to H_n(Z_{\bullet}\otimes_R M) \to H_n(P_{\bullet}\otimes_R M) \to H_n(dP_{\bullet}\otimes_R M).
+	\]
+	Since the outer complexes have zero differentials, one identifies
+	\[
+		H_n(Z_{\bullet}\otimes_R M) \simeq Z_n\otimes_R M, \quad H_n(dP_{\bullet}\otimes_R M) \simeq d(P_n)\otimes_R M, \quad H_{n+1}(dP_{\bullet}\otimes_R M) \simeq d(P_{n+1})\otimes_R M.
+	\]
+
+	The short exact sequence
+	\[
+		0\to d(P_{n+1})\to Z_n\to H_n(P)\to 0
+	\]
+	identifies the left term with \( \Tor_1^{R}(H_n(P),M) \) and gives an exact segment
+	\[
+		0\to \Tor_1^R\!\bigl(H_n(P),M\bigr) \to Z_n\otimes_R M \to H_n(P\otimes_R M) \to d(P_n)\otimes_R M \to 0.
+	\]
+	Finally, the short exact sequence \( 0\to d(P_n)\to Z_{n-1}\to H_{n-1}(P)\to 0 \) identifies
+	\[
+		\coker\bigl(Z_n\otimes_R M \to H_n(P\otimes_R M)\bigr) \simeq \Tor_1^{R}(H_{n-1}(P),M).
+	\]
+\end{proof}
+
+\begin{corollary*}
+	If \( R=\bb{Z} \), the sequence \( (\star) \) splits (non-naturally); hence
+	\[
+		H_n(P\otimes_{\bb{Z}} M) \simeq H_n(P)\otimes_{\bb{Z}} M \oplus \Tor^{\bb{Z}}_1\!\bigl(H_{n-1}(P),M\bigr).
+	\]
+\end{corollary*}
+
+\begin{proof}
+	Over \( \bb{Z} \), subgroups of free abelian groups are free; thus each \( d(P_n)\subseteq P_{n-1} \) is free, and there exists a decomposition \( P_{n-1}\cong \bb{Z}^{I_{n-1}} \oplus d(P_n) \). Passing to tensors, \( d(P_n)\otimes M \) is a direct summand of \( P_{n-1}\otimes M \). Modding out \( Z_n\otimes M \) and \( \ker(d_n\otimes 1_M) \) by the common image \( d_{n+1}\otimes 1_M \) shows that \( H_n(P)\otimes M \) is a direct summand of \( H_n(P\otimes M) \); the complement is \( \Tor^{\bb{Z}}_1(H_{n-1}(P),M) \) by \( (\star) \).
+\end{proof}
+
+\begin{definition*}
+	Let \( P \in \Ch(\ctrmhyp{Mod}{R}) \) be a chain complex of right \( R \)-modules and \( Q \in \Ch(\cthyprm{R}{Mod}) \) a chain complex of left \( R \)-modules. Define the tensor product complex \( (P\otimes_R Q, d) \) by
+	\[
+		\ (P\otimes_R Q)_n \,=\, \bigoplus_{p+q=n} P_p \otimes_R Q_q,
+	\]
+	with differential on homogeneous tensors given by
+	\[
+		\ d(a\otimes b) \,=\, d_P(a)\otimes b \, + \, (-1)^{p}\, a \otimes d_Q(b), \qquad a\in P_p,\; b\in Q_q.
+	\]
+\end{definition*}
+
+\begin{theorem*}[K\"unneth formula for complexes]
+	If each \( P_n \) and \( d(P_n)\subseteq P_{n-1} \) is flat (as right \( R \)-modules) for all \( n \), then for every \( n \) there is a natural short exact sequence
+	\[
+		0 \too \bigoplus_{p+q=n} H_p(P)\otimes_R H_q(Q)
+		\too H_n(P\otimes_R Q)
+		\too \bigoplus_{p+q=n-1} \Tor^{R}_1\!\bigl(H_p(P), H_q(Q)\bigr)
+		\too 0 .
+	\]
+	If \( R \) is a PID, this sequence (noncanonically) splits.
+\end{theorem*}
+
+\section{Topological Application of the K\"unneth  Formula}
+
+Let \( X \) be a topological space. A \emdef{singular} \( n \)-\emdef{simplex} in \( X \) is a continuous map \( \sigma: \Delta^{n} \to X \) from the standard simplex \( \Delta^{n} = \Cl{e_0,\dots,e_n} \) (the convex hull of the vertices \( e_0,\dots,e_n \)).
+
+\begin{definition*}[Singular chains]
+	The group of \emdef{singular \( n \)-chains} is the free abelian group on singular \( n \)-simplices,
+	\[
+		\ S_n(X) := \bb{Z}\langle \sigma \mid \sigma: \Delta^n\to X \rangle \;\simeq\; \bigoplus_{\sigma} \bb{Z}\,[\sigma] .
+	\]
+	For a generator corresponding to \( \sigma \), write \( [p_0,\dots,p_n] := [\sigma(e_0),\dots,\sigma(e_n)] \). The boundary map \( \partial: S_n(X) \to S_{n-1}(X) \) is
+	\[
+		\ \partial[p_0,\dots,p_n] = \sum_{k=0}^{n} (-1)^k [p_0,\dots, \widehat{p_k},\dots,p_n] \,=\, \sum_{k=0}^{n} (-1)^k\, [\sigma\circ d^{k}(e_0,\dots,\widehat{e_k},\dots,e_n)],
+	\]
+	where \( d^{k}: \Delta^{n-1}\inc \Delta^{n} \) is the \( k \)-th face inclusion.
+\end{definition*}
+
+For an abelian group \( M \), \emdef{homology with coefficients} in \( M \) is defined by
+\[
+	\ H_n(X,M) := H_n\bigl(S_{\bullet}(X) \otimes_{\bb{Z}} M\bigr), \qquad M \in \ctrm{Ab}.
+\]
+By the universal coefficients theorem,
+\[
+	\ H_n(X,M) \;\simeq\; H_n(X,\bb{Z})\otimes_{\bb{Z}} M \,\oplus\, \Tor^{\bb{Z}}_1\!\bigl(H_{n-1}(X,\bb{Z}),\, M\bigr) \quad (\text{e.g. } M=\bb{Z}/n).
+\]
+
+\begin{theorem*}[Eilenberg\textendash Zilber]
+	There is a natural chain homotopy equivalence
+	\[
+		\ S_{\bullet}(X\times Y) \simeq S_{\bullet}(X) \otimes_{\bb{Z}} S_{\bullet}(Y),
+	\]
+	whence an isomorphism \( H_n(X\times Y,\bb{Z}) \simeq H_n(S_{\bullet}(X)\otimes S_{\bullet}(Y)) \).
+\end{theorem*}
+
+Combining with K\"unneth, for all spaces \( X,Y \) one obtains the (integral) K\"unneth decomposition
+\[
+	\ H_n(X\times Y) \;\simeq\; \bigoplus_{p+q=n} H_p(X)\otimes_{\bb{Z}} H_q(Y) \,\oplus\, \bigoplus_{p+q=n-1} \Tor^{\bb{Z}}_1\!\bigl(H_p(X), H_q(Y)\bigr).
+\]
+
+\begin{theorem*}[Universal Coefficient Theorem]
+	Let \( P \) be a chain complex of projective right \( R \)-modules with \( P_n \) and \( d(P_n) \) projective for all \( n \). For any left \( R \)-module \( M \) there is a (noncanonically) split short exact sequence
+	\[
+		0 \too \Ext^{1}_{R}\!\bigl(H_{n-1}(P),\, M\bigr)
+		\too H^{n} \bigl(\Hom_{R}(P, M)\bigr)
+		\too \Hom_{R} \bigl(H_{n}(P),\, M\bigr)
+		\too 0.
+	\]
+\end{theorem*}
+
+\Heading{Application}
+
+For a topological space \( X \) and an abelian group \( M \), define singular cohomology with coefficients by
+\[
+	H^{n}(X,M) := H^{n}\!\bigl(\Hom_{\bb{Z}}(S_{\bullet}(X), M)\bigr).
+\]
+Then the universal coefficient theorem over \( \bb{Z} \) gives a (noncanonical) decomposition
+\[
+	H^{n}(X,M) \;\simeq\; \Hom\!\bigl(H_{n}(X,\bb{Z}), M\bigr) \oplus \Ext^{1}_{\bb{Z}}\!\bigl(H_{n-1}(X,\bb{Z}), M\bigr).
+\]
+
+\section{Ext\texorpdfstring{$^1$}{1} and Extensions}
+
+\begin{definitions*}
+	\item For objects \( A,C \) in an abelian category \( \A \), an \emdef{extension} of \( A \) by \( C \) is a short exact sequence
+		\[
+			0 \too A \tox{i} B \tox{p} C \too 0.
+		\]
+		Write \( E=(A\tox{i}B\tox{p}C) \).
+
+	\item A morphism \( r=(\alpha,\beta,\gamma): E\to E' \) between
+		\( E=(A\to B\to C) \) and \( E'=(A'\to B'\to C') \) is a commutative diagram with exact rows
+		\[
+			\begin{tikzcd}
+				0 \arrow[r] & A \arrow[r,"i"] \arrow[d,"\alpha"] & B \arrow[r,"p"] \arrow[d,"\beta"] & C \arrow[r] \arrow[d,"\gamma"] & 0 \\
+				0 \arrow[r] & A' \arrow[r,"i'"] & B' \arrow[r,"p'"] & C' \arrow[r] & 0
+			\end{tikzcd}
+		\]
+		(in particular, \( p'\beta=\gamma p \) and \( \beta i = i'\alpha \)).
+
+	\item Two extensions of the same \( A,C \) are \emdef{equivalent}, \( E\sim E' \), if there exists an isomorphism of extensions \( (\id_A,\beta,\id_C):E\to E' \) (equivalently, \( \beta: B\tox{\sim} B' \)). Denote by \( \Ext(C,A) \) the set of equivalence classes of extensions of \( A \) by \( C \).
+\end{definitions*}
+
+\Heading{Functoriality}
+
+Given \( E\in\Ext(C,A) \) and a morphism \( \gamma: C'\to C \), there exists a unique class \( \gamma^{*}E\in\Ext(C',A) \) together with a morphism of extensions \( (\id_A,\beta,\gamma): \gamma^{*}E \to E \) fitting into a pullback square
+\[
+	\begin{tikzcd}
+		0 \arrow[r] & A \arrow[r] \arrow[d,equals] & B\times_{C} C' \arrow[r] \arrow[d] & C' \arrow[r] \arrow[d,"\gamma"] & 0 \\
+		0 \arrow[r] & A \arrow[r] & B \arrow[r] & C \arrow[r] & 0.
+	\end{tikzcd}
+\]
+Dually, for \( \alpha: A\to A' \) there exists a unique class \( \alpha_{*}E\in\Ext(C,A') \) with a morphism of extensions \( (\alpha,\beta,\id_C): E\to \alpha_{*}E \) obtained by the pushout
+\[
+	\begin{tikzcd}
+		0 \arrow[r] & A \arrow[r] \arrow[d,"\alpha"] & B \arrow[r] \arrow[d] & C \arrow[r] \arrow[d,equals] & 0 \\
+		0 \arrow[r] & A' \arrow[r] & A'\sqcup_{A} B \arrow[r] & C \arrow[r] & 0 .
+	\end{tikzcd}
+\]
+
+\Heading{Sum of Extensions}
+
+For \( E_1,E_2\in\Ext(C,A) \), define their \emdef{sum} by the following formula:
+\[
+	E_1+E_2\;:=\; \nabla_{A*}\bigl(\,\Delta_C^{\,*}(E_1\oplus E_2)\,\bigr) \in \Ext(C,A),
+\]
+where \( \Delta_C: C\to C\oplus C \) is the diagonal and \( \nabla_A: A\oplus A\to A \) the codiagonal.
+
+\vspace*{2mm}
+
+The zero element is the split extension and \( -E=(\,-\id_A\,)_{*}E \).
+
+\Heading{Additivity}
+
+For all \( \alpha: A\to A' \) and \( \gamma: C'\to C \):
+\[
+	\alpha_{*}(E_1+E_2)=\alpha_{*}E_1+\alpha_{*}E_2,\qquad (E_1+E_2)\circ\gamma = E_1\circ\gamma + E_2\circ\gamma.
+\]
+Write \( E\circ\gamma:=\gamma^{*}E \). The operations are additive in the morphisms:
+\[
+	(\alpha_1+\alpha_2)_{*}E = (\alpha_1)_{*}E + (\alpha_2)_{*}E,\qquad E\circ(\gamma_1+\gamma_2)=E\circ\gamma_1+E\circ\gamma_2.
+\]
+
+Let \( E \) be an extension \( 0\to A\tox{i} B\tox{p} C\to 0 \). Choose a projective resolution
+\[
+	\dotsm \too P_2\tox{d_2} P_1\tox{d_1} P_0\tox{\epsilon} C \to 0.
+\]
+Pick a lift \( \alpha: P_0\to B \) with \( p\circ \alpha = \epsilon \). Since \( p\,\alpha\,d_1 = 0 \), there is a unique map \( \delta_1: P_1\to A \) with \( i\,\delta_1 = \alpha d_1 \). Because \( d_1 d_2=0 \), one has \( \delta_1 d_2 = 0 \), so \( \delta_1 \) is a 1–cocycle in \( \Hom_R(P_\bullet,A) \). Put
+\[
+	\Psi([E]) := [\delta_1] \in H^1\!\bigl(\Hom_R(P_\bullet,A)\bigr) = \Ext^1_R(C,A).
+\]
+
+\begin{lemma*}
+	The map \( \Psi \) is well-defined.
+\end{lemma*}
+\begin{proof}
+	If \( \alpha' \) is another lift with \( p\alpha' = \epsilon \), then \( \alpha' - \alpha = i\,s \) for a unique \( s: P_0\to A \). The corresponding cocycles satisfy \( \delta_1' - \delta_1 = s\,d_1 \), a coboundary. Hence \( [\delta_1'] = [\delta_1] \) in \( \Ext^1 \), so \( \Psi \) is well defined.
+\end{proof}
+
+Let \( [d_1] \in \Ext^1(C,A) \) be represented by a cocycle \( d_1: P_1 \to A \) with \( d_1 d_2 = 0 \), where
+\[
+	\dotsm \too P_2 \tox{d_2} P_1 \tox{d_0} P_0 \too C \to 0
+\]
+is a projective resolution of \( C \). Put \( B_2 := \im(d_2) \) and let \( \bar d_1: P_1/B_2 \to A \) be induced by \( d_1 \). Define
+\[
+	\Theta([d_1]) := \Bigl[\, \bar d_1 : 0 \too P_1/B_2 \too P_0 \too C \too 0 \,\Bigr],
+\]
+that is, the pushout of \( 0\to P_1/B_2 \to P_0 \to C \to 0 \) along \( \bar d_1 \). We argue that \( \Theta \) is well-defined.
+
+\begin{lemma*}
+	If \( d_1' = d_1 + s\, d_2 \) for some \( s: P_0 \to A \), then \( \Theta([d_1']) \) is equivalent to \( \Theta([d_1]) \).
+\end{lemma*}
+
+\begin{proof}
+	Let \( \bar d_1': P_1/B_2 \to A \) be induced by \( d_1' \). Consider the cocartesian squares
+	\[
+		\begin{tikzcd}
+			P_1/B_2 \arrow[r] \arrow[d, "\bar d_1"'] & P_0 \arrow[d] &\qquad& P_1/B_2 \arrow[r] \arrow[d, "\bar d_1'"'] & P_0 \arrow[d] \\
+			A \arrow[r] & B_{d_1} && A \arrow[r] & B_{d_1'}
+		\end{tikzcd}
+	\]
+	The universal property of pushouts applied to the pair of maps \( (\id_A, \id_{P_0}) \) and \( (\id_A - s\, p, \id_{P_0}) \) (where \( p: P_0 \epi C \)) yields mutually inverse isomorphisms \( B_{d_1} \tox{\sim} B_{d_1'} \) commuting with the structure maps to \( A \) and \( C \). Hence the bottom short exact rows
+	\[
+		0 \too A \too B_{d_1} \too C \too 0,\qquad 0 \too A \too B_{d_1'} \too C \too 0
+	\]
+	represent the same class in \( \Ext(C,A) \).
+\end{proof}
+
+\begin{proposition*}[w/o proof]
+	The maps \( \Psi \) and \( \Theta \) are inverse bijections.
+\end{proposition*}
