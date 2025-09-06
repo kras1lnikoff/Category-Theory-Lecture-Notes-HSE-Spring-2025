@@ -4,7 +4,7 @@
 
 \vspace*{2mm}
 
-Let \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \) be a pair of adjoint functors (\( F \adj G \)).
+Let \( F: \C \to \D \) and \( G: \D \to \C \) be a pair of adjoint functors (\( F \adj G \)).
 
 \begin{definition*}
 	A functor is called \emdef{continuous} (resp. \emdef{cocontinuous}) if it preserves all limits (resp. colimits).
@@ -47,13 +47,13 @@ We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
 \end{remarks*}
 
 \begin{examples*}
-	\item In \( \ctrm{Sets} \), any non-empty set is a generator. Moreover, any \( S \) with \( |S| \ge 2 \) is a cogenerator.
-	\item In \( \ctrm{Top} \) we can endow the corresponding sets with discrete (resp. indiscrete) topology.
-	\item In \( \ctrm{Ab} \), a group \( \bb{Z} \oplus A \) is a generator and \( \bb{Q}/\bb{Z} \) is a cogenerator.
-	\item In \( \cthyprm{R}{Mod} \), \( R \) is a generator and \( \Hom_\bb{Z}(_\bb{Z} R, \bb{Q}/\bb{Z}) \) is a cogenerator.
-	\item In \( \ctrm{Grps} \), \( \bb{Z} \) is a generator.
+	\item In \( \ctSet \), any non-empty set is a generator. Moreover, any \( S \) with \( |S| \ge 2 \) is a cogenerator.
+	\item In \( \ctTop \) we can endow the corresponding sets with discrete (resp. indiscrete) topology.
+	\item In \( \ctAb \), a group \( \bb{Z} \oplus A \) is a generator and \( \bb{Q}/\bb{Z} \) is a cogenerator.
+	\item In \( \ctRMod \), \( R \) is a generator and \( \Hom_\bb{Z}(_\bb{Z} R, \bb{Q}/\bb{Z}) \) is a cogenerator.
+	\item In \( \ctGrp \), \( \bb{Z} \) is a generator.
 		\begin{statement*}
-			There are no cogenerators in \( \ctrm{Grps} \).
+			There are no cogenerators in \( \ctGrp \).
 		\end{statement*}
 		\begin{proof}
 			Suppose \( Q \) is cogenerating. Given a non-trivial simple group \( G \),
@@ -62,18 +62,18 @@ We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
 			\]
 			hence there is \( \alpha: G \to Q \) such that \( \alpha \neq 1 \). Since \( \ker \alpha \) is a proper normal subgroup of a simple group, \( \alpha \) is injective. But there are simple groups of arbitrary large cardinalities (for example, \( \mrm{PSL}_2(K), K = \bb{C}(x_i)_{i \in I} \)), a contradiction.
 		\end{proof}
-	\item In \( \ctrm{Rings} \), \( \bb{Z}[x] \) is a generator. There are no cogenerators by the similar agrument: there are fields of arbitrary large cardinalities, and all non-trivial homomorphisms from them are injective.
-	\item In \( \ctrm{CHaus} \), \( \{\ast\} \) is a generator, and \( [0, 1] \) is a cogenerator.
+	\item In \( \ctRing \), \( \bb{Z}[x] \) is a generator. There are no cogenerators by the similar agrument: there are fields of arbitrary large cardinalities, and all non-trivial homomorphisms from them are injective.
+	\item In \( \ctCHaus \), \( \{\ast\} \) is a generator, and \( [0, 1] \) is a cogenerator.
 \end{examples*}
 
 \begin{definitions*}
-	\item Let \( R \incx{f} C \) and \( S \incx{g} C \) be monomorphisms in \( \C \). We say that \( (R, f) \sim (S, g) \) if there is an isomorphism \( \tau: R \to S \) such that \( g \tau = f \). Equivalence classes under this relation are called \emdef{subobjects} of \( C \). We denote by \( \mrm{Sub}(C) \) the class of all subobjects of \( C \).
-	\item We say that \( \C \) is \emdef{well-powered} if \( \mrm{Sub}(C) \) is a set for all \( C \in \Ob(\C) \).
+	\item Let \( R \incx{f} C \) and \( S \incx{g} C \) be monomorphisms in \( \C \). We say that \( (R, f) \sim (S, g) \) if there is an isomorphism \( \tau: R \to S \) such that \( g \tau = f \). Equivalence classes under this relation are called \emdef{subobjects} of \( C \). We denote by \( \Sub(C) \) the class of all subobjects of \( C \).
+	\item We say that \( \C \) is \emdef{well-powered} if \( \Sub(C) \) is a set for all \( C \in \Ob(\C) \).
 \end{definitions*}
 
 \begin{examples*}
 	\item All \enquote{everyday} categories are well-powered.
-	\item An example of a not well-powered category would be any partially ordered class with a maximal element (which every element would be a distinct suboject of). In particular, \( \ctrm{Ord}^\op \).
+	\item An example of a not well-powered category would be any partially ordered class with a maximal element (which every element would be a distinct suboject of). In particular, \( \ctOrd^\op \).
 \end{examples*}
 
 \begin{theorem*}[Electrification]
@@ -106,7 +106,7 @@ We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
 \end{proof}
 
 \begin{lemma*}
-	Let \( \C \) and \( \ct{D} \) be complete categories and \( F: \C \to \ct{D} \), \( G: \ct{D} \to \ct{E} \) continuous functors. Then \( F \comma G \) is complete, and the forgetful functors \( P_{\C}: F \comma G \to \C \) and \( P_{\ct{D}}: F \comma G \to \ct{D} \) are continuous.
+	Let \( \C \) and \( \D \) be complete categories and \( F: \C \to \D \), \( G: \D \to \ct{E} \) continuous functors. Then \( F \comma G \) is complete, and the forgetful functors \( P_{\C}: F \comma G \to \C \) and \( P_{\D}: F \comma G \to \D \) are continuous.
 \end{lemma*}
 \begin{proof}
 	We provide a sketch of the proof:
@@ -116,21 +116,21 @@ We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
 \end{proof}
 
 \begin{theorem*}[Primeval AFT]
-	Suppose \( \ct{D} \) has all (not necessary small) limits. A functor \( G: \ct{D} \to \C \) has a left adjoint if and only if \( G \) is continuous.
+	Suppose \( \D \) has all (not necessary small) limits. A functor \( G: \D \to \C \) has a left adjoint if and only if \( G \) is continuous.
 \end{theorem*}
 
 \begin{remark*}
-	For such \( \ct{D} \) we have \( |\ct{D}(X, Y)| \le 1 \) (i.e. \( \ct{D} \) is \emdef{thin}).
+	For such \( \D \) we have \( |\D(X, Y)| \le 1 \) (i.e. \( \D \) is \emdef{thin}).
 \end{remark*}
 \begin{proof}
 	One direction follows from RAPL. Now, by the previous lemma, \( \C \comma G \) has all limits, hence \( \lim \Id_{\C \comma G} \) is the initial object.
 \end{proof}
 
 \begin{lemma*}
-	If \( \ct{D} \) is complete, well-powered with a cogenerator \( Q \), then \( \ct{D} \) has an initial object.
+	If \( \D \) is complete, well-powered with a cogenerator \( Q \), then \( \D \) has an initial object.
 \end{lemma*}
 \begin{proof}
-	Let \( i = \bigcap\limits_{X \inc Q} X \) and \( D \in \Ob(\ct{D}) \). For \( f, g \in \ct{D}(i, D) \), their equalizer is a suboject of \( i \), hence \( f = g \). Set \( S := \ct{D}(D, Q) \). The map \( D \to Q^S \) is monic, therefore
+	Let \( i = \bigcap\limits_{X \inc Q} X \) and \( D \in \Ob(\D) \). For \( f, g \in \D(i, D) \), their equalizer is a suboject of \( i \), hence \( f = g \). Set \( S := \D(D, Q) \). The map \( D \to Q^S \) is monic, therefore
 	\[
 		\begin{tikzcd}
 			T && Q \\
@@ -155,7 +155,7 @@ We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
 \end{proposition*}
 
 \begin{theorem*}[SAFT]
-	Let \( \ct{D} \) be a complete well-powered category with a cogenerator \( Q \). A functor \( G: \ct{D} \to \C \) has a left adjoint if and only if \( G \) is continuous.
+	Let \( \D \) be a complete well-powered category with a cogenerator \( Q \). A functor \( G: \D \to \C \) has a left adjoint if and only if \( G \) is continuous.
 \end{theorem*}
 \begin{proof}
 	Only one direction requires proof. We want to show that \( C \comma G \) has an initial object for each \( C \in \Ob(\C) \). To do that we apply the previous lemma:
@@ -163,11 +163,11 @@ We note that \( F \) is cocontinuous (LAPC) and \( G \) is continuous (RAPL).
 		\item \( C \comma G \) is complete (DONE).
 		\item \( C \comma G \) is well-powered:
 
-			Since \( C \comma G \tox{P_{\ct{D}}} \ct{D} \) is continuous, it preserves monomorphisms (since \( f \) is mono iff the corresponding square is a pullback).
+			Since \( C \comma G \tox{P_{\D}} \D \) is continuous, it preserves monomorphisms (since \( f \) is mono iff the corresponding square is a pullback).
 
 			\vspace*{2mm}
 
-			We show that \( P_{\ct{D}} \) reflects monomorphisms. Indeed,
+			We show that \( P_{\D} \) reflects monomorphisms. Indeed,
 			\[
 				\begin{tikzcd}
 					&&& {G(D'')} \\

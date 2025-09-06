@@ -12,8 +12,8 @@
 	Fix \( d \ge 0 \). For a right \( R \)-module \( M \), the following are equivalent:
 	\begin{enumerate}
 		\item \( \fdim_R(M) \le d \).
-		\item \( \Tor^R_i(M,N)=0 \) for all \( i>d \) and all \( N\in \ctrmhyp{Mod}{R} \).
-		\item \( \Tor^R_{d+1}(M,N)=0 \) for all \( N\in \ctrmhyp{Mod}{R} \).
+		\item \( \Tor^R_i(M,N)=0 \) for all \( i>d \) and all \( N\in \ctModR \).
+		\item \( \Tor^R_{d+1}(M,N)=0 \) for all \( N\in \ctModR \).
 		\item If \( 0\to K_d\to F_{d-1}\to \dotsm \to F_0\to M\to 0 \) is exact with each \( F_i \) flat, then \( K_d \) is flat.
 	\end{enumerate}
 \end{lemma*}
@@ -21,11 +21,11 @@
 \begin{theorem*}
 	The following numbers are equal:
 	\begin{enumerate}
-		\item \( \displaystyle \sup\{\fdim_R(M)\mid M\in \cthyprm{R}{Mod}\} \).
+		\item \( \displaystyle \sup\{\fdim_R(M)\mid M\in \ctRMod\} \).
 		\item \( \displaystyle \sup\{\fdim_R(R/I)\mid I\le R \text{ a right ideal}\} \).
-		\item \( \displaystyle \sup\{\fdim_R(N)\mid N\in \ctrmhyp{Mod}{R}\} \).
+		\item \( \displaystyle \sup\{\fdim_R(N)\mid N\in \ctModR\} \).
 		\item \( \displaystyle \sup\{\fdim_R(R/I)\mid I\le R \text{ a left ideal}\} \).
-		\item \( \displaystyle \sup\{\,d \mid \exists\, M\in \cthyprm{R}{Mod},\,N\in \ctrmhyp{Mod}{R}\text{ with }\Tor^R_d(M,N)\neq 0\,\} \).
+		\item \( \displaystyle \sup\{\,d \mid \exists\, M\in \ctRMod,\,N\in \ctModR\text{ with }\Tor^R_d(M,N)\neq 0\,\} \).
 	\end{enumerate}
 \end{theorem*}
 
@@ -74,7 +74,7 @@ Fix abelian categories \( \A \) and \( \B \).
 \end{remark*}
 
 \begin{example*}
-	\( \{R^iF\} \) is a \( \delta \)-functor.
+	\( \{\RD^iF\} \) is a \( \delta \)-functor.
 \end{example*}
 
 \begin{definition*}[Morphism of Delta Functors]
@@ -91,7 +91,7 @@ Fix abelian categories \( \A \) and \( \B \).
 \begin{definition*}[Homological Delta Functor]
 	A \emdef{homological \( \delta \)-functor} is a functor
 	\[
-		K^\bullet: \opn{Lex}(\A, \B) \to \delta\text{-}\opn{Func}(\A, \B).
+		K^\bullet: \ctrm{Lex}(\A, \B) \to \cthyprm{\delta}{Func}(\A, \B).
 	\]
 \end{definition*}
 
@@ -142,13 +142,13 @@ Fix abelian categories \( \A \) and \( \B \).
 \end{proof}
 
 \begin{corollary*}
-	If \( F: \A \to \B \) is left exact additive, then its right derived functors \( R^nF \) with the standard connecting morphisms form a universal \( \delta \)-functor.
+	If \( F: \A \to \B \) is left exact additive, then its right derived functors \( \RD^nF \) with the standard connecting morphisms form a universal \( \delta \)-functor.
 \end{corollary*}
 
 \section{Universal Coefficients Theorem}
 
 \begin{theorem*}[K\"unneth formula]
-	Let \( P=(\dotsm \to P_{n+1} \tox{d_{n+1}} P_n \tox{d_n} P_{n-1}\to\dotsm) \) be a chain complex of flat right \( R \)-modules such that the images \( d(P_n)\subseteq P_{n-1} \) are flat for all \( n\in\bb{Z} \). For every \( n\in\bb{Z} \) and every \( M\in \cthyprm{R}{Mod} \) there is a natural short exact sequence
+	Let \( P=(\dotsm \to P_{n+1} \tox{d_{n+1}} P_n \tox{d_n} P_{n-1}\to\dotsm) \) be a chain complex of flat right \( R \)-modules such that the images \( d(P_n)\subseteq P_{n-1} \) are flat for all \( n\in\bb{Z} \). For every \( n\in\bb{Z} \) and every \( M\in \ctRMod \) there is a natural short exact sequence
 	\[
 		0 \too H_n(P)\otimes_R M \too H_n(P\otimes_R M) \too \Tor^{R}_1\!\bigl(H_{n-1}(P), M\bigr) \too 0. \tag{$\star$}
 	\]
@@ -193,7 +193,7 @@ Fix abelian categories \( \A \) and \( \B \).
 \end{proof}
 
 \begin{definition*}
-	Let \( P \in \Ch(\ctrmhyp{Mod}{R}) \) be a chain complex of right \( R \)-modules and \( Q \in \Ch(\cthyprm{R}{Mod}) \) a chain complex of left \( R \)-modules. Define the tensor product complex \( (P\otimes_R Q, d) \) by
+	Let \( P \in \ctCh(\ctModR) \) be a chain complex of right \( R \)-modules and \( Q \in \ctCh(\ctRMod) \) a chain complex of left \( R \)-modules. Define the tensor product complex \( (P\otimes_R Q, d) \) by
 	\[
 		\ (P\otimes_R Q)_n \,=\, \bigoplus_{p+q=n} P_p \otimes_R Q_q,
 	\]
@@ -232,7 +232,7 @@ Let \( X \) be a topological space. A \emdef{singular} \( n \)-\emdef{simplex} i
 
 For an abelian group \( M \), \emdef{homology with coefficients} in \( M \) is defined by
 \[
-	\ H_n(X,M) := H_n\bigl(S_{\bullet}(X) \otimes_{\bb{Z}} M\bigr), \qquad M \in \ctrm{Ab}.
+	\ H_n(X,M) := H_n\bigl(S_{\bullet}(X) \otimes_{\bb{Z}} M\bigr), \qquad M \in \ctAb.
 \]
 By the universal coefficients theorem,
 \[
@@ -292,7 +292,7 @@ Then the universal coefficient theorem over \( \bb{Z} \) gives a (noncanonical) 
 		\]
 		(in particular, \( p'\beta=\gamma p \) and \( \beta i = i'\alpha \)).
 
-	\item Two extensions of the same \( A,C \) are \emdef{equivalent}, \( E\sim E' \), if there exists an isomorphism of extensions \( (\id_A,\beta,\id_C):E\to E' \) (equivalently, \( \beta: B\tox{\sim} B' \)). Denote by \( \Ext(C,A) \) the set of equivalence classes of extensions of \( A \) by \( C \).
+	\item Two extensions \( E \) and \( E' \) of the same \( A,C \in \Ob(\A) \) are \emdef{equivalent}, (we write \( E\sim E' \)), if there exists an isomorphism of extensions \( (\id_A,\beta,\id_C):E\to E' \). Denote by \( \Ext(C,A) \) the set of equivalence classes of extensions of \( A \) by \( C \).
 \end{definitions*}
 
 \Heading{Functoriality}

@@ -3,14 +3,14 @@
 \textsc{In the last episode...}
 
 \begin{definition*}
-	A \emdef{universal arrow} is an initial object in \( (C \comma G) \), where \( C \in \Ob(\C) \) and \( G: \C \to \ct{D} \).
+	A \emdef{universal arrow} is an initial object in \( (C \comma G) \), where \( C \in \Ob(\C) \) and \( G: \C \to \D \).
 \end{definition*}
 
 \begin{lemma*}
-	If functors \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \) are adjoint (\( F \adj G \)), then \( (F(C), \eta_C) \) is a universal arrow for any given object \( C \in \Ob(\C) \).
+	If functors \( F: \C \to \D \) and \( G: \D \to \C \) are adjoint (\( F \adj G \)), then \( (F(C), \eta_C) \) is a universal arrow for any given object \( C \in \Ob(\C) \).
 \end{lemma*}
 \begin{proof}
-	Let \( (D, h) \in \Ob(C \comma G) \); in other words, let \( D \in \Ob(\ct{D}) \) and \( h \in \C(C, G(D)) \). By adjunction there is a unique map \( \bar{h} \in \ct{D}(F(C), D) \) closing the diagram below:
+	Let \( (D, h) \in \Ob(C \comma G) \); in other words, let \( D \in \Ob(\D) \) and \( h \in \C(C, G(D)) \). By adjunction there is a unique map \( \bar{h} \in \D(F(C), D) \) closing the diagram below:
 	\[
 		\begin{tikzcd}
 			&& C \\
@@ -25,14 +25,14 @@
 \end{proof}
 
 \begin{theorem*}
-	Let \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \). There is a one-to-one correspondence between
+	Let \( F: \C \to \D \) and \( G: \D \to \C \). There is a one-to-one correspondence between
 	\begin{itemize}
 		\item[a)] adjunctions \( F \adj G \);
 		\item[b)] natural transformations \( \eta: 1_{\C} \to GF \) such that \( (F(C), \eta_C) \) is a universal arrow for any \( C \in \Ob(\C) \).
 	\end{itemize}
 \end{theorem*}
 \begin{proof}
-	Note that the previous lemma implies a) \( \To \) b). To show that b) \( \To \) a), let \( D \in \Ob(\ct{D}) \) and define \( \varepsilon_D: FG(D) \to D \) to be the unique map
+	Note that the previous lemma implies a) \( \To \) b). To show that b) \( \To \) a), let \( D \in \Ob(\D) \) and define \( \varepsilon_D: FG(D) \to D \) to be the unique map
 	\[
 		(FG(D), \eta_{G(D)}) \to (G(D), 1_{G(D)})
 	\]
@@ -127,7 +127,7 @@
 \end{proof}
 
 \begin{corollary*}
-	\( G: \ct{D} \to \C \) has a left adjoint iff for all \( C \in \Ob(\C) \) the category \( (C \comma G) \) has an initial object.
+	\( G: \D \to \C \) has a left adjoint iff for all \( C \in \Ob(\C) \) the category \( (C \comma G) \) has an initial object.
 \end{corollary*}
 \begin{proof}
 	It suffices to show only the backward implication. Set \( (F(C), \eta_C) \) to be the initial oobject in \( (C \comma G) \). If \( f: C \to C' \) set \( F(f) \) to be the unique map such that
@@ -182,8 +182,8 @@
 \end{remarks*}
 
 \begin{examples*}
-	\item In \( \ctrm{Sets}, \cthyprm{G}{Sets}, \ctrm{Mon}, \ctrm{Rings} \) the product of \( X \) and \( Y \) the product is the \enquote{usual} \( X \times Y \).
-	\item In \( \ctrm{Fields} \) there are no products (if \( L, K \) are fields, \( L, L \times K, K \) would have the same characteristic).
+	\item In \( \ctSet, \cthyprm{G}{Sets}, \ctMon, \ctRing \) the product of \( X \) and \( Y \) the product is the \enquote{usual} \( X \times Y \).
+	\item In \( \ctField \) there are no products (if \( L, K \) are fields, \( L, L \times K, K \) would have the same characteristic).
 \end{examples*}
 
 \begin{definition*}
@@ -201,7 +201,7 @@
 
 \begin{examples*}
 	\item In the category of finitely generated \( R \)-modules there are only finite products.
-	\item \( \ctrm{Sets}, \ctrm{Mon}, \ctrm{Rings}, \ctrm{CRings} \) all have arbitrary large products.
+	\item \( \ctSet, \ctMon, \ctRing, \ctCRing \) all have arbitrary large products.
 \end{examples*}
 
 \begin{definition*}
@@ -261,12 +261,12 @@
 \end{remarks*}
 
 \begin{examples*}
-	\item In \( \ctrm{Sets} \), given \( f, g: X \to Y \) one has
+	\item In \( \ctSet \), given \( f, g: X \to Y \) one has
 		\[
 			\eq(f, g) = \{x \in X ~|~ f(x) = g(x)\}.
 		\]
-	\item In \( \ctrm{Mon}, \ctrm{Grps} \), we can put algebraic structure on (1).
-	\item In \( \ctrm{Top} \), we can put topology on (1).
+	\item In \( \ctMon, \ctGrp \), we can put algebraic structure on (1).
+	\item In \( \ctTop \), we can put topology on (1).
 \end{examples*}
 
 \begin{proposition*}

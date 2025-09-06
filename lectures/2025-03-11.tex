@@ -30,7 +30,7 @@ The colimit of this diagram is the \emdef{coequalizer} of \( f \) and \( g \):
 This diagram is called a \emdef{cofork}.
 
 \begin{examples*}
-	\item A special case in \( \ctrm{Sets} \). Let \( R \subset X \times X \) be an equivalence relation on \( X \).
+	\item A special case in \( \ctSet \). Let \( R \subset X \times X \) be an equivalence relation on \( X \).
 		\[
 			\begin{tikzcd}
 				R && {X \times X} && X && R && X
@@ -85,7 +85,7 @@ Let \( I \) be the category \( (\bullet \ot \bullet \to \bullet) \) and \( D: I 
 is called the \emdef{pushout} of \( f \) and \( g \).
 
 \begin{examples*}
-	\item In \( \ctrm{Sets} \), the pushout of \( f \) and \( g \) is
+	\item In \( \ctSet \), the pushout of \( f \) and \( g \) is
 		\[
 			X \sqcup_Z Y := X \sqcup Y / R,
 		\]
@@ -104,7 +104,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 				\arrow[from=3-1, to=3-3]
 			\end{tikzcd}
 		\]
-	\item In \( \ctrm{Top} \), the pushout is
+	\item In \( \ctTop \), the pushout is
 		\[
 			X \sqcup_Z Y := X \sqcup Y \fac R
 		\]
@@ -119,7 +119,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 				\arrow[from=3-1, to=3-3]
 			\end{tikzcd}
 		\]
-	\item In \( \ctrm{Grps} \), given the diagram
+	\item In \( \ctGrp \), given the diagram
 		\[
 			G \otx{f} K \tox{g} H
 		\]
@@ -178,9 +178,9 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 
 		So the fundamental group \enquote{maps pushouts to pushouts}.
 
-	\item In \( \ctrm{Rings} \), the pushout is the \emdef{amalgamated product of rings}.
+	\item In \( \ctRing \), the pushout is the \emdef{amalgamated product of rings}.
 
-	\item In \( \ctrm{CRings} \), the pushout is the tensor product of algebras.
+	\item In \( \ctCRing \), the pushout is the tensor product of algebras.
 \end{examples*}
 
 \section{Direct limits}
@@ -190,7 +190,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 \end{definition*}
 
 \begin{examples*}
-	\item In \( \ctrm{Sets} \), the direct limit of
+	\item In \( \ctSet \), the direct limit of
 		\[
 			\begin{tikzcd}{X_0} && {X_1} && {X_2} && \dotsc
 				\arrow[hook, from=1-1, to=1-3]
@@ -202,7 +202,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 		\[
 			\liminj X_n = \bigcup\limits_{n=0}^\infty X_n.
 		\]
-	\item In \( \ctrm{Grps} \), the direct limit of
+	\item In \( \ctGrp \), the direct limit of
 		\[
 			\begin{tikzcd}{S_1} && {S_2} && {S_2} && \dotsc
 				\arrow[hook, from=1-1, to=1-3]
@@ -226,7 +226,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 		\[
 			\liminj GL_n(R) = GL(R).
 		\]
-	\item In \( \ctrm{Ab} \), the direct limit of
+	\item In \( \ctAb \), the direct limit of
 		\[
 			\begin{tikzcd}{\bb{Z}/p\bb{Z}} && {\bb{Z}/p^2\bb{Z}} && {\bb{Z}/p^3\bb{Z}} && \dotsc
 				\arrow["p", hook, from=1-1, to=1-3]
@@ -243,7 +243,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 \section{Functors and Limits}
 
 \begin{definition*}
-	A functor \( F: \C \to \ct{D} \) \emdef{preserves limits} if for any \( D: I \to \C \) and its limiting cone
+	A functor \( F: \C \to \D \) \emdef{preserves limits} if for any \( D: I \to \C \) and its limiting cone
 	\[
 		(L \tox{p_i} D(i))_{i \in I},
 	\]
@@ -251,7 +251,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 	\[
 		(F(L) \tox{F(p_i)} FD(i))_{i \in I}
 	\]
-	is limiting for \( FD: I \to \ct{D} \).
+	is limiting for \( FD: I \to \D \).
 \end{definition*}
 
 \begin{theorem*}
@@ -283,7 +283,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 \end{corollary*}
 
 \begin{corollary*}
-	Let \( F: \C \to \ct{D} \) and \( G: \ct{D} \to \C \) such that \( F \adj G \), then
+	Let \( F: \C \to \D \) and \( G: \D \to \C \) such that \( F \adj G \), then
 	\begin{enumerate}
 		\item \( F \) preserves colimits (LAPC);
 		\item \( G \) preserves limits (RAPL).
@@ -292,7 +292,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 \begin{proof}
 	We show (2):
 	\[
-		\C(C, G(\lim_I D)) \cong \ct{D}(F(C), \lim_I D) \cong \lim_I \ct{D}(F(C), D(i)) \cong
+		\C(C, G(\lim_I D)) \cong \D(F(C), \lim_I D) \cong \lim_I \D(F(C), D(i)) \cong
 	\]
 	\[
 		\cong \lim_I \C(C, GD(i)) \cong \C(C, \lim_I GD(i)).
@@ -306,7 +306,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 \begin{examples*}
 	\item Let \( R \) and \( S \) be unital associative rings, and \( _R B_S \) be an \( R\text{-}S \)-bimodule.
 		\[
-			\begin{tikzcd}{\cthyprm{S}{Mod}} &&& {\cthyprm{R}{Mod}}
+			\begin{tikzcd}{\ctRMod[S]} &&& {\ctRMod}
 				\arrow[""{name=0, anchor=center, inner sep=0}, "F", shift left=2, from=1-1, to=1-4]
 				\arrow[""{name=1, anchor=center, inner sep=0}, "G", shift left=2, from=1-4, to=1-1]
 				\arrow["\adj"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
@@ -345,7 +345,7 @@ is called the \emdef{pushout} of \( f \) and \( g \).
 \begin{remark*}
 	Let \( f: R \to S \) be a morhisms of rings, the \emdef{restriction of scalars} functor
 	\[
-		f^* \equiv \opn{res}_f: \cthyprm{S}{Mod} \to \cthyprm{R}{Mod}
+		f^* \equiv \opn{res}_f: \ctRMod[S] \to \ctRMod
 	\]
 	on an \( S \)-module \( N \) is simultaneously
 	\[

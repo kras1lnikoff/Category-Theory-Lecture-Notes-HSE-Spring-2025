@@ -1,14 +1,14 @@
 \Lecture{February 4, 2025}
 
 \begin{theorem*}
-	A functor \( F: \C \to \ct{D} \) is an equivalence of categories if and only if \( F \) is fully faithful and essentially surjective.
+	A functor \( F: \C \to \D \) is an equivalence of categories if and only if \( F \) is fully faithful and essentially surjective.
 \end{theorem*}
 \begin{proof}
 	We introduce the following notation:
 	\[
-		\begin{tikzcd}{\opn{sk} \C} &&& {\opn{sk} \ct{D}} \\
+		\begin{tikzcd}{\opn{sk} \C} &&& {\opn{sk} \D} \\
 			\\
-			\C &&& {\ct{D}}
+			\C &&& {\D}
 			\arrow["{j_D F i_C}", from=1-1, to=1-4]
 			\arrow["{i_C}", shift left=2, hook, from=1-1, to=3-1]
 			\arrow["{i_D}", shift left=2, hook, from=1-4, to=3-4]
@@ -19,14 +19,14 @@
 	\]
 	Note that \( j_D F i_C \) is surjective on objects. We will show that it is also injective. Indeed,
 	\[
-		\varphi: \C(A, B) \tox{\sim} \ct{D}(F(A), F(B))
+		\varphi: \C(A, B) \tox{\sim} \D(F(A), F(B))
 	\]
-	is a bijection for any \( A, B \in \Ob(\C) \). Suppose \( h: F(A) \tox{\sim} F(B) \) is an isomorphism. Then \( \varphi^{-1}(h) \) is also an isomorphism, hence \( A = B \) in \( \opn{sk}(\C) \). This shows that \( j_D F i_C \) is an isomorphism of categories, so there is an inverse functor \( K: \opn{sk} \ct{D} \to \opn{sk} \C \). It follows that \( F \) is an equivalence of categories and \( i_D K j_C \) is a quasi-inverse for \( F \).
+	is a bijection for any \( A, B \in \Ob(\C) \). Suppose \( h: F(A) \tox{\sim} F(B) \) is an isomorphism. Then \( \varphi^{-1}(h) \) is also an isomorphism, hence \( A = B \) in \( \opn{sk}(\C) \). This shows that \( j_D F i_C \) is an isomorphism of categories, so there is an inverse functor \( K: \opn{sk} \D \to \opn{sk} \C \). It follows that \( F \) is an equivalence of categories and \( i_D K j_C \) is a quasi-inverse for \( F \).
 \end{proof}
 
 \section{Yoneda's Lemma}
 
-Let \( \C^\vee = [\C, \ctrm{Sets}] \). Recall that \( h_A = \C(A, -): \C \to \ctrm{Sets} \) is an object of \( \Ob(\C^\vee) \).
+Let \( \C^\vee = [\C, \ctSet] \). Recall that \( h_A = \C(A, -): \C \to \ctSet \) is an object of \( \Ob(\C^\vee) \).
 
 \begin{lemma*}[Yoneda]
 	For any \( F \in \Ob(\C^\vee) \) and \( A \in \Ob(\C) \),
@@ -102,14 +102,14 @@ Let \( \C^\vee = [\C, \ctrm{Sets}] \). Recall that \( h_A = \C(A, -): \C \to \ct
 
 \vspace*{2mm}
 
-Let \( \hat{\C} = [\C^\op, \ctrm{Sets}] \). The dual statement of Yoneda's lemma:
+Let \( \hat{\C} = [\C^\op, \ctSet] \). The dual statement of Yoneda's lemma:
 \[
 	\hat{\C}(h^A, F) = F(A),
 \]
 where \( F \) and \( h^A = \C(-, A) \in \Ob(\hat{\C}) \). It follows that \( h^{(-)}: \C \to \hat{\C} \) is fully faithful.
 
 \begin{definition*}
-	A functor \( F: \C \to \ctrm{Sets} \) is called \emdef{representable} if there is a natural isomorphism \( \theta: F \tox{\sim} h_A \) for some object \( A \in \Ob(\C) \).
+	A functor \( F: \C \to \ctSet \) is called \emdef{representable} if there is a natural isomorphism \( \theta: F \tox{\sim} h_A \) for some object \( A \in \Ob(\C) \).
 \end{definition*}
 
 \section{The Godement's Product (a.k.a. the Horizontal Composition)}
@@ -117,7 +117,7 @@ where \( F \) and \( h^A = \C(-, A) \in \Ob(\hat{\C}) \). It follows that \( h^{
 Recall that for natural transformations \( \alpha: F \To G \) and \( \beta: G \To H \) its \emdef{vertical composition}
 \[
 	\begin{tikzcd}
-		\C &&&& {\ct{D}}
+		\C &&&& {\D}
 		\arrow[""{name=0, anchor=center, inner sep=0}, "G"{pos=0.8}, from=1-1, to=1-5]
 		\arrow[""{name=1, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
 		\arrow[""{name=2, anchor=center, inner sep=0}, "H"', curve={height=30pt}, from=1-1, to=1-5]

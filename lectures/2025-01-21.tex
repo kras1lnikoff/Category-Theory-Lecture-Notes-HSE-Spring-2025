@@ -40,7 +40,7 @@
 \begin{remark*}
 	There are plenty of ways to denote the set of morphisms. For example,
 	\[
-		\Hom_{\C}(X, Y) \equiv \C(X, Y) \equiv \opn{Maps}_{\C}(X, Y) \equiv \opn{Arr}_{\C}(X, Y).
+		\Hom_{\C}(X, Y) \equiv \C(X, Y) \equiv \opn{Maps}_{\C}(X, Y) \equiv \Arr_{\C}(X, Y).
 	\]
 \end{remark*}
 
@@ -57,13 +57,13 @@
 \end{definition*}
 
 \begin{examples*}
-	\item \( \ctrm{Sets} \) is the category of sets and functions;
-	\item \( \ctrm{Mon} \) is the category of monoids and monoid homomorphisms;
-	\item \( \ctrm{Grps} \) is the category of group and group homomorphisms;
-	\item \( \ctrm{Rings} \) is the category of (all) rings and ring homomorphisms;
-	\item \( \ctrm{CRings} \) is the category of commutative rings;
-	\item \( \ctrm{Fields} \) is the category of fields and field homomorphisms;
-	\item For a monoid \( M \), there is a category \( \cthyprm{M}{Sets} \), where
+	\item \( \ctSet \) is the category of sets and functions;
+	\item \( \ctMon \) is the category of monoids and monoid homomorphisms;
+	\item \( \ctGrp \) is the category of group and group homomorphisms;
+	\item \( \ctRing \) is the category of (all) rings and ring homomorphisms;
+	\item \( \ctCRing \) is the category of commutative rings;
+	\item \( \ctField \) is the category of fields and field homomorphisms;
+	\item For a monoid \( M \), there is a category \( \ctGSet[M] \), where
 		\begin{enumerate}[(i)]
 			\item objects are sets \( X \) with an \( M \)-\emdef{action} \( M \times X \to X \);
 			\item morphisms are \emdef{equivariant maps}, i.e. functions \( \varphi: X \to Y \) such that
@@ -94,28 +94,28 @@
 				\]
 		\end{enumerate}
 
-	\item \( \cthyprm{R}{Mod} \) and \( \ctrmhyp{Mod}{R} \) are the categories of left and right modules over a ring \( R \).
+	\item \( \ctRMod \) and \( \ctModR \) are the categories of left and right modules over a ring \( R \).
 
 		If \( R \) is commutative, these notions coincide and we write
 		\[
-			\cthyprm{R}{Mod} \equiv \ctrmhyp{Mod}{R} \equiv \ctrm{Mod}(R).
+			\ctRMod \equiv \ctModR \equiv \ctMod(R).
 		\]
 		Moreover, if \( R \) is a field, this is the category of vector spaces
 		\[
-			\ctrm{Mod}(R) \equiv \ctrm{Vect}(R).
+			\ctMod(R) \equiv \ctVect(R).
 		\]
 
-	\item \( \ctrm{Top} \) is the category of topological spaces and continuous maps.
-	\item The category of metric spaces \( \ctrm{Met} \):
+	\item \( \ctTop \) is the category of topological spaces and continuous maps.
+	\item The category of metric spaces \( \ctMet \):
 		\begin{enumerate}[(i)]
 			\item Objects are pairs \( (X, d) \), where \( X \) is a set and \( d: X \times X \to \bb{R} \) a metric.
 			\item Morphisms \( (X, d_1) \to (Y, d_2) \) are functions \( f: X \to Y \) which are
 				\begin{enumerate}[a)]
-					\item isometries (the rigid version of \( \ctrm{Met} \)), i.e.
+					\item isometries (the rigid version of \( \ctMet \)), i.e.
 						\[
 							d(f(x), f(y)) = d(x, y) \quad \text{ for all } x, y \in X;
 						\]
-					\item Lipschitz maps (categorically richer version of \( \ctrm{Met} \)), i.e.
+					\item Lipschitz maps (categorically richer version of \( \ctMet \)), i.e.
 						\[
 							\exists K > 0: \quad d(f(x), f(y)) \le K d(x, y) \quad \text{ for all } x, y \in X.
 						\]
@@ -123,9 +123,9 @@
 		\end{enumerate}
 
 	\item \( C^{\infty} \)-manifolds, analytic manifolds, schemes, \dots
-	\item \( \ctrm{hTop} \) is the homotopy category of topological spaces, which
+	\item \( \cthTop \) is the homotopy category of topological spaces, which
 		\begin{enumerate}[(i)]
-			\item objects are the same as in \( \ctrm{{Top}} \);
+			\item objects are the same as in \( \ctTop \);
 			\item morphisms are homotopy classes of continuous maps.
 		\end{enumerate}
 
@@ -134,12 +134,12 @@
 		\end{definition*}
 
 		\begin{theorem*}[w/o proof]
-			\( \ctrm{hTop} \) is not a concrete category.
+			\( \cthTop \) is not a concrete category.
 		\end{theorem*}
 
-	\item The category of \emdef{binary relations} \( \ctrm{Rel} \):
+	\item The category of \emdef{binary relations} \( \ctRel \):
 		\begin{enumerate}[(i)]
-			\item Objects of \( \Ob(\ctrm{Rel}) \) are sets.
+			\item Objects of \( \Ob(\ctRel) \) are sets.
 			\item Morphisms \( X \to Y \) are binary relations \( R \subset X \times Y \) with the usual notion of composition.
 		\end{enumerate}
 

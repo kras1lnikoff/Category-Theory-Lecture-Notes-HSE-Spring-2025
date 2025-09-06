@@ -3,7 +3,7 @@
 \textsc{In the previous episode...}
 
 \begin{theorem*}
-	Let \( P \in \cthyprm{R}{Mod} \). The following are equivalent:
+	Let \( P \in \ctRMod \). The following are equivalent:
 	\begin{enumerate}
 		\item \( P \) is projective.
 		\item For any epimorphism \( \beta: M \to N \) and any \( f: P \to N \) there exists \( \sigma: P \to M \) such that \( \beta \sigma = f \).
@@ -19,7 +19,7 @@
 				  \end{tikzcd}
 			  \]
 		\item Any short exact sequence \( 0 \to K \to M \to P \to 0 \) splits.
-		\item There exists \( K \in \cthyprm{R}{Mod} \) such that \( P \oplus K \cong R^{(I)} \) for some set \( I \).
+		\item There exists \( K \in \ctRMod \) such that \( P \oplus K \cong R^{(I)} \) for some set \( I \).
 	\end{enumerate}
 \end{theorem*}
 \begin{proof}
@@ -47,7 +47,7 @@
 \newpage
 
 \begin{theorem*}
-	Let \( E \in \cthyprm{R}{Mod} \). The following are equivalent:
+	Let \( E \in \ctRMod \). The following are equivalent:
 	\begin{enumerate}
 		\item \( E \) is injective (\( h^E \) is exact).
 		\item For any monomorphism \( \beta: M \to N \) and any \( f: M \to P \) there exists \( g: N \to P \) such that \( g \beta = f \).
@@ -116,8 +116,8 @@
 \begin{proposition*}[Relations between injective and division modules]
 	\hfill
 	\begin{enumerate}
-		\item If \( R \) is a domain, then injective modules are division modules, i.e.\( \mrm{Inj}(R) \subset \mrm{Div}(R) \).
-		\item If \( R \) is a PID, then every division module is injective, i.e. \( \mrm{Inj}(R) = \mrm{Div}(R) \).
+		\item If \( R \) is a domain, then injective modules are division modules, i.e.\( \Inj(R) \subset \Div(R) \).
+		\item If \( R \) is a PID, then every division module is injective, i.e. \( \Inj(R) = \Div(R) \).
 		\item If \( R \) is a domain, then \( Q(R) \), i.e. the field of fractions of \( R \), is injective.
 	\end{enumerate}
 \end{proposition*}
@@ -128,7 +128,7 @@
 Note that when \( R = \bb{Z} \), abelian group \( \bb{Q} \) is divisible, hence \( \bb{Q}/\bb{Z} \) is injective.
 
 \begin{proposition*}
-	\( \bb{Q}/\bb{Z} \) is an injective cogenerator of \( \ctrm{Ab} \).
+	\( \bb{Q}/\bb{Z} \) is an injective cogenerator of \( \ctAb \).
 \end{proposition*}
 \begin{proof}
 	Let \( f: A \to B \) such that \( f \neq 0 \), i.e. there is \( b \in B \) such that \( b \in \Im f \) and \( b \neq 0 \). Define \( \tilde{h}: \bb{Z}b \to \bb{Q}/\bb{Z} \) by
@@ -153,7 +153,7 @@ Note that when \( R = \bb{Z} \), abelian group \( \bb{Q} \) is divisible, hence 
 \end{definition*}
 
 \begin{proposition*}
-	Let \( R \) be a ring. Then \( \Hom_\bb{Z}(R_\bb{Z}, \bb{Q}/\bb{Z}) \) is an injective cogenerator in \( \cthyprm{R}{Mod} \).
+	Let \( R \) be a ring. Then \( \Hom_\bb{Z}(R_\bb{Z}, \bb{Q}/\bb{Z}) \) is an injective cogenerator in \( \ctRMod \).
 \end{proposition*}
 \begin{proof}
 	It follows from the following chain of isomorphisms:
@@ -161,7 +161,7 @@ Note that when \( R = \bb{Z} \), abelian group \( \bb{Q} \) is divisible, hence 
 \end{proof}
 
 \begin{corollary*}
-	In \( \cthyprm{R}{Mod} \) there are enough injectives.
+	In \( \ctRMod \) there are enough injectives.
 \end{corollary*}
 
 \begin{definition*}
@@ -169,7 +169,7 @@ Note that when \( R = \bb{Z} \), abelian group \( \bb{Q} \) is divisible, hence 
 \end{definition*}
 
 \begin{proposition*}
-	In \( \cthyprm{R}{Mod} \) there are enough projectives.
+	In \( \ctRMod \) there are enough projectives.
 \end{proposition*}
 \begin{proof}
 	Note that \( R^{(S)} \to M \to 0 \) and free module \( R^{(S)} \) is clearly projective.
@@ -196,7 +196,7 @@ Note that when \( R = \bb{Z} \), abelian group \( \bb{Q} \) is divisible, hence 
 \end{proof}
 
 \begin{theorem*}[Bass-Papp]
-	Let \( R \) be a ring. If countable direct sums of injective objects in \( \cthyprm{R}{Mod} \)  are injective, then \( R \) is Noetherian.
+	Let \( R \) be a ring. If countable direct sums of injective objects in \( \ctRMod \)  are injective, then \( R \) is Noetherian.
 \end{theorem*}
 \begin{proof}
 	Assume the contrary. Let \( I_1 \subsetneq I_2 \subsetneq \dotsc \) and \( I = \bigcup\limits_{n \ge 1} I_n \) be ideals of \( R \). Consider injective module \( E_n \) such that \( I/I_n \inc E_n \), and let \( \pi_n: I \to I/I_n \).

@@ -9,21 +9,21 @@
 	\begin{enumerate}
 		\item For \( i\ge m+2 \), there are natural isomorphisms
 			\[
-				L_i F(A)\;\simeq\; L_{i-1}F(K_1)\;\simeq\; \dotsm\; \simeq\; L_{i-m-1}F(K_{m+1}).
+				\LD_i F(A)\;\simeq\; \LD_{i-1}F(K_1)\;\simeq\; \dotsm\; \simeq\; \LD_{i-m-1}F(K_{m+1}).
 			\]
 		\item There is a short exact sequence
 			\[
-				0 \too L_{m+1}F(A) \too F(K_{m+1}) \too F(P_m) \too F(K_m) \too 0.
+				0 \too \LD_{m+1}F(A) \too F(K_{m+1}) \too F(P_m) \too F(K_m) \too 0.
 			\]
 	\end{enumerate}
 \end{proposition*}
 
 \begin{proof}
-	For the short exact sequence \( 0\to K_{i+1}\to P_i\to K_i\to 0 \) with \( P_i \) projective, the long exact sequence of left derived functors gives \( L_jF(P_i)=0 \) for \( j\ge 1 \) and isomorphisms \( L_jF(K_i)\simeq L_{j-1}F(K_{i+1}) \) for \( j\ge 2 \). Iterating, starting from \( 0\to K_1\to P_0\to A\to 0 \) yields the chain in (1). For (2), apply the long exact sequence to \( 0\to K_{m+1}\to P_m\to K_m\to 0 \) to obtain
+	For the short exact sequence \( 0\to K_{i+1}\to P_i\to K_i\to 0 \) with \( P_i \) projective, the long exact sequence of left derived functors gives \( \LD_jF(P_i)=0 \) for \( j\ge 1 \) and isomorphisms \( \LD_jF(K_i)\simeq \LD_{j-1}F(K_{i+1}) \) for \( j\ge 2 \). Iterating, starting from \( 0\to K_1\to P_0\to A\to 0 \) yields the chain in (1). For (2), apply the long exact sequence to \( 0\to K_{m+1}\to P_m\to K_m\to 0 \) to obtain
 	\[
-		0 \to L_1F(K_m) \to F(K_{m+1}) \to F(P_m) \to F(K_m) \to 0,
+		0 \to \LD_1F(K_m) \to F(K_{m+1}) \to F(P_m) \to F(K_m) \to 0,
 	\]
-	then identify \( L_1F(K_m) \simeq L_{m+1}F(A) \) by (1). Consider the short exact sequences
+	then identify \( \LD_1F(K_m) \simeq \LD_{m+1}F(A) \) by (1). Consider the short exact sequences
 	\[
 		0 \to K_{m+2} \to P_{m+1} \tox{d_{m+1}} K_{m+1} \to 0
 	\]
@@ -31,7 +31,7 @@
 	\[
 		0 \to K_{m+1}\tox{i} P_m\tox{d_m} K_m \to 0.
 	\]
-	Applying \( F \) and using \( L_jF(P)=0 \) for projective \( P \), get the commutative diagram with exact rows
+	Applying \( F \) and using \( \LD_jF(P)=0 \) for projective \( P \), get the commutative diagram with exact rows
 	\[
 		\begin{tikzcd}
 			F(P_{m+2}) \arrow[r] \arrow[d, equals] & \ker F(d_{m+1}) \arrow[r] \arrow[d] & \ker F(i) \arrow[r] \arrow[d] & 0 \\
@@ -40,11 +40,11 @@
 			& F(K_m) \arrow[r,"\sim"] & \coker F(i)
 		\end{tikzcd}
 	\]
-	Snake Lemma yields an isomorphism \( \ker F(i)\cong L_1F(K_m) \), and by iterating the isomorphisms \( L_jF(K_r)\cong L_{j-1}F(K_{r+1}) \) one gets \( \ker F(i)\cong L_{m+1}F(A) \), which finishes the proof.\qedhere
+	Snake Lemma yields an isomorphism \( \ker F(i)\cong \LD_1F(K_m) \), and by iterating the isomorphisms \( \LD_jF(K_r)\cong \LD_{j-1}F(K_{r+1}) \) one gets \( \ker F(i)\cong \LD_{m+1}F(A) \), which finishes the proof.\qedhere
 \end{proof}
 
 \begin{definition*}
-	An object \( Q \) is called \( F \)-\emdef{acyclic} if \( L_iF(Q)=0 \) for all \( i\ge 1 \).
+	An object \( Q \) is called \( F \)-\emdef{acyclic} if \( \LD_iF(Q)=0 \) for all \( i\ge 1 \).
 \end{definition*}
 
 \begin{definition*}
@@ -59,15 +59,15 @@
 	Let \( F(-):= M\otimes_R(-) \). A left \( R \)-module \( N \) is \( F \)-acyclic iff \( \Tor_i^R(M,N)=0 \) for all \( i\ge 1 \). The following are equivalent:
 	\begin{enumerate}
 		\item \( N \) is flat.
-		\item \( \Tor_1^R(M,N)=0 \) for all \( M\in \ctrmhyp{Mod}{R} \).
-		\item \( \Tor_i^R(M,N)=0 \) for all \( M\in \ctrmhyp{Mod}{R} \) and all \( i\ge 1 \).
+		\item \( \Tor_1^R(M,N)=0 \) for all \( M\in \ctModR \).
+		\item \( \Tor_i^R(M,N)=0 \) for all \( M\in \ctModR \) and all \( i\ge 1 \).
 	\end{enumerate}
 \end{example*}
 
 \begin{proposition*}
 	If \( Q_\bullet \to A \) is an \( F \)-acyclic resolution, then for every \( n\ge 0 \)
 	\[
-		L_n F(A)\;\simeq\; H_n\bigl(F(Q_\bullet)\bigr).
+		\LD_n F(A)\;\simeq\; H_n\bigl(F(Q_\bullet)\bigr).
 	\]
 \end{proposition*}
 
@@ -78,23 +78,23 @@
 	\]
 	with \( Q_i \) being \( F \)-acyclic, the long exact sequence of left derived functors yields isomorphisms
 	\[
-		L_nF(K_i)\cong L_{n-1}F(K_{i+1})
+		\LD_nF(K_i)\cong \LD_{n-1}F(K_{i+1})
 	\]
 	for all \( n\ge 2 \) and an exact segment
 	\[
-		0\too L_1F(K_i)\too F(K_{i+1}) \too F(Q_i)\too F(K_i)\too 0.
+		0\too \LD_1F(K_i)\too F(K_{i+1}) \too F(Q_i)\too F(K_i)\too 0.
 	\]
-	Iterating gives \( L_nF(A)\cong L_1F(K_{n-1}) \). For \( i=0 \) the segment reads
+	Iterating gives \( \LD_nF(A)\cong \LD_1F(K_{n-1}) \). For \( i=0 \) the segment reads
 	\[
-		0\too L_1F(A)\too F(K_1)\tox{F(j)} F(Q_0)\too F(A)\too 0,
+		0\too \LD_1F(A)\too F(K_1)\tox{F(j)} F(Q_0)\too F(A)\too 0,
 	\]
 	which identifies
 	\[
-		L_1F(A) \cong \ker F(j) \cong H_1(F(Q_\bullet)),
+		\LD_1F(A) \cong \ker F(j) \cong H_1(F(Q_\bullet)),
 	\]
 	and the result follows after shifting the indices
 	\[
-		L_n F(A) \cong L_1 F(K_{n - 1}) \cong H_1\biggl(F\bigl(\,\dotsc \to Q_{n - 1} \to K_{n - 1} \to 0\bigr)\biggr) \cong H_n (F(Q_\bullet)).
+		\LD_n F(A) \cong \LD_1 F(K_{n - 1}) \cong H_1\biggl(F\bigl(\,\dotsc \to Q_{n - 1} \to K_{n - 1} \to 0\bigr)\biggr) \cong H_n (F(Q_\bullet)).
 	\]
 \end{proof}
 
@@ -146,7 +146,7 @@ Also if \( Q_\bullet \to B \) is a projective resolution, let
 \section{Dimensions}
 
 \begin{definition*}
-	For \( M\in \cthyprm{R}{Mod} \), the \emdef{projective dimension} \( \pdim_R(M) \) is the minimal integer \( n \) such that there exists a projective resolution
+	For \( M\in \ctRMod \), the \emdef{projective dimension} \( \pdim_R(M) \) is the minimal integer \( n \) such that there exists a projective resolution
 	\[
 		0 \too P_n \too \dotsm \too P_0 \too M \too 0.
 	\]
@@ -227,16 +227,16 @@ A dual statement of the theorem also holds for injective dimensions.
 \begin{theorem*}
 	The following numbers are equal:
 	\begin{enumerate}
-		\item \( \displaystyle \sup\{\idim_R N \mid N \in \cthyprm{R}{Mod}\} \).
-		\item \( \displaystyle \sup\{\pdim_R M \mid M \in \cthyprm{R}{Mod}\} \).
+		\item \( \displaystyle \sup\{\idim_R N \mid N \in \ctRMod\} \).
+		\item \( \displaystyle \sup\{\pdim_R M \mid M \in \ctRMod\} \).
 		\item \( \displaystyle \sup\{\pdim_R M \mid M \text{ is finitely generated}\} \).
 		\item \( \displaystyle \sup\{\pdim_R I \mid I \le R\ \text{a left ideal}\} \).
-		\item \( \displaystyle \sup\{ d \mid \exists M,N\in \cthyprm{R}{Mod}\ \text{with}\ \Ext_R^{d}(M,N)\ne 0\} \).
+		\item \( \displaystyle \sup\{ d \mid \exists M,N\in \ctRMod\ \text{with}\ \Ext_R^{d}(M,N)\ne 0\} \).
 	\end{enumerate}
 \end{theorem*}
 \begin{proof}
 	From the theorems on projective and injective dimensions it follows that
-	\( (1) = (5) = (2) \). Moreover, \( (2) \ge (3) \ge (4) \) is immediate. If \( d:=(4)<\infty \) and \( N\in \cthyprm{R}{Mod} \), take
+	\( (1) = (5) = (2) \). Moreover, \( (2) \ge (3) \ge (4) \) is immediate. If \( d:=(4)<\infty \) and \( N\in \ctRMod \), take
 	\[
 		0 \to N \to E^0 \to \dotsm \to E^d \to K \to 0.
 	\]

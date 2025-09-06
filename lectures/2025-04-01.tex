@@ -3,25 +3,25 @@
 \section{Eilenberg-Watts Theorems}
 
 \begin{enumerate}
-	\item Let \( G: \cthyprm{R}{Mod} \to \cthyprm{S}{Mod} \) be a continuous functor. By SAFT \( G \) has a left adjoint \( F \). Then for any \( R \)-module \( M \)
+	\item Let \( G: \ctRMod \to \ctRMod[S] \) be a continuous functor. By SAFT \( G \) has a left adjoint \( F \). Then for any \( R \)-module \( M \)
 		\[
 			G(M) = \Hom_S(S, G(M)) \cong \Hom_R(F(S), M).
 		\]
 		Note that \( F(S) \) is a bimodule, since we have \( S \to \End_S(S) \to \End_R(F(S)) \).
-	\item  Let \( F: \cthyprm{S}{Mod} \to \cthyprm{R}{Mod} \) be a cocontinuous functor. By co-SAFT it has a right adjoint \( G \). Then \( G = \Hom(B, -) \), hence \( F = B \otimes_S - \).
+	\item  Let \( F: \ctRMod[S] \to \ctRMod \) be a cocontinuous functor. By co-SAFT it has a right adjoint \( G \). Then \( G = \Hom(B, -) \), hence \( F = B \otimes_S - \).
 \end{enumerate}
 
 \begin{definition*}
-	A set of objects \( \{D_i\}_{i \in I} \) is called \emdef{weakly initial} if for all \( D \in \Ob(\ct{D}) \) there is \( i \in I \) and a map \( D_i \to D \).
+	A set of objects \( \{D_i\}_{i \in I} \) is called \emdef{weakly initial} if for all \( D \in \Ob(\D) \) there is \( i \in I \) and a map \( D_i \to D \).
 \end{definition*}
 
 \begin{lemma*}
-	Let \( \ct{D} \) be a complete category. If \( \ct{D} \) has a weakly initial set, then it has an initial object.
+	Let \( \D \) be a complete category. If \( \D \) has a weakly initial set, then it has an initial object.
 \end{lemma*}
 \begin{proof}
-	Let \( W := \prod D_i \) and \( V := \eq(\ct{D}(W, W)) \inc W \). We know that \( gh = h \) for each \( g \in \ct{D}(W, W) \).
+	Let \( W := \prod D_i \) and \( V := \eq(\D(W, W)) \inc W \). We know that \( gh = h \) for each \( g \in \D(W, W) \).
 	\begin{enumerate}
-		\item[1)] Let \( D \in \Ob(\ct{D}) \). There is \( D_i \to D \), hence \( V \tox{h} W \tox{p_i} D_i \to D \) and \( \ct{D}(V, D) \neq \varnothing \).
+		\item[1)] Let \( D \in \Ob(\D) \). There is \( D_i \to D \), hence \( V \tox{h} W \tox{p_i} D_i \to D \) and \( \D(V, D) \neq \varnothing \).
 		\item[2)] Suppose \( f,g: V \to D \). We want to show that \( f = g \).
 			\[
 				\begin{tikzcd}
@@ -41,7 +41,7 @@
 \end{proof}
 
 \begin{theorem*}[GAFT or Freyd's AFT]
-	Let \( \ct{D} \) be a complete category and \( G: \ct{D} \to \C \) a continuous functor. Then \( G \) has a left adjoint if and only if for each \( C \in \Ob(\C) \) there is \( \{D_i\}_{i \in I} \subset \Ob(\ct{D}) \) with the property that for all \( D \in \Ob(\ct{D}) \) and any \( f: C \to G(D) \) there exist \( i \in I \), \( \varphi: G \to G(D_i) \), \( \bar{f}: D_i \to D \) such that \( f = G(\bar{f}) \circ \varphi \).
+	Let \( \D \) be a complete category and \( G: \D \to \C \) a continuous functor. Then \( G \) has a left adjoint if and only if for each \( C \in \Ob(\C) \) there is \( \{D_i\}_{i \in I} \subset \Ob(\D) \) with the property that for all \( D \in \Ob(\D) \) and any \( f: C \to G(D) \) there exist \( i \in I \), \( \varphi: G \to G(D_i) \), \( \bar{f}: D_i \to D \) such that \( f = G(\bar{f}) \circ \varphi \).
 \end{theorem*}
 \begin{proof}
 	Clear, since this is equivalent to having a weakly initial set.
@@ -52,7 +52,7 @@
 \section{Additive Categories}
 
 \begin{definitions*}
-	\item An \( \mrm{Ab} \)-category (a \emdef{preadditive} category) is a category \( \A \) such that
+	\item An \( \Ab \)-category (a \emdef{preadditive} category) is a category \( \A \) such that
 		\begin{enumerate}
 			\item \( \A(X, Y) \) is an abelian group for all \( X, Y \in \A \).
 			\item The composition map \( \A(X, Y) \times \A(Y, Z) \to \A(X, Z) \) is bilinear:
@@ -60,7 +60,7 @@
 					(g_1 + g_2) \circ f = g_1 \circ f + g_2 \circ f.
 				\]
 		\end{enumerate}
-	\item If \( \A \) and \( \B \) are \( \mrm{Ab} \)-categories, a functor \( F: \A \to \B \) is called \emdef{additive} if
+	\item If \( \A \) and \( \B \) are \( \Ab \)-categories, a functor \( F: \A \to \B \) is called \emdef{additive} if
 		\[
 			\A(X, Y) \to \B(F(X), F(Y))
 		\]
@@ -68,10 +68,10 @@
 \end{definitions*}
 
 \begin{examples*}
-	\item \( \cthyprm{R}{Mod} \). In particular, \( \ctrm{Ab} \) and \( \ctrm{Vect}(k) \).
-	\item \( \ctrm{Sh}(X, R) \).
-	\item For \( X \) a ringed space, \( \ctrm{Mod}(\ca{O}_X) \).
-	\item \( \ctrm{QCoh}(X) \) and \( \ctrm{Coh}(X) \).
+	\item \( \ctRMod \). In particular, \( \ctAb \) and \( \ctVect(k) \).
+	\item \( \ctSh(X, R) \).
+	\item For \( X \) a ringed space, \( \ctMod(\ca{O}_X) \).
+	\item \( \ctQCoh(X) \) and \( \ctCoh(X) \).
 \end{examples*}
 
 \begin{proposition*}
@@ -88,7 +88,7 @@
 \end{proof}
 
 \begin{definition*}
-	Let \( \A \) be an \( \mrm{Ab} \)-category and \( X, Y \in \A \). A \emdef{biproduct} of \( X \) and \( Y \) is a diagram
+	Let \( \A \) be an \( \Ab \)-category and \( X, Y \in \A \). A \emdef{biproduct} of \( X \) and \( Y \) is a diagram
 	\[
 		\begin{tikzcd}
 			X && {X \oplus Y} && Y
@@ -170,7 +170,7 @@
 \end{proof}
 
 \begin{definition*}
-	An \emdef{additive} category is an \( \mrm{Ab} \)-category with a zero object and binary biproducts.
+	An \emdef{additive} category is an \( \Ab \)-category with a zero object and binary biproducts.
 \end{definition*}
 
 \begin{proposition*}
@@ -193,7 +193,7 @@
 
 We write
 \[
-	\ctrm{Func}^{add}(\A, \B) = (\A, \B).
+	\ctFunc^{\text{add}}(\A, \B) = (\A, \B).
 \]
 
 \section{Abelian Categories}
@@ -336,7 +336,7 @@ Let \( \A \) and \( \B \) be abelian categories and \( F: \A \to \B \) be a func
 \newpage
 
 \begin{theorem*}
-	Let \( P \in \cthyprm{R}{Mod} \). The following are equivalent:
+	Let \( P \in \ctRMod \). The following are equivalent:
 	\begin{enumerate}
 		\item \( P \) is projective.
 		\item For any epimorphism \( \beta: M \to N \) and any \( f: P \to N \) there is \( \sigma: P \to M \) such that \( \beta \sigma = f \).
@@ -352,7 +352,7 @@ Let \( \A \) and \( \B \) be abelian categories and \( F: \A \to \B \) be a func
 				\end{tikzcd}
 			\]
 		\item Any short exact sequence \( 0 \to K \to M \to P \to 0 \) splits.
-		\item There is \( K \in \cthyprm{R}{Mod} \) such that \( P \oplus K \cong R^{(S)} \).
+		\item There is \( K \in \ctRMod \) such that \( P \oplus K \cong R^{(S)} \).
 	\end{enumerate}
 \end{theorem*}
 \begin{proof}

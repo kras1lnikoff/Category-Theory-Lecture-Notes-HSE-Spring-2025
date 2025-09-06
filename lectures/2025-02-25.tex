@@ -55,11 +55,11 @@
 \end{remarks*}
 
 \begin{examples*}
-	\item In \( \ctrm{Sets} \), one has
+	\item In \( \ctSet \), one has
 		\[
 			X \times_Z Y = \{(x, y) \in X \times Y \,\mid\, f(x) = g(y)\}.
 		\]
-	\item Further examples in \( \ctrm{Sets} \):
+	\item Further examples in \( \ctSet \):
 		\[
 			\begin{tikzcd}[column sep = 9mm]
 				{f^{-1}(x)} && Y && {X \cap Y} && Y && {R_f} && X \\
@@ -79,7 +79,7 @@
 				\arrow["f"', from=3-9, to=3-11]
 			\end{tikzcd}
 		\]
-	\item In \( \ctrm{Mon} \), \( R_f \) is the \emdef{congruence} on \( M \) induced by \( f \).
+	\item In \( \ctMon \), \( R_f \) is the \emdef{congruence} on \( M \) induced by \( f \).
 \end{examples*}
 
 \section{Limits of Functors}
@@ -139,7 +139,7 @@ It follows that \( \lim \) is a functor \( \lim_I: [I, \C] \to \C \). Note that
 hence \( \lim \) is a right adjoint for the constant functor \( \Delta \).
 
 \begin{theorem*}
-	If a category \( \C \) has binary equalizers and all products indexed by \( \Ob(I) \) and \( \opn{Arr}(I) \), then for any \( D: I \to \C \) there is a limit \( \lim_I D \).
+	If a category \( \C \) has binary equalizers and all products indexed by \( \Ob(I) \) and \( \Arr(I) \), then for any \( D: I \to \C \) there is a limit \( \lim_I D \).
 \end{theorem*}
 \begin{proof}
 	We argue that the category of cones over \( F \) is isomorphic to the following category of cones:
@@ -265,23 +265,23 @@ hence \( \lim \) is a right adjoint for the constant functor \( \Delta \).
 \end{definition*}
 
 \begin{examples*}
-	\item In \( \ctrm{Sets} \), the coproduct is the disjoint union \( X \coprod Y \).
-	\item In \( \ctrm{Top} \), the same set can be endowed with topology.
-	\item In \( \cthyprm{R}{Mod} \), the coproduct is the disjoint union \( X \oplus Y \).
+	\item In \( \ctSet \), the coproduct is the disjoint union \( X \coprod Y \).
+	\item In \( \ctTop \), the same set can be endowed with topology.
+	\item In \( \ctRMod \), the coproduct is the disjoint union \( X \oplus Y \).
 
 		Note that for an infinite set \( I \),
 		\[
 			\bigoplus_{i \in I} M_i \neq \prod_{i \in I} M_i.
 		\]
 
-	\item In \( \ctrm{Grps} \), the coproduct is the \emdef{free product} \( X \ast Y \).
+	\item In \( \ctGrp \), the coproduct is the \emdef{free product} \( X \ast Y \).
 
 		Note that if \( X = \cl{S_X ~|~ R_X} \) and \( Y = \cl{S_Y ~|~ R_Y} \), then
 		\[
 			X \ast Y = \cl{S_X \coprod S_Y ~|~ R_X \coprod R_Y}.
 		\]
 
-	\item In \( \ctrm{Rings} \), the coproduct is the similarly defined free product \( X \ast Y \).
+	\item In \( \ctRing \), the coproduct is the similarly defined free product \( X \ast Y \).
 
 		It can also be defined in the following way:
 		\[

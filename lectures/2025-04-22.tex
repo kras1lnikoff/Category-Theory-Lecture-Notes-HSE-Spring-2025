@@ -20,7 +20,7 @@
 \end{definition*}
 
 \begin{remark*}
-	The \emdef{shift functor} \( [1]: \Ch(\ct{A}) \to \Ch(\ct{A}) \) is defined by
+	The \emdef{shift functor} \( [1]: \ctCh(\A) \to \ctCh(\A) \) is defined by
 	\[
 		(A[1])_n := A_{n-1}, \qquad d^{A[1]}_n := -\,d^A_{n-1},
 	\]
@@ -58,7 +58,7 @@
 	\end{enumerate}
 \end{proposition*}
 
-Let \( 0 \to A \tox{i} B \tox{q} C \to 0 \) be a short exact sequence in an abelian category \( \ct{A} \). Take projective resolutions \( \varepsilon^A: Q_\bullet \epi A \) and \( \varepsilon^C: P_\bullet \epi C \). By projectivity choose a lift \( \psi_0: P_0 \to B \) with \( q\,\psi_0 = \varepsilon^C_0 \).
+Let \( 0 \to A \tox{i} B \tox{q} C \to 0 \) be a short exact sequence in an abelian category \( \A \). Take projective resolutions \( \varepsilon^A: Q_\bullet \epi A \) and \( \varepsilon^C: P_\bullet \epi C \). By projectivity choose a lift \( \psi_0: P_0 \to B \) with \( q\,\psi_0 = \varepsilon^C_0 \).
 
 Using the induced map on cycles, pick \( \varphi_0: P_1 \to Q_0 \) so that
 \[
@@ -108,29 +108,29 @@ We omit the proof of this lemma but reformulate the statement (2):
 \section{Derived Functors}
 
 \begin{definition*}
-	Let \( F: \ct{A} \to \ct{B} \) be a right exact additive functor between abelian categories and assume \( \ct{A} \) has enough projectives. For \( A \in \Ob(\ct{A}) \), choose a projective resolution \( P_\bullet \epi A \) and define
+	Let \( F: \A \to \B \) be a right exact additive functor between abelian categories and assume \( \A \) has enough projectives. For \( A \in \Ob(\A) \), choose a projective resolution \( P_\bullet \epi A \) and define
 	\[
-		(\mrm{L}_i F)(A) := H_i\bigl(F(P_\bullet)\bigr) \qquad (i \ge 0).
+		(\LD_i F)(A) := H_i\bigl(F(P_\bullet)\bigr) \qquad (i \ge 0).
 	\]
 	Independent of the choice of \( P_\bullet \) up to canonical isomorphism, this yields \emdef{left derived functors}
 	\[
-		\mrm{L}_i F: \ct{A} \to \ct{B}.
+		\LD_i F: \A \to \B.
 	\]
 \end{definition*}
 
 \begin{definition*}
-	Similarly, if \( F: \ct{A} \to \ct{B} \) is left exact additive and \( \ct{A} \) has enough injectives, then for \( A \in \Ob(\ct{A}) \) and an injective resolution \( A \inc E^\bullet \) one defines \emdef{right derived functors}
+	Similarly, if \( F: \A \to \B \) is left exact additive and \( \A \) has enough injectives, then for \( A \in \Ob(\A) \) and an injective resolution \( A \inc E^\bullet \) one defines \emdef{right derived functors}
 	\[
-		(\mrm{R}^i F)(A) := H^i\bigl(F(E^\bullet)\bigr) \qquad (i \ge 0).
+		(\RD^i F)(A) := H^i\bigl(F(E^\bullet)\bigr) \qquad (i \ge 0).
 	\]
 \end{definition*}
 
 \begin{proposition*}[Properties of derived functors]
 	\mbox{}
 	\begin{enumerate}
-		\item \( \mrm{L}_0 F \cong F \).
-		\item The functors \( \mrm{L}_i F \) are independent of the chosen projective resolution.
-		\item Each \( \mrm{L}_i F \) is additive.
+		\item \( \LD_0 F \cong F \).
+		\item The functors \( \LD_i F \) are independent of the chosen projective resolution.
+		\item Each \( \LD_i F \) is additive.
 	\end{enumerate}
 \end{proposition*}
 \begin{proof}
@@ -138,7 +138,7 @@ We omit the proof of this lemma but reformulate the statement (2):
 	\begin{enumerate}
 		\item If \( 0 \to P_1 \to P_0 \epi A \to 0 \) is exact with \( P_j \) projective, then applying \( F \) gives an exact sequence \( F(P_1) \to F(P_0) \to F(A) \to 0 \), and hence \( H_0(F(P_\bullet)) \cong F(A) \).
 		\item Any two resolutions of \( A \) are connected by a chain homotopy equivalence, and applying \( F \) preserves homotopies, so the induced maps on homology are isomorphisms.
-		\item For a morphism \( f: A \to A' \) and chosen projective resolutions, any lift \( f_\bullet \)  of \( f \) induces a chain map whose effect on homology defines \( \mrm{L}_i F(f) \). In particular, \( f_\bullet + g_\bullet \) lifts \( f + g \).
+		\item For a morphism \( f: A \to A' \) and chosen projective resolutions, any lift \( f_\bullet \)  of \( f \) induces a chain map whose effect on homology defines \( \LD_i F(f) \). In particular, \( f_\bullet + g_\bullet \) lifts \( f + g \).
 	\end{enumerate}
 \end{proof}
 
@@ -149,23 +149,23 @@ We omit the proof of this lemma but reformulate the statement (2):
 In the category of \( R \)-modules there are two canonical examples.
 
 \begin{examples*}
-	\item Given \( M \in \Ob(\cthyprm{R}{Mod}) \), the functor \( h_M := \Hom(M, -) \) is left exact. Then
+	\item Given \( M \in \Ob(\ctRMod) \), the functor \( h_M := \Hom(M, -) \) is left exact. Then
 		\[
-			\Ext_R^i(M, N) := R^i \, h_M(N).
+			\Ext_R^i(M, N) := \RD^i \, h_M(N).
 		\]
-	\item Given \( M \in \Ob(\cthyprm{R}{Mod}) \), the functor \( t_M := M \otimes - \) is left exact. Then
+	\item Given \( M \in \Ob(\ctRMod) \), the functor \( t_M := M \otimes - \) is left exact. Then
 		\[
-			\Tor^R_i(M, N) := L^i \, t_M(N).
+			\Tor^R_i(M, N) := \LD_i \, t_M(N).
 		\]
 \end{examples*}
 
 \begin{theorem*}[Derived long exact sequence]
-	Let \( 0 \to A' \tox{i} A \tox{q} A'' \to 0 \) be a short exact sequence in an abelian category \( \ct{A} \), and let \( F: \ct{A} \to \ct{B} \) be a right exact additive functor. Assume \( \ct{A} \) has enough projectives. Then there is a natural long exact sequence
+	Let \( 0 \to A' \tox{i} A \tox{q} A'' \to 0 \) be a short exact sequence in an abelian category \( \A \), and let \( F: \A \to \B \) be a right exact additive functor. Assume \( \A \) has enough projectives. Then there is a natural long exact sequence
 	\[
-		\dotsm \too \mrm{L}_{n}F(A') \tox{u_n} \mrm{L}_{n}F(A) \tox{v_n} \mrm{L}_{n}F(A'') \tox{\partial_n} \mrm{L}_{n-1}F(A') \too
+		\dotsm \too \LD_{n}F(A') \tox{u_n} \LD_{n}F(A) \tox{v_n} \LD_{n}F(A'') \tox{\partial_n} \LD_{n-1}F(A') \too
 	\]
 	\[
-		\dotsm \too \mrm{L}_{1}F(A'') \tox{\partial_1} \mrm{L}_{0}F(A') \too \mrm{L}_{0}F(A) \too \mrm{L}_{0}F(A'') \to 0.
+		\dotsm \too \LD_{1}F(A'') \tox{\partial_1} \LD_{0}F(A') \too \LD_{0}F(A) \too \LD_{0}F(A'') \to 0.
 	\]
 	The maps \( u_n \) and \( v_n \) are induced by \( i \) and \( q \), and \( \partial_n \) is the connecting morphism. The construction is functorial in morphisms of short exact sequences.
 \end{theorem*}
@@ -179,7 +179,7 @@ In the category of \( R \)-modules there are two canonical examples.
 	\[
 		0 \too F(P'_\bullet) \too F(P_\bullet) \too F(P''_\bullet) \too 0,
 	\]
-	so passing to homology gives the desired long exact sequence in which \( H_n(F(P_\bullet)) = \mrm{L}_nF(-) \). Naturality follows from the functoriality of the horseshoe and the connecting morphism in homology.
+	so passing to homology gives the desired long exact sequence in which \( H_n(F(P_\bullet)) = \LD_n F(-) \). Naturality follows from the functoriality of the horseshoe and the connecting morphism in homology.
 \end{proof}
 
 \begin{example*}
